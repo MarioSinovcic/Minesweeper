@@ -4,8 +4,20 @@
     &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Application.GridSetupTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=97682d8c_002D601a_002D4401_002Db7e5_002D0c306ef6a30c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldReadEmptyTilesInJsonCornersFileCorrectly" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=97682d8c_002D601a_002D4401_002Db7e5_002D0c306ef6a30c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldReadEmptyTilesInJsonCornersFileCorrectly" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Application.GridSetupTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Domain.GridTests.ShouldReturnZeroForTileWithNoNeighbouringMines&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Domain.GridTests.ShouldReturnOneForTileWithOneNeighbouringMine&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Domain.GridTests.ShouldReturnTwoForATileWithOneNeighbouringMine&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fa1c89cc_002D44d1_002D47af_002D8f2c_002D0937a66637cd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldCreateGridWithCorrectDimensions" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Or&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Application.GridSetupTests.ShouldCreateGridWithCorrectDimensions&lt;/TestId&gt;
+      &lt;TestId&gt;NUnit3x::D025C26B-4D8E-4925-BE20-9A47EFAB112C::.NETCoreApp,Version=v5.0::Minesweeper_Tests.Domain.GridTests&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+    &lt;Project Location="/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests" Presentation="&amp;lt;Minesweeper Tests&amp;gt;" /&gt;
+  &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

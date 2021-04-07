@@ -9,7 +9,7 @@ namespace Minesweeper_Tests.Application
 {
     public class GridSetupTests
     {
-        private const string  TestFolderPath = "/Minesweeper Tests/GridTestFakes/";
+        private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]
@@ -29,6 +29,15 @@ namespace Minesweeper_Tests.Application
         public void ShouldThrowIoExceptionForInvalidPaths()
         {
             Assert.Throws<IOException>(() => JsonGridSetup.CreateGrid("/user/"));
+        }
+        
+        [Test]
+        public void ShouldCreateGridWithCorrectDimensions()
+        {
+            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMineSmallGrid.json");
+            
+            Assert.AreEqual(7, resultGrid.Width); //TODO: ask about spying this, rather than making it public
+            Assert.AreEqual(3, resultGrid.Height);
         }
 
         [Test]

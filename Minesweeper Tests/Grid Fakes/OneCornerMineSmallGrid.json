@@ -1,0 +1,9 @@
+{
+  "mineTileChar": "x",
+  "emptyTileChar": "o",
+  "initialGrid":[
+    ["x","o","o","o","o","o","o"],
+    ["o","o","o","o","o","o","o"],
+    ["o","o","o","o","o","o","o"]
+  ]
+}

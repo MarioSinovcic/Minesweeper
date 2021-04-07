@@ -11,7 +11,7 @@ namespace Domain
         }
 
         public TileStatus Status { get; private set; }
-        public TileType Type { get; private set; }
+        public TileType Type { get; }
 
         public void ShowTile()
         {
