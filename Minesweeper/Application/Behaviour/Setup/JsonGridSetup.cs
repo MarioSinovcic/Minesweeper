@@ -2,18 +2,19 @@ using System;
 using System.IO;
 using Domain;
 using Domain.Enums;
+using Minesweeper.Application.DTOs;
 using Newtonsoft.Json;
 
-namespace Minesweeper.Application
+namespace Minesweeper.Application.Behaviour.Setup
 {
-    public class JsonGridSetup 
+    public static class JsonGridSetup 
     {
-        public static Grid CreateGrid(string pathname)
+        public static Grid CreateGrid(string pathname) //TODO: correct use of static
         {
-            ValidDatePath(pathname);
+            ValidatePath(pathname);
             
             using var jsonFile = new StreamReader(pathname);
-            var jsonInput = JsonConvert.DeserializeObject<InputInfoDTO>(jsonFile.ReadToEnd());
+            var jsonInput = JsonConvert.DeserializeObject<GridInputDto>(jsonFile.ReadToEnd());
 
             var gridWidth = jsonInput.InitialGrid.GetLength(1);
             var gridHeight = jsonInput.InitialGrid.GetLength(0);
@@ -24,36 +25,29 @@ namespace Minesweeper.Application
                 for (var j = 0; j < gridHeight; j++)
                 {
                     var tileType = GetTileType(jsonInput.InitialGrid[j,i], jsonInput.MineTileChar);
-                    tiles[j, i] = new Tile {Type = tileType};
+                    tiles[j, i] = new Tile(tileType);
                 }
             }
             return new Grid(tiles);
         }
 
-        private static void ValidDatePath(string pathname)
+        private static void ValidatePath(string pathname)
         {
             if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");
             try
             {
                 using var jsonFile = new StreamReader(pathname);
-                JsonConvert.DeserializeObject<InputInfoDTO>(jsonFile.ReadToEnd());
+                JsonConvert.DeserializeObject<GridInputDto>(jsonFile.ReadToEnd());
             }
             catch (Exception e)
             {
                 throw new IOException("Invalid path for grid creation.", e);
             }
-            
         }
 
         private static TileType GetTileType(string value, string mineTileChar)
         {
             return string.Equals(value, mineTileChar) ? TileType.Mine : TileType.Empty;
-        }
-        class InputInfoDTO //should be a record
-        {
-            public string MineTileChar { get; set; }
-            public string EmptyTileChar { get; set; }
-            public string[,] InitialGrid { get; set; }
         }
     }
 }
