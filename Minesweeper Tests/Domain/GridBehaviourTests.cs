@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace Minesweeper_Tests.Domain
 {
-    public class JsonGridTests
+    public class GridBehaviourTests
     {
         private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
         private static string _currentPath = Directory.GetCurrentDirectory();
@@ -20,7 +20,7 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldThrowOutOffRangeExceptionIfInputIsOutOfBounds()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMine.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
             Assert.Throws<IndexOutOfRangeException>(() => resultGrid.GetNeighbouringMines(3,2));
         }
@@ -28,7 +28,7 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldReturnZeroForATileWithNoNeighbouringMines()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMine.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
             Assert.AreEqual(0, resultGrid.GetNeighbouringMines(2,2));
             Assert.AreEqual(0, resultGrid.GetNeighbouringMines(0,3));
@@ -37,7 +37,7 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldReturnOneForATileWithOneNeighbouringMine()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "ThreeMines.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "ThreeMines.json").CreateGrid();
             
             Assert.AreEqual(1, resultGrid.GetNeighbouringMines(1,2));
             Assert.AreEqual(1, resultGrid.GetNeighbouringMines(0,4));
@@ -46,7 +46,7 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldReturnTwoForATileWithTwoNeighbouringMines()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "ThreeMines.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "ThreeMines.json").CreateGrid();
             
             Assert.AreEqual(2, resultGrid.GetNeighbouringMines(1,3));
         }
@@ -54,7 +54,7 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldWrapAroundHeightToDetectMines()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMine.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
             Assert.AreEqual(1, resultGrid.GetNeighbouringMines(2,0));
             Assert.AreEqual(1, resultGrid.GetNeighbouringMines(0,1));
@@ -63,15 +63,15 @@ namespace Minesweeper_Tests.Domain
         [Test]
         public void ShouldWrapAroundWidthAndHeightToDetectMines()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "FourCornerMines_SmallGrid.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
             
             Assert.AreEqual(3, resultGrid.GetNeighbouringMines(2,2));
         }
         
         [Test]
-        public void ShouldReturnEightAtMost()
+        public void ShouldReturnEightNeighboursAtMost()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "AllMines.json");
+            var resultGrid = new JsonGridSetup(_currentPath + "AllMines.json").CreateGrid();
             
             Assert.AreEqual(8, resultGrid.GetNeighbouringMines(3,3));
         }

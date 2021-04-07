@@ -10,8 +10,12 @@ namespace Domain
             Status = TileStatus.Hidden;
         }
 
+        public Tile()
+        {
+        }
+
         public TileStatus Status { get; private set; }
-        public TileType Type { get; }
+        public TileType Type { get; set; }
 
         public void ShowTile()
         {

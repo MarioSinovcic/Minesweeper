@@ -2,18 +2,26 @@ using System;
 using System.IO;
 using Domain;
 using Domain.Enums;
-using Minesweeper.Application.DTOs;
+using Minesweeper.Application.Interfaces;
+using Minesweeper.DTOs;
 using Newtonsoft.Json;
 
 namespace Minesweeper.Application.Behaviour.Setup
 {
-    public static class JsonGridSetup 
+    public class JsonGridSetup : IGridSetup
     {
-        public static Grid CreateGrid(string pathname) //TODO: correct use of static
+        private static string _pathname;
+
+        public JsonGridSetup(string pathname)
         {
-            ValidatePath(pathname);
+            _pathname = pathname;
+        }
+        
+        public Grid CreateGrid() //TODO: correct use of static
+        {
+            ValidatePath(_pathname);
             
-            using var jsonFile = new StreamReader(pathname);
+            using var jsonFile = new StreamReader(_pathname);
             var jsonInput = JsonConvert.DeserializeObject<GridInputDto>(jsonFile.ReadToEnd());
 
             var gridWidth = jsonInput.InitialGrid.GetLength(1);
