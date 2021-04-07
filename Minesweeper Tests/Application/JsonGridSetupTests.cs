@@ -34,7 +34,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldCreateGridWithCorrectDimensions()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMineSmallGrid.json");
+            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "OneCornerMine.json");
             
             Assert.AreEqual(7, resultGrid.Width); //TODO: ask about spying this, rather than making it public
             Assert.AreEqual(3, resultGrid.Height);
@@ -43,7 +43,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldReadMinesInJsonCornersFileCorrectly()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "MinedFourCornersSmall.json");
+            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "FourCornerMines_SmallGrid.json");
             var expected = new Tile(TileType.Mine); //TODO: ask about this | new Tile{Type = TileType.Mine}
             
             Assert.AreEqual(expected.Status, resultGrid.Tiles[0,0].Status);
@@ -53,7 +53,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldReadEmptyTilesInJsonCornersFileCorrectly()
         {
-            var resultGrid = JsonGridSetup.CreateGrid( _currentPath + "MinedFourCornersSmall.json");
+            var resultGrid = JsonGridSetup.CreateGrid( _currentPath + "FourCornerMines_SmallGrid.json");
             var expected = new Tile(TileType.Empty);
             
             Assert.AreEqual(expected.Status, resultGrid.Tiles[1,1].Status);
@@ -63,7 +63,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldSetAllTileStatusesToHidden()
         {
-            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "MinedFourCornersLarge.json");
+            var resultGrid = JsonGridSetup.CreateGrid(_currentPath + "FourCornerMines_LargeGrid.json");
 
             foreach (var tile in resultGrid.Tiles)
             {
