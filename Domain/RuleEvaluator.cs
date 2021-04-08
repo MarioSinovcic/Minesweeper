@@ -16,10 +16,16 @@ namespace Domain
                 return GameStatus.Error;
             }
 
-            return grid.Tiles[xCoord, yCoord].Type.Equals(TileType.Mine) ? GameStatus.Loss : GameStatus.Playing;
-            
-            // var tiles = grid.Tiles.Cast<Tile>().ToList();
-            // var mineCount = tiles.Count(x => x.Type == TileType.Mine);
+            if (grid.Tiles[xCoord, yCoord].Type.Equals(TileType.Mine))
+            {
+                return GameStatus.Loss;
+            }
+
+            var tiles = grid.Tiles.Cast<Tile>().ToList();
+            var emptyTilesCount = tiles.Count(x => x.Type == TileType.Empty);
+            var shownTilesCount = tiles.Count(x => x.Status == TileStatus.Shown) + 1;
+
+            return emptyTilesCount == shownTilesCount ? GameStatus.Win : GameStatus.Playing;
         }
     }
 }

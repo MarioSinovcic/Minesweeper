@@ -1,0 +1,27 @@
+using Application.Behaviour.Setup;
+using Domain.Entities;
+using Domain.Enums;
+
+namespace Minesweeper_Tests.Grid_Stubs
+{
+    public record WinningGridStub : Grid
+    {
+        private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Grid Fakes/OneCornerMine.json";
+        private static readonly Grid Grid = new JsonGridSetup(PathName).CreateGrid();
+
+        public WinningGridStub(Tile[,] tiles) : base(Grid.Tiles)
+        {
+            for (var i = 0; i < Grid.Width; i++)
+            {
+                for (var j = 0; j < Grid.Height; j++)
+                {
+                    if (Grid.Tiles[j,i].Type == TileType.Empty)
+                    {
+                        Grid.Tiles[j,i] = Grid.Tiles[j, i].ShowTile();
+                    }
+                }
+            }
+            Grid.Tiles[1, 1] = new Tile {Type = TileType.Empty}; //last tile not shown, needs to be selected to win
+        }
+    }
+}

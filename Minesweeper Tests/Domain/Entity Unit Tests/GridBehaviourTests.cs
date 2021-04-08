@@ -9,6 +9,15 @@ namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
     {
         private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
         private static string _currentPath = Directory.GetCurrentDirectory();
+        
+        private static readonly object[] BoundaryValuesForInputCoords =
+        {
+            new[] {-9, 2}, //case 1
+            new[] {-9, -1}, //case 2
+            new[] {2, -500}, //case 3
+            new[] {3, 50}, //case 4
+            new[] {52, 1}, //case 5
+        };
 
         [SetUp]
         public void Setup()
@@ -17,13 +26,13 @@ namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
             _currentPath += TestFolderPath;
         }
         
-        [Test]
-        public void ShouldThrowOutOffRangeExceptionIfInputIsOutOfBounds()
+        [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
+        public void ShouldThrowOutOffRangeExceptionIfInputIsOutOfBounds(int[] boundaryValuesForInputCoords)
         {
             
             var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
-            Assert.Throws<IndexOutOfRangeException>(() => resultGrid.GetNeighbouringMines(3,2));
+            Assert.Throws<IndexOutOfRangeException>(() => resultGrid.GetNeighbouringMines(boundaryValuesForInputCoords[0],boundaryValuesForInputCoords[1]));
         }
         
         [Test]

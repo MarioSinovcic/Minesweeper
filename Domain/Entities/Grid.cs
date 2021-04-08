@@ -18,7 +18,7 @@ namespace Domain.Entities
 
         public int GetNeighbouringMines(int y, int x)
         {
-            if (y >= Height || x >= Width)
+            if (y >= Height || x >= Width || y < 0 || x < 0)
             {
                 throw new IndexOutOfRangeException("X and Y co-ordinates must be within the grid's dimensions.");
             }
