@@ -1,9 +1,9 @@
 using System;
+using Application.Application.Interfaces;
 using Domain;
 using Domain.Enums;
-using Minesweeper.Application.Interfaces;
 
-namespace Minesweeper.Application.Behaviour.Setup
+namespace Application.Application.Behaviour.Setup
 {
     public class RandomGridSetup : IGridSetup
     {

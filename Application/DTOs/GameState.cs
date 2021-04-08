@@ -1,7 +1,7 @@
 using Domain;
 using Domain.Enums;
 
-namespace Minesweeper.DTOs
+namespace Application.DTOs
 {
     public sealed class GameState //should be a record
     {

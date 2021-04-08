@@ -4,6 +4,7 @@ namespace Domain.Enums
     {
         Playing, 
         Win,
-        Loss
+        Loss,
+        Error
     }
 }

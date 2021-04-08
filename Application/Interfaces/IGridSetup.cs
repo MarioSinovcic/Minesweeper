@@ -1,6 +1,6 @@
 using Domain;
 
-namespace Minesweeper.Application.Interfaces
+namespace Application.Application.Interfaces
 {
     public interface IGridSetup
     {

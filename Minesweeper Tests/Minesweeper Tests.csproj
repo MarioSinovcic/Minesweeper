@@ -14,7 +14,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Minesweeper\Minesweeper.csproj" />
+      <ProjectReference Include="..\Application\Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\Componenet Tests" />
     </ItemGroup>
 
 </Project>

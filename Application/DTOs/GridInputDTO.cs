@@ -1,4 +1,4 @@
-namespace Minesweeper.DTOs
+namespace Application.DTOs
 {
     public class GridInputDto //should be a record
     {

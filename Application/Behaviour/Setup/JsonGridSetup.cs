@@ -1,12 +1,12 @@
 using System;
 using System.IO;
+using Application.Application.Interfaces;
+using Application.DTOs;
 using Domain;
 using Domain.Enums;
-using Minesweeper.Application.Interfaces;
-using Minesweeper.DTOs;
 using Newtonsoft.Json;
 
-namespace Minesweeper.Application.Behaviour.Setup
+namespace Application.Application.Behaviour.Setup
 {
     public class JsonGridSetup : IGridSetup
     {
