@@ -1,7 +1,7 @@
 using System;
 using System.IO;
+using Application.Behaviour.Setup;
 using Domain.Enums;
-using Application.Application.Behaviour.Setup;
 using Domain.Entities;
 using NUnit.Framework;
 

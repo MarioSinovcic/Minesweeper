@@ -1,10 +1,9 @@
 using System;
 using Application.Application.Interfaces;
-using Domain;
 using Domain.Entities;
 using Domain.Enums;
 
-namespace Application.Application.Behaviour.Setup
+namespace Application.Behaviour.Setup
 {
     public class RandomGridSetup : IGridSetup
     {

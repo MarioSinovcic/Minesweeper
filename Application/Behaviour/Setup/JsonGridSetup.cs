@@ -2,12 +2,11 @@ using System;
 using System.IO;
 using Application.Application.Interfaces;
 using Application.DTOs;
-using Domain;
 using Domain.Entities;
 using Domain.Enums;
 using Newtonsoft.Json;
 
-namespace Application.Application.Behaviour.Setup
+namespace Application.Behaviour.Setup
 {
     public class JsonGridSetup : IGridSetup
     {

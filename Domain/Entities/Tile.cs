@@ -4,11 +4,8 @@ namespace Domain.Entities
 {
     public record Tile
     {
-        public TileStatus Status { get; private set; } = TileStatus.Hidden;
+        public TileStatus Status { get; private init; } = TileStatus.Hidden;
         public TileType Type { get; init; }
-        public void ShowTile()
-        {
-            Status = TileStatus.Shown;
-        }
+        public Tile ShowTile() => this with {Status = TileStatus.Shown};
     }
 }
