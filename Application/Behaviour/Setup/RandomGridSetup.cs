@@ -1,6 +1,7 @@
 using System;
 using Application.Application.Interfaces;
 using Domain;
+using Domain.Entities;
 using Domain.Enums;
 
 namespace Application.Application.Behaviour.Setup
@@ -18,7 +19,7 @@ namespace Application.Application.Behaviour.Setup
         public virtual int Height { get; private set; } = 8;
         public virtual int Difficulty { get; private set; } = 10;
 
-        public Grid CreateGrid() //TODO: correct use of static
+        public Grid CreateGrid() 
         {
             ValidateParameters();
             
@@ -29,7 +30,7 @@ namespace Application.Application.Behaviour.Setup
                 for (var j = 0; j < Height; j++)
                 {
                     var tileType = GetRandomTileType();
-                    tiles[j, i] = new Tile(tileType);
+                    tiles[j, i] = new Tile{Type = tileType};
                 }
             }
             return new Grid(tiles);

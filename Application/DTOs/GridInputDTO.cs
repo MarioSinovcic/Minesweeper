@@ -1,9 +1,9 @@
 namespace Application.DTOs
 {
-    public class GridInputDto //should be a record
+    public record GridInputDto 
     {
-        public string MineTileChar { get; set; } //should be inits
-        public string EmptyTileChar { get; set; }
-        public string[,] InitialGrid { get; set; }
+        public string MineTileChar { get; init; }
+        public string EmptyTileChar { get; init; }
+        public string[,] InitialGrid { get; init; }
     }
 }

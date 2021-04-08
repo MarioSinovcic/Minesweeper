@@ -1,22 +1,11 @@
 using Domain.Enums;
 
-namespace Domain
+namespace Domain.Entities
 {
-    public sealed class Tile
+    public record Tile
     {
-        public Tile(TileType type)
-        {
-            Type = type;
-            Status = TileStatus.Hidden;
-        }
-
-        public Tile()
-        {
-        }
-
-        public TileStatus Status { get; private set; }
-        public TileType Type { get; set; }
-
+        public TileStatus Status { get; private set; } = TileStatus.Hidden;
+        public TileType Type { get; init; }
         public void ShowTile()
         {
             Status = TileStatus.Shown;

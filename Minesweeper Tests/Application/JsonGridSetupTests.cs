@@ -1,21 +1,21 @@
 using System;
 using System.IO;
-using Domain;
 using Domain.Enums;
 using Application.Application.Behaviour.Setup;
+using Domain.Entities;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Application
 {
     public class JsonGridSetupTests
     {
-        private const string  TestFolderPath = "/Application Tests/Grid Fakes/";
+        private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]
         public void Setup()
         {
-            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Application/", StringComparison.Ordinal) + 13);
+            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Minesweeper/", StringComparison.Ordinal) + 13);
             _currentPath += TestFolderPath;
         }
         
@@ -36,7 +36,7 @@ namespace Minesweeper_Tests.Application
         {
             var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
-            Assert.AreEqual(7, resultGrid.Width); //TODO: ask about spying this, rather than making it public
+            Assert.AreEqual(7, resultGrid.Width);
             Assert.AreEqual(3, resultGrid.Height);
         }
 
@@ -44,7 +44,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldReadMinesInJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup(_currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            var expected = new Tile{Type = TileType.Mine}; //TODO: ask about this | new Tile{Type = TileType.Mine}
+            var expected = new Tile{Type = TileType.Mine};
             
             Assert.AreEqual(expected.Status, resultGrid.Tiles[0,0].Status);
             Assert.AreEqual(expected.Type, resultGrid.Tiles[0,0].Type);
@@ -54,7 +54,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldReadEmptyTilesInJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup( _currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            var expected = new Tile(TileType.Empty);
+            var expected = new Tile{Type = TileType.Empty};
             
             Assert.AreEqual(expected.Status, resultGrid.Tiles[1,1].Status);
             Assert.AreEqual(expected.Type, resultGrid.Tiles[1,1].Type);

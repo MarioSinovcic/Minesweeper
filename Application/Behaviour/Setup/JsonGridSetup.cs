@@ -3,6 +3,7 @@ using System.IO;
 using Application.Application.Interfaces;
 using Application.DTOs;
 using Domain;
+using Domain.Entities;
 using Domain.Enums;
 using Newtonsoft.Json;
 
@@ -33,7 +34,7 @@ namespace Application.Application.Behaviour.Setup
                 for (var j = 0; j < gridHeight; j++)
                 {
                     var tileType = GetTileType(jsonInput.InitialGrid[j,i], jsonInput.MineTileChar);
-                    tiles[j, i] = new Tile(tileType);
+                    tiles[j, i] = new Tile{Type = tileType};
                 }
             }
             return new Grid(tiles);

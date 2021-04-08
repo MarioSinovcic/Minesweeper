@@ -1,9 +1,9 @@
 using System;
 using Domain.Enums;
 
-namespace Domain
+namespace Domain.Entities
 {
-    public sealed class Grid
+    public record Grid
     {
         public Grid(Tile[,] tiles)
         {
@@ -11,16 +11,16 @@ namespace Domain
             Width = tiles.GetLength(1);
             Tiles = tiles;
         }
-
+        
         public int Width { get; }
-        public int Height { get; }
-        public Tile[,] Tiles { get; }
+        public int Height { get; } 
+        public Tile[,] Tiles { get; set; }
 
         public int GetNeighbouringMines(int y, int x)
         {
             if (y >= Height || x >= Width)
             {
-                throw new IndexOutOfRangeException("The x and y co-ordinates must be within the grid's dimensions.");
+                throw new IndexOutOfRangeException("X and Y co-ordinates must be within the grid's dimensions.");
             }
             
             var aliveNeighbours = 0;

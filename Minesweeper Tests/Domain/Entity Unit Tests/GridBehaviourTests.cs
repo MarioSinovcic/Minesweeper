@@ -3,23 +3,24 @@ using System.IO;
 using Application.Application.Behaviour.Setup;
 using NUnit.Framework;
 
-namespace Minesweeper_Tests.Domain
+namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
 {
     public class GridBehaviourTests
     {
-        private const string  TestFolderPath = "/Application Tests/Grid Fakes/";
+        private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]
         public void Setup()
         {
-            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Application/", StringComparison.Ordinal) + 13);
+            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Minesweeper/", StringComparison.Ordinal) + 13);
             _currentPath += TestFolderPath;
         }
         
         [Test]
         public void ShouldThrowOutOffRangeExceptionIfInputIsOutOfBounds()
         {
+            
             var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
             Assert.Throws<IndexOutOfRangeException>(() => resultGrid.GetNeighbouringMines(3,2));
