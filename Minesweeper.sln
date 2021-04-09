@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper Tests", "Minesw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8BD054D8-FB26-4285-95F4-3A02CEFECD89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{EA354811-4607-4E50-9127-72DA4B013477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{8BD054D8-FB26-4285-95F4-3A02CEFECD89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BD054D8-FB26-4285-95F4-3A02CEFECD89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BD054D8-FB26-4285-95F4-3A02CEFECD89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA354811-4607-4E50-9127-72DA4B013477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA354811-4607-4E50-9127-72DA4B013477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA354811-4607-4E50-9127-72DA4B013477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA354811-4607-4E50-9127-72DA4B013477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

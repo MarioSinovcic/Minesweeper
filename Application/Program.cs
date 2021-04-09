@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Application
+﻿namespace Application
 {
     class Program
     {
         //dependencies injection stuff
         
-        private static void Main(string[] args)
+        private static void Main()
         {
             //controller.setupGame() <- builder??
         
