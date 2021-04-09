@@ -5,13 +5,13 @@ namespace Domain.Entities
 {
     public record Grid
     {
-        public Grid(Tile[,] tiles)
+        public Grid(Tile[,] tiles) //remove later
         {
             Height = tiles.GetLength(0);
             Width = tiles.GetLength(1);
             Tiles = tiles;
         }
-        
+
         public int Width { get; }
         public int Height { get; } 
         public Tile[,] Tiles { get; set; }

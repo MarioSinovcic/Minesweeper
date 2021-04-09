@@ -22,7 +22,7 @@ namespace Application.Behaviour.Setup
             ValidatePath(_pathname);
             
             using var jsonFile = new StreamReader(_pathname);
-            var jsonInput = JsonConvert.DeserializeObject<GridInputDto>(jsonFile.ReadToEnd());
+            var jsonInput = JsonConvert.DeserializeObject<JSONGridInputDTO>(jsonFile.ReadToEnd());
 
             var gridWidth = jsonInput.InitialGrid.GetLength(1);
             var gridHeight = jsonInput.InitialGrid.GetLength(0);
@@ -45,7 +45,7 @@ namespace Application.Behaviour.Setup
             try
             {
                 using var jsonFile = new StreamReader(pathname);
-                JsonConvert.DeserializeObject<GridInputDto>(jsonFile.ReadToEnd());
+                JsonConvert.DeserializeObject<JSONGridInputDTO>(jsonFile.ReadToEnd());
             }
             catch (Exception e)
             {

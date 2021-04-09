@@ -4,9 +4,19 @@ namespace Application
 {
     class Program
     {
-        static void Main(string[] args)
+        //dependencies injection stuff
+        
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //controller.setupGame() <- builder??
+        
+            //while (true)
+            //{
+            //var InputDTO = inputHandler.getInput();
+            //var GameStateDTO = controller.handleMove(inputDTO);
+            //outputHandler.DisplayGameState(GameStateDTO);
+            //}
         }
+
     }
 }

@@ -1,6 +1,6 @@
 namespace Application.DTOs
 {
-    public record GridInputDto 
+    public sealed record JSONGridInputDTO 
     {
         public string MineTileChar { get; init; }
         public string EmptyTileChar { get; init; }

@@ -4,26 +4,26 @@ using Domain.Enums;
 
 namespace Domain
 {
-    public class RuleEvaluator
+    public class RuleEvaluator //potential to refactor into list of IRules
     {
-        public static GameStatus EvaluateGameStatus(Grid grid, int[] selectedTile)
+        public static GameStatus EvaluateGameStatus(Grid grid, Coords selectedTileCoordinates)
         {
-            var xCoord = selectedTile[0];
-            var yCoord = selectedTile[1];
+            var x = selectedTileCoordinates.X;
+            var y = selectedTileCoordinates.Y;
             
-            if (xCoord > grid.Width || xCoord < 0 || yCoord > grid.Height || yCoord < 0)
+            if (x > grid.Width || x < 0 || y > grid.Height || y < 0)
             {
                 return GameStatus.Error;
             }
 
-            if (grid.Tiles[xCoord, yCoord].Type.Equals(TileType.Mine))
+            if (grid.Tiles[x, y].Type.Equals(TileType.Mine))
             {
                 return GameStatus.Loss;
             }
 
             var tiles = grid.Tiles.Cast<Tile>().ToList();
-            var emptyTilesCount = tiles.Count(x => x.Type == TileType.Empty);
-            var shownTilesCount = tiles.Count(x => x.Status == TileStatus.Shown) + 1;
+            var emptyTilesCount = tiles.Count(tile => tile.Type == TileType.Empty);
+            var shownTilesCount = tiles.Count(tile => tile.Status == TileStatus.Shown) + 1;
 
             return emptyTilesCount == shownTilesCount ? GameStatus.Win : GameStatus.Playing;
         }

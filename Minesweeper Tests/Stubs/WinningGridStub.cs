@@ -2,7 +2,7 @@ using Application.Behaviour.Setup;
 using Domain.Entities;
 using Domain.Enums;
 
-namespace Minesweeper_Tests.Grid_Stubs
+namespace Minesweeper_Tests.Stubs
 {
     public record WinningGridStub : Grid
     {

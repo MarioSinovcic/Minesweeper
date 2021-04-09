@@ -1,12 +1,12 @@
 using Domain.Entities;
 using Domain.Enums;
 
-namespace Application.DTOs
+namespace Domain.DTOs
 {
-    public record GameStateDto 
+    public record GameStateDTO 
     {
         public GameStatus GameStatus { get; init; } 
-        public int[] PlayerMove { get; init; } 
+        public Coords PlayerMove { get; init; } 
         public Grid Grid { get; init; }
     }
 }
