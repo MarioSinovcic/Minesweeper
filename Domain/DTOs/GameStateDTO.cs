@@ -6,6 +6,7 @@ namespace Domain.DTOs
     public record GameStateDTO 
     {
         public GameStatus GameStatus { get; init; }
-        public Move PlayerMove { get; init; }
+        public Grid Grid { get; init; }
+        public Coords Coords { get; init; }
     }
 }

@@ -14,19 +14,22 @@ namespace Domain.Entities
 
         public int Width { get; }
         public int Height { get; } 
-        public Tile[,] Tiles { get; set; }
+        public Tile[,] Tiles { get; init; }
 
-        public int GetNeighbouringMines(int y, int x)
+        public int GetNeighbouringMines(Coords coords)
         {
+            var y = coords.Y;
+            var x = coords.X;
+            
             if (y >= Height || x >= Width || y < 0 || x < 0)
             {
                 throw new IndexOutOfRangeException("X and Y co-ordinates must be within the grid's dimensions.");
             }
             
-            var aliveNeighbours = 0;
+            var mines = 0;
             if (Tiles[y,x].Type.Equals(TileType.Mine))
             {
-                aliveNeighbours--;
+                mines--;
             }
             
             for (var i = -1 ; i < 2; i++)
@@ -37,11 +40,11 @@ namespace Domain.Entities
                     var yCoord = (y + j + Height) % Height;
                     if (Tiles[yCoord,xCoord].Type.Equals(TileType.Mine))
                     {
-                        aliveNeighbours++;
+                        mines++;
                     }
                 }
             }
-            return aliveNeighbours;
+            return mines;
         }
     }
 }
