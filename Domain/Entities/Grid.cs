@@ -18,9 +18,9 @@ namespace Domain.Entities
 
         public int GetNeighbouringMines(Coords coords)
         {
-            var y = coords.Y;
             var x = coords.X;
-            
+            var y = coords.Y;
+
             if (y >= Height || x >= Width || y < 0 || x < 0)
             {
                 throw new IndexOutOfRangeException("X and Y co-ordinates must be within the grid's dimensions.");
@@ -32,13 +32,14 @@ namespace Domain.Entities
                 mines--;
             }
             
-            for (var i = -1 ; i < 2; i++)
+            for (var xoff = -1 ; xoff < 2; xoff++)
             {
-                for (var j = -1; j < 2; j++)
+                for (var yoff = -1; yoff < 2; yoff++)
                 {
-                    var xCoord = (x + i + Width) % Width;
-                    var yCoord = (y + j + Height) % Height;
-                    if (Tiles[yCoord,xCoord].Type.Equals(TileType.Mine))
+                    var xCoord = x + xoff;
+                    var yCoord = y + yoff;
+                    if (xCoord <= -1 || xCoord >= Width || yCoord <= -1 || yCoord >= Height) continue;
+                    if (Tiles[yCoord, xCoord].Type.Equals(TileType.Mine))
                     {
                         mines++;
                     }
