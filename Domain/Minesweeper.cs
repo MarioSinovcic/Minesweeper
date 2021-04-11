@@ -23,37 +23,44 @@ namespace Domain
             var y = move.Coords.Y;
         
             var neighbours = move.Grid.GetNeighbouringMines(move.Coords);
-        
-            if (neighbours > 0)
+            var grid = move.Grid;
+
+            switch (neighbours)
             {
-                var grid = move.Grid;
-                grid.Tiles[x, y] = grid.Tiles[x, y].ShowTile();
-                return grid;
+                case > 0:
+                    grid.Tiles[y, x] = grid.Tiles[y, x].ShowTile();
+                    return grid;
+                case 0:
+                    grid = ShowAllSurroundingEmptyTiles(grid, x, y);
+                    break;
             }
-
-            // var width = move.Grid.Width;
-            // var height = move.Grid.Height;
-            //
-            // var mines = 0;
-            //
-            // if (neighbours == 0)
-            // {
-            //     for (var i = -1 ; i < 2; i++)
-            //     {
-            //         for (var j = -1; j < 2; j++)
-            //         {
-            //             var xCoord = (x + i + width) % width;
-            //             var yCoord = (y + j + height) % height;
-            //             if (get)
-            //             {
-            //                 
-            //             }
-            //
-            //         }
-            //     }
-            // }
-
             return move.Grid;
+        }
+
+        private static Grid ShowAllSurroundingEmptyTiles(Grid grid, int x,int y)
+        {
+            var width = grid.Width;
+            var height = grid.Height;
+            
+            for (var xoff = -1 ; xoff < 2; xoff++)
+            {
+                for (var yoff = -1; yoff < 2; yoff++)
+                {
+                    var xCoord = x + xoff;
+                    var yCoord = y + yoff;
+                    if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
+                    if (grid.Tiles[yCoord,xCoord].Type.Equals(TileType.Empty) &&
+                        grid.Tiles[yCoord,xCoord].Status.Equals(TileStatus.Hidden))
+                    {
+                        grid.Tiles[yCoord, xCoord] = grid.Tiles[yCoord, xCoord].ShowTile();
+                        if (!(grid.GetNeighbouringMines(new Coords {X = xCoord, Y = yCoord}) > 0))
+                        {
+                            ShowAllSurroundingEmptyTiles(grid, xCoord, yCoord);
+                        }
+                    }
+                }
+            }
+            return grid;
         }
     }
 }
