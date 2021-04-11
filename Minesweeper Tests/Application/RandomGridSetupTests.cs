@@ -11,13 +11,13 @@ namespace Minesweeper_Tests.Application
     {
         
         [Test]
-        public void ShouldThrowApplicationExceptionForInvalidParams()
+        public void ShouldThrowApplicationException_ForInvalidParams()
         {
             Assert.Throws<ApplicationException>(() => new RandomGridSetup(-5, -0, 0).CreateGrid());
         }
 
         [Test]
-        public void ShouldCreateGridWithCorrectDimensions()
+        public void ShouldCreateGrid_WithCorrectDimensions()
         {
             var resultGrid = new RandomGridSetup(5,10,10).CreateGrid();
             Assert.AreEqual(5, resultGrid.Width);
@@ -25,7 +25,7 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldHaveMinedAndEmptyTiles() //spy??
+        public void ShouldCreatedGrid_WithMinedAndEmptyTiles() //spy??
         {
             var resultGrid = new RandomGridSetup(10,10,10).CreateGrid();
             var tiles = resultGrid.Tiles.Cast<Tile>().ToList();

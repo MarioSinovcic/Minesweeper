@@ -20,19 +20,19 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldThrowIoExceptionForNullPath()
+        public void ShouldThrowIoException_ForNullPath()
         {
             Assert.Throws<IOException>(() => new JsonGridSetup(null).CreateGrid());
         }
         
         [Test]
-        public void ShouldThrowIoExceptionForInvalidPaths()
+        public void ShouldThrowIoException_ForInvalidPaths()
         {
             Assert.Throws<IOException>(() => new JsonGridSetup("/user/").CreateGrid());
         }
         
         [Test]
-        public void ShouldCreateGridWithCorrectDimensions()
+        public void ShouldCreateGrid_WithCorrectDimensions()
         {
             var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             
@@ -41,7 +41,7 @@ namespace Minesweeper_Tests.Application
         }
 
         [Test]
-        public void ShouldReadMinesInJsonCornersFileCorrectly()
+        public void ShouldReadMines_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup(_currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
             var expected = new Tile{Type = TileType.Mine};
@@ -51,7 +51,7 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldReadEmptyTilesInJsonCornersFileCorrectly()
+        public void ShouldReadEmptyTiles_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup( _currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
             var expected = new Tile{Type = TileType.Empty};
@@ -61,7 +61,7 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldSetAllTileStatusesToHidden()
+        public void ShouldSetAllTileStatuses_ToHidden()
         {
             var resultGrid = new JsonGridSetup(_currentPath + "FourCornerMines_LargeGrid.json").CreateGrid();
 

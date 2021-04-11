@@ -32,7 +32,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
 
         [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
-        public void ShouldReturnErrorStateIfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
+        public void ShouldReturnErrorState_IfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
         {
             var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, boundaryValuesForInputCoords);
@@ -41,7 +41,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
         
         [Test]
-        public void ShouldReturnLossStateIfMineSelected()
+        public void ShouldReturnLossState_IfMineSelected()
         {
             var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords{X = 0, Y = 0});
@@ -50,7 +50,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
         
         [Test]
-        public void ShouldReturnWinStateIfAllEmptyTilesAreShown()
+        public void ShouldReturnWinState_IfAllEmptyTilesAreShown()
         {
             var grid = new WinningGridStub(null);
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords{X = 1, Y = 1});
@@ -59,7 +59,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
         
         [Test]
-        public void ShouldReturnLossEvenIfAllEmptyTilesAreShown()
+        public void ShouldReturnLossEven_IfAllEmptyTilesAreShown()
         {
             var grid = new WinningGridStub(null);
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords{X = 0, Y = 0});
@@ -68,7 +68,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
         
         [Test]
-        public void ShouldReturnPlayingIfGameIsNotFinished()
+        public void ShouldReturnPlaying_IfGameIsNotFinished()
         {
             var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords{X = 1, Y = 1});
@@ -77,7 +77,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
         
         [Test]
-        public void ShouldReturnPlayingIfGameIsNotFinishedInTheLateGame()
+        public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
             var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
             grid.Tiles[0, 2] = grid.Tiles[0, 2].ShowTile();

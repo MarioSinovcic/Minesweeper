@@ -7,7 +7,7 @@ namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
     public class TileBehaviourTests
     {
         [Test]
-        public void ShouldChangeFromHiddenToShown()
+        public void ShouldChangeTileStatus_FromHiddenToShown()
         {
             var resultTile = new Tile {Type = TileType.Empty};
             resultTile = resultTile.ShowTile();
