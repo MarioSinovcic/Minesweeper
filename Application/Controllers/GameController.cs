@@ -6,10 +6,8 @@ using Domain.Enums;
 
 namespace Application.Controllers
 {
-    public class GameController
+    public class GameController //TODO: add factory pattern, error handling, json deserializing ??
     {
-        //GridFactory
-
         public GameStateDTO SetupGame()
         {
             var grid = new RandomGridSetup(10, 10, 5).CreateGrid();
