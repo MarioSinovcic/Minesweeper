@@ -10,7 +10,7 @@ namespace Frontend
     {
         private const string HiddenTile = " ";
         private const string VerticalSeparator = "|";
-        private const string GenerationDivider = "+";
+        private const string YDivider = "-";
         
         public void DisplayGameState(GameStateDTO gameState)
         {
@@ -31,10 +31,10 @@ namespace Frontend
 
         private void DisplayGenerationDivider(int width)
         {
-            var divider = GenerationDivider;
-            for (var i = 0; i < width*2; i++)
+            var divider = "   0  ";
+            for (var i = 1; i < width; i++)
             {
-                divider += $"  {GenerationDivider}";
+                divider += $"   {i}  ";
             }
             Console.WriteLine(divider);
         }

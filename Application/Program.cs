@@ -13,22 +13,21 @@ namespace Application
         
         private static void Main()
         {
-            var grid = new JsonGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Grid Fakes/FiveMines_LargeGrid.json").CreateGrid();
-            //var grid = new RandomGridSetup(10, 10, 15).CreateGrid();
-            grid = Minesweeper.PerformMove(new Move {Grid = grid, Coords = new Coords {X = 0, Y = 3}}).Grid;
-            
-            var gameState = new GameStateDTO {Grid = grid, Coords = null, GameStatus = GameStatus.Playing};
-
             var outputHandler = new ConsoleOutputHandler();
+            var inputHandler = new ConsoleInputHandler();
             
+            //var grid = new JsonGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Grid Fakes/FiveMines_LargeGrid.json").CreateGrid();
+            var grid = new RandomGridSetup(10, 10, 15).CreateGrid();
+            var gameState = new GameStateDTO {Grid = grid, Coords = null, GameStatus = GameStatus.Playing};
             //controller.setupGame() <- builder??
-        
-            //while (true)
-            //{
-            //var InputDTO = inputHandler.getInput();
-            //var GameStateDTO = controller.handleMove(inputDTO);
+            
             outputHandler.DisplayGameState(gameState);
-            //}
+            while (true)
+            {
+                var coords = inputHandler.GetTurnInput();
+                gameState = Minesweeper.PerformMove(new Move {Grid = grid, Coords = coords}); //TODO: setup mediating controller
+                outputHandler.DisplayGameState(gameState);
+            }
         }
 
     }
