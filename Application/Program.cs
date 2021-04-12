@@ -16,8 +16,7 @@ namespace Application
             var outputHandler = new ConsoleOutputHandler();
             var inputHandler = new ConsoleInputHandler();
             
-            //var grid = new JsonGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Grid Fakes/FiveMines_LargeGrid.json").CreateGrid();
-            var grid = new RandomGridSetup(10, 10, 15).CreateGrid();
+            var grid = new RandomGridSetup(10, 10, 5).CreateGrid();
             var gameState = new GameStateDTO {Grid = grid, Coords = null, GameStatus = GameStatus.Playing};
             //controller.setupGame() <- builder??
             

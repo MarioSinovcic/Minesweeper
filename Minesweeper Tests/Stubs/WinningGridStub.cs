@@ -6,7 +6,7 @@ namespace Minesweeper_Tests.Stubs
 {
     public record WinningGridStub : Grid
     {
-        private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Grid Fakes/OneCornerMine.json";
+        private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Grids/OneCornerMine.json";
         private static readonly Grid Grid = new JsonGridSetup(PathName).CreateGrid();
 
         public WinningGridStub(Tile[,] tiles) : base(Grid.Tiles)

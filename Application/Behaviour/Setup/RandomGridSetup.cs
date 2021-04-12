@@ -1,22 +1,37 @@
 using System;
+using System.IO;
 using Application.Application.Interfaces;
+using Application.DTOs;
 using Domain.Entities;
 using Domain.Enums;
+using Newtonsoft.Json;
 
 namespace Application.Behaviour.Setup
 {
-    public class RandomGridSetup : IGridSetup
+    public sealed class RandomGridSetup : IGridSetup
     {
-        public RandomGridSetup(int width, int height, int difficulty) //take in this data via a config system
+        private int Width { get; } = 8;
+        private int Height { get; } = 8;
+        private int Difficulty { get; } = 10;
+        
+        public RandomGridSetup(int width, int height, int difficulty)
         {
             Width = width;
             Height = height;
             Difficulty = difficulty; 
         }
 
-        public virtual int Width { get; private set; } = 8;
-        public virtual int Height { get; private set; } = 8;
-        public virtual int Difficulty { get; private set; } = 10;
+        public RandomGridSetup(string settingsFilePath)
+        {
+            ValidatePath(settingsFilePath);
+            
+            using var jsonFile = new StreamReader(settingsFilePath);
+            var jsonInput = JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
+            
+            Width = jsonInput.Width;
+            Height = jsonInput.Height;
+            Difficulty = jsonInput.Difficulty; 
+        }
 
         public Grid CreateGrid() 
         {
@@ -47,6 +62,20 @@ namespace Application.Behaviour.Setup
         {
             var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
             return randomNum.Next(Difficulty) < 1 ? TileType.Mine : TileType.Empty;
+        }
+        
+        private static void ValidatePath(string pathname) //DRY validation: make json diser.
+        {
+            if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");
+            try
+            {
+                using var jsonFile = new StreamReader(pathname);
+                JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
+            }
+            catch (Exception e)
+            {
+                throw new IOException("Invalid path for grid creation.", e);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 {
     public class MinesweeperRulesTests
     {
-        private const string TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
+        private const string TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]

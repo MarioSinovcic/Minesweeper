@@ -9,7 +9,7 @@ namespace Minesweeper_Tests.Application
 {
     public class JsonGridSetupTests
     {
-        private const string  TestFolderPath = "/Minesweeper Tests/Grid Fakes/";
+        private const string  TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]
@@ -17,6 +17,7 @@ namespace Minesweeper_Tests.Application
         {
             _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Minesweeper/", StringComparison.Ordinal) + 13);
             _currentPath += TestFolderPath;
+            Console.WriteLine(_currentPath);
         }
         
         [Test]
