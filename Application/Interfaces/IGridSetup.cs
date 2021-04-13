@@ -1,7 +1,6 @@
-using Domain;
 using Domain.Entities;
 
-namespace Application.Application.Interfaces
+namespace Application.Interfaces
 {
     public interface IGridSetup
     {

@@ -4,7 +4,7 @@ using Domain.Enums;
 
 namespace Domain
 {
-    public class RuleEvaluator //potential to refactor into list of IRules
+    public static class RuleEvaluator //TODO: potential to refactor into list of IRules
     {
         public static GameStatus EvaluateGameStatus(Grid grid, Coords selectedTileCoordinates)
         {

@@ -1,6 +1,6 @@
 namespace Application.DTOs
 {
-    public sealed record RandomGridSettingsDTO 
+    public sealed record RandomGridSettingsDTO
     {
         public int Width { get; init; }
         public int Height { get; init; }

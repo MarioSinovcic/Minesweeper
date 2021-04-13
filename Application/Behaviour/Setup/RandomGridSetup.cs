@@ -1,7 +1,7 @@
 using System;
 using System.IO;
-using Application.Application.Interfaces;
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Enums;
 using Newtonsoft.Json;

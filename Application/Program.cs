@@ -3,24 +3,23 @@ using Frontend;
 
 namespace Application
 {
-    class Program
+    internal static class Program
     {
-        //dependencies injection stuff
-        
         private static void Main()
         {
-            var outputHandler = new ConsoleOutputHandler();
+            var outputHandler = new ConsoleOutputHandler(); //TODO: introduce a dependency injection system?
             var inputHandler = new ConsoleInputHandler();
+            var ioFacade = new IOFacade(inputHandler, outputHandler);
             var gameController = new GameController();
-
-            var gameState = gameController.SetupGame(); //<- builder??
+            
+            var gameState = gameController.SetupGame(); //TODO: use builder??
                 
-            outputHandler.DisplayGameState(gameState);
+            ioFacade.DisplayGameState(gameState);
             while (true)
             {
-                var coords = inputHandler.GetTurnInput(); //should be inputDTO
-                gameState = gameController.HandleMove(coords, gameState); //TODO: setup mediating controller
-                outputHandler.DisplayGameState(gameState);
+                var coords = ioFacade.GetTurnInput(); //TODO: should be inputDTO
+                gameState = gameController.HandleMove(coords, gameState); 
+                ioFacade.DisplayGameState(gameState);
             }
         }
 
