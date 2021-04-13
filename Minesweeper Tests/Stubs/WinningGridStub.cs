@@ -9,7 +9,7 @@ namespace Minesweeper_Tests.Stubs
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Grids/OneCornerMine.json";
         private static readonly Grid Grid = new JsonGridSetup(PathName).CreateGrid();
 
-        public WinningGridStub(Tile[,] tiles) : base(Grid.Tiles)
+        public WinningGridStub() : base(Grid.Tiles)
         {
             for (var i = 0; i < Grid.Width; i++)
             {
@@ -21,7 +21,7 @@ namespace Minesweeper_Tests.Stubs
                     }
                 }
             }
-            Grid.Tiles[1, 1] = new Tile {Type = TileType.Empty}; //last tile not shown, needs to be selected to win
+            Grid.Tiles[1, 1] = new Tile(TileType.Empty); //last tile not shown, needs to be selected to win
         }
     }
 }

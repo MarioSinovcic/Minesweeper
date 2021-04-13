@@ -44,7 +44,7 @@ namespace Application.Behaviour.Setup
                 for (var j = 0; j < Height; j++)
                 {
                     var tileType = GetRandomTileType();
-                    tiles[j, i] = new Tile{Type = tileType};
+                    tiles[j, i] = new Tile(tileType);
                 }
             }
             return new Grid(tiles);
@@ -58,7 +58,7 @@ namespace Application.Behaviour.Setup
             }
         }
 
-        private TileType GetRandomTileType()
+        private TileType GetRandomTileType() //TODO: stub random, provided by the constructor
         {
             var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
             return randomNum.Next(Difficulty) < 1 ? TileType.Mine : TileType.Empty;

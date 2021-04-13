@@ -10,7 +10,7 @@ namespace Frontend
         {
             var input = Console.ReadLine(); 
             
-            return new Coords{X = (int)Char.GetNumericValue(input[0]), Y = (int)Char.GetNumericValue(input[2])};
+            return new Coords((int)Char.GetNumericValue(input[0]), (int)Char.GetNumericValue(input[2]));
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Frontend
                 Console.Write($" {i}  ");
                 for (var j = 0; j < grid.Width; j++)
                 {
-                    DisplayCell(grid, new Coords {X = j, Y = i});
+                    DisplayCell(grid, new Coords(j,i));
                 }
 
                 Console.WriteLine($"{VerticalSeparator}");

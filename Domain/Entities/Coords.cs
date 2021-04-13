@@ -1,8 +1,6 @@
+using System.Runtime.Intrinsics.X86;
+
 namespace Domain.Entities
 {
-    public record Coords
-    {
-        public int X { get; init; }
-        public int Y { get; init; }
-    }
+    public sealed record Coords(int X, int Y);
 }

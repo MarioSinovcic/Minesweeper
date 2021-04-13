@@ -33,7 +33,7 @@ namespace Application.Behaviour.Setup
                 for (var j = 0; j < gridHeight; j++)
                 {
                     var tileType = GetTileType(jsonInput.InitialGrid[j,i], jsonInput.MineTileChar);
-                    tiles[j, i] = new Tile{Type = tileType};
+                    tiles[j, i] = new Tile(tileType);
                 }
             }
             return new Grid(tiles);

@@ -9,7 +9,7 @@ namespace Minesweeper_Tests.Application
 {
     public class JsonGridSetupTests
     {
-        private const string  TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";
+        private const string  TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";  //TODO: refactor, copy to output directory
         private static string _currentPath = Directory.GetCurrentDirectory();
 
         [SetUp]
@@ -35,7 +35,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldCreateGrid_WithCorrectDimensions()
         {
-            var resultGrid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var resultGrid = new JsonGridSetup("Fakes/Grids/OneCornerMine.json").CreateGrid();
             
             Assert.AreEqual(7, resultGrid.Width);
             Assert.AreEqual(3, resultGrid.Height);
@@ -45,20 +45,17 @@ namespace Minesweeper_Tests.Application
         public void ShouldReadMines_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup(_currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            var expected = new Tile{Type = TileType.Mine};
+            var mineTile = new Tile(TileType.Mine);
             
-            Assert.AreEqual(expected.Status, resultGrid.Tiles[0,0].Status);
-            Assert.AreEqual(expected.Type, resultGrid.Tiles[0,0].Type);
+            Assert.AreEqual(mineTile.Status, resultGrid.Tiles[0,0].Status);
+            Assert.AreEqual(mineTile.Type, resultGrid.Tiles[0,0].Type);
         }
         
         [Test]
         public void ShouldReadEmptyTiles_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup( _currentPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            var expected = new Tile{Type = TileType.Empty};
-            
-            Assert.AreEqual(expected.Status, resultGrid.Tiles[1,1].Status);
-            Assert.AreEqual(expected.Type, resultGrid.Tiles[1,1].Type);
+            Assert.AreEqual(new Tile(TileType.Empty), resultGrid.Tiles[1,1]);
         }
         
         [Test]

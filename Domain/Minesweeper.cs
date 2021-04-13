@@ -49,7 +49,7 @@ namespace Domain
                     if (!grid.Tiles[yCoord, xCoord].Type.Equals(TileType.Empty) ||
                         !grid.Tiles[yCoord, xCoord].Status.Equals(TileStatus.Hidden)) continue;
                     grid.Tiles[yCoord, xCoord] = grid.Tiles[yCoord, xCoord].ShowTile();
-                    if (!(grid.GetNeighbouringMines(new Coords {X = xCoord, Y = yCoord}) > 0))
+                    if (!(grid.GetNeighbouringMines(new Coords(xCoord, yCoord)) > 0))
                     {
                         ShowAllSurroundingEmptyTiles(grid, xCoord, yCoord);
                     }

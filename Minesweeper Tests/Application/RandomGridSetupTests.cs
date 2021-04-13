@@ -28,7 +28,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldCreateGrid_WithCorrectDimensionsAndRandomMines()
         {
             var resultGrid = new RandomGridSetup(4,3,2).CreateGrid();
-            var tiles = resultGrid.Tiles.Cast<Tile>().ToList();
+            var tiles = resultGrid.Tiles.OfType<Tile>(); //Code smell: casting
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             
             Assert.AreEqual(4, resultGrid.Width);
@@ -60,11 +60,12 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowApplicationException_ForInvalidParamsInSettingsFile()
         {
-            Assert.Throws<ApplicationException>(() => new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            Assert.True(error.Message.Contains("invalid")); //or assert on the property of custom exception
         }
         
         [Test]
-        public void ShouldThrowApplicationException_ForMissingsParamsInSettingsFile()
+        public void ShouldThrowApplicationException_ForMissingParamsInSettingsFile()
         {
             Assert.Throws<ApplicationException>(() => new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
         }
