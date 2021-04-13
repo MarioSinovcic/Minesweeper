@@ -10,20 +10,13 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 {
     public class MinesweeperRulesTests
     {
-        private const string TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";
+        private const string TestFolderPath = "Fakes/Grids/";
         private static string _currentPath = Directory.GetCurrentDirectory();
-
-        [SetUp]
-        public void Setup()
-        {
-            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Minesweeper/", StringComparison.Ordinal) + 13);
-            _currentPath += TestFolderPath;
-        }
 
         [Test]
         public void ShouldShowSingleTile_WithOneNeighbouringMine()
         {
-            var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(1,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
@@ -34,7 +27,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowSingleTile_WithTwoNeighbouringMines()
         {
-            var grid = new JsonGridSetup(_currentPath + "FourSquareMines_SmallGrid.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "FourSquareMines_SmallGrid.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(2,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
@@ -45,7 +38,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTiles_IfZeroNeighbouringMines() //refactor: doesn't test functionality properly, hard to find the point of failure
         {
-            var grid = new JsonGridSetup(_currentPath + "FourSquareMines_LargeGrid.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "FourSquareMines_LargeGrid.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(3,3)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
@@ -63,7 +56,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnDiagonallyMinedGrid()
         {
-            var grid = new JsonGridSetup(_currentPath + "DiagonalMines.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "DiagonalMines.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(1,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
@@ -78,7 +71,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFourMines()
         {
-            var grid = new JsonGridSetup(_currentPath + "FourSquareMines_SmallGrid.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "FourSquareMines_SmallGrid.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(5,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
@@ -88,7 +81,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFiveMines()
         {
-            var grid = new JsonGridSetup(_currentPath + "FiveMines_LargeGrid.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "FiveMines_LargeGrid.json").CreateGrid();
             var move = new Move {Grid = grid, Coords = new Coords(0,3)};
             var resultGrid = Minesweeper.PerformMove(move).Grid; //TODO: command query separation, perform move, get grid should be separate
             

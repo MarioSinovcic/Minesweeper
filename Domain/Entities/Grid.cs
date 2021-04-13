@@ -14,7 +14,7 @@ namespace Domain.Entities
 
         public int Width { get; }
         public int Height { get; } 
-        public Tile[,] Tiles { get; init; } //TODO: create method for getting access to tiles by coords
+        public Tile[,] Tiles { get; init; } //TODO: refactor for getting status/type for coords
 
         public int GetNeighbouringMines(Coords coords)
         {

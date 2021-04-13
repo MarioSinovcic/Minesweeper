@@ -11,8 +11,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 {
     public class GameStatusTests
     {
-        private const string TestFolderPath = "/Minesweeper Tests/Fakes/Grids/";
-        private static string _currentPath = Directory.GetCurrentDirectory();
+        private const string TestFolderPath = "Fakes/Grids/";
 
         private static readonly object[] BoundaryValuesForInputCoords =
         {
@@ -24,17 +23,10 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             new Coords(52,1), //case 6
         };
 
-        [SetUp]
-        public void Setup()
-        {
-            _currentPath = _currentPath.Substring(0, _currentPath.IndexOf("/Minesweeper/", StringComparison.Ordinal) + 13);
-            _currentPath += TestFolderPath;
-        }
-
         [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
         public void ShouldReturnErrorState_IfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
         {
-            var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, boundaryValuesForInputCoords);
 
             Assert.AreEqual(GameStatus.Error, resultGameStatus);
@@ -43,7 +35,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnLossState_IfMineSelected()
         {
-            var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(0,0));
 
             Assert.AreEqual(GameStatus.Loss, resultGameStatus);
@@ -70,7 +62,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinished()
         {
-            var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(1,1));
 
             Assert.AreEqual(GameStatus.Playing, resultGameStatus);
@@ -79,7 +71,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
-            var grid = new JsonGridSetup(_currentPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
             grid.Tiles[0, 2] = grid.Tiles[0, 2].ShowTile();
             grid.Tiles[0, 4] = grid.Tiles[0, 4].ShowTile();
             grid.Tiles[1, 1] = grid.Tiles[1, 1].ShowTile();

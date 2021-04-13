@@ -9,9 +9,8 @@ namespace Minesweeper_Tests.Application
 {
     public class RandomGridSetupTests
     {
-        
         [Test]
-        public void ShouldThrowApplicationException_ForInvalidParams()
+        public void ShouldThrowApplicationException_ForInvalidParams() //TODO: remove absolute paths from bottomn tests
         {
             Assert.Throws<ApplicationException>(() => new RandomGridSetup(-5, -0, 0).CreateGrid());
         }
@@ -51,8 +50,8 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldGatherCorrectDimensionSettings_FromSettingsFile()
         {
-            var resultGrid = new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Application/Behaviour/Setup/RandomGridSettings.json").CreateGrid();
-
+            var resultGrid = new RandomGridSetup("Fakes/Settings/RandomGridSettings.json").CreateGrid();
+        
             Assert.AreEqual(9,resultGrid.Height);
             Assert.AreEqual(10,resultGrid.Width);
         }
@@ -60,14 +59,15 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowApplicationException_ForInvalidParamsInSettingsFile()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
-            Assert.True(error.Message.Contains("invalid")); //or assert on the property of custom exception
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            Assert.True(error.Message.Contains("Invalid input parameters")); 
         }
         
         [Test]
         public void ShouldThrowApplicationException_ForMissingParamsInSettingsFile()
         {
-            Assert.Throws<ApplicationException>(() => new RandomGridSetup("/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
+            Assert.True(error.Message.Contains("Invalid input parameters"));
         }
     }
 }
