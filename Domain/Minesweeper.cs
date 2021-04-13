@@ -6,6 +6,10 @@ namespace Domain
 {
     public static class Minesweeper //TODO: setup mediator
     {
+        //TODO: holds state, with command query opps
+        //TODO: gamestate factory
+        
+        
         public static GameStateDTO PerformMove(Move move)
         {
             var updatedGameStatus = RuleEvaluator.EvaluateGameStatus(move.Grid, move.Coords);

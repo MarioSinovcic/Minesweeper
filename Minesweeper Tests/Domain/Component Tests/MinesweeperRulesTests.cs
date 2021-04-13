@@ -86,7 +86,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var resultGrid = Minesweeper.PerformMove(move).Grid; //TODO: command query separation, perform move, get grid should be separate
             
             Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,0].Status); //TODO: grid method for getStatusAtCoords & getTypeAtCoords
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,0].Status);    //Tile record not exposed
+            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,0].Status); //Tile record not exposed
             Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,1].Status);
             Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,2].Status);
         }

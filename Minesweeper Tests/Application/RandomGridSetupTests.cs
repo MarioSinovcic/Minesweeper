@@ -10,7 +10,7 @@ namespace Minesweeper_Tests.Application
     public class RandomGridSetupTests
     {
         [Test]
-        public void ShouldThrowApplicationException_ForInvalidParams() //TODO: remove absolute paths from bottomn tests
+        public void ShouldThrowApplicationException_ForInvalidParams()
         {
             Assert.Throws<ApplicationException>(() => new RandomGridSetup(-5, -0, 0).CreateGrid());
         }
