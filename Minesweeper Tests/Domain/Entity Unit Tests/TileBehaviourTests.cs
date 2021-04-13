@@ -1,5 +1,5 @@
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Domain.Entity_Unit_Tests

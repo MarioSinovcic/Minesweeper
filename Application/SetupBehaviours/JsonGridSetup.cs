@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using Application.DTOs;
 using Application.Interfaces;
-using Domain.Entities;
+using Application.SetupBehaviours.DTOs;
 using Domain.Enums;
+using Domain.Values;
 using Newtonsoft.Json;
 
 namespace Application.Behaviour.Setup
@@ -22,7 +22,7 @@ namespace Application.Behaviour.Setup
             ValidatePath(_pathname);
             
             using var jsonFile = new StreamReader(_pathname);
-            var jsonInput = JsonConvert.DeserializeObject<JSONGridInputDTO>(jsonFile.ReadToEnd());
+            var jsonInput = JsonConvert.DeserializeObject<JsonGridInputDTO>(jsonFile.ReadToEnd());
 
             var gridWidth = jsonInput.InitialGrid.GetLength(1);
             var gridHeight = jsonInput.InitialGrid.GetLength(0);
@@ -45,7 +45,7 @@ namespace Application.Behaviour.Setup
             try
             {
                 using var jsonFile = new StreamReader(pathname);
-                JsonConvert.DeserializeObject<JSONGridInputDTO>(jsonFile.ReadToEnd());
+                JsonConvert.DeserializeObject<JsonGridInputDTO>(jsonFile.ReadToEnd());
             }
             catch (Exception e)
             {

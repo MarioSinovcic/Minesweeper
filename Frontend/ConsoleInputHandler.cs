@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Entities;
+using Domain.Values;
 using Frontend.Interfaces;
 
 namespace Frontend

@@ -1,12 +1,12 @@
 using System;
 using System.IO;
-using Application.DTOs;
 using Application.Interfaces;
-using Domain.Entities;
+using Application.SetupBehaviours.DTOs;
 using Domain.Enums;
+using Domain.Values;
 using Newtonsoft.Json;
 
-namespace Application.Behaviour.Setup
+namespace Application.SetupBehaviours
 {
     public sealed class RandomGridSetup : IGridSetup
     {

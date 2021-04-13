@@ -1,7 +1,7 @@
 using System;
 using Domain.Enums;
 
-namespace Domain.Entities
+namespace Domain.Values
 {
     public record Grid
     {

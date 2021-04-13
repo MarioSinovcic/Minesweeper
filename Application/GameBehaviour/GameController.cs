@@ -1,20 +1,19 @@
-using Application.Behaviour.Setup;
+using Application.SetupBehaviours;
 using Domain;
-using Domain.DTOs;
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 
-namespace Application.Controllers
+namespace Application.GameBehaviour
 {
     public class GameController //TODO: add factory pattern, error handling, json deserializing ??
     {
-        public GameStateDTO SetupGame()
+        public GameState SetupGame()
         {
             var grid = new RandomGridSetup(10, 10, 5).CreateGrid();
-            return new GameStateDTO {Grid = grid, Coords = null, GameStatus = GameStatus.Playing};
+            return new GameState(GameStatus.Playing, grid, null); //TODO: create factory NewGameState(grid)
         }
 
-        public GameStateDTO HandleMove(Coords inputDto, GameStateDTO gameState)
+        public GameState HandleMove(Coords inputDto, GameState gameState)
         {
             return Minesweeper.PerformMove(new Move {Grid = gameState.Grid, Coords = inputDto});
         }

@@ -1,6 +1,6 @@
 using Domain.Enums;
 
-namespace Domain.Entities
+namespace Domain.Values
 {
     public sealed record Tile(TileType Type, TileStatus Status = TileStatus.Hidden)
     {

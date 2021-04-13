@@ -1,7 +1,6 @@
 ﻿using System;
-using Domain.DTOs;
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 using Frontend.Interfaces;
 
 namespace Frontend
@@ -11,7 +10,7 @@ namespace Frontend
         private const string HiddenTile = " ";
         private const string VerticalSeparator = "|";
 
-        public void DisplayGameState(GameStateDTO gameState)
+        public void DisplayGameState(GameState gameState)
         {
             Console.Clear();
             var grid = gameState.Grid;

@@ -2,7 +2,8 @@ using System;
 using System.Linq;
 using Domain.Enums;
 using Application.Behaviour.Setup;
-using Domain.Entities;
+using Application.SetupBehaviours;
+using Domain.Values;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Application

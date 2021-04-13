@@ -1,6 +1,6 @@
 using Application.Behaviour.Setup;
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 
 namespace Minesweeper_Tests.Stubs
 {

@@ -1,16 +1,15 @@
 using System.Linq;
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 
 namespace Domain
 {
-    public static class RuleEvaluator //TODO: potential to refactor into list of IRules
+    public static class RuleEvaluator //TODO: potential to refactor into list of IRules (polymorphic) -> isValid(), 
     {
         public static GameStatus EvaluateGameStatus(Grid grid, Coords selectedTileCoordinates)
         {
-            var x = selectedTileCoordinates.X;
-            var y = selectedTileCoordinates.Y;
-            
+            var (x, y) = selectedTileCoordinates;
+
             if (x > grid.Width || x < 0 || y > grid.Height || y < 0)
             {
                 return GameStatus.Error;

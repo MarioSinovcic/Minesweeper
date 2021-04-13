@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Domain.Values;
 
 namespace Frontend.Interfaces
 {

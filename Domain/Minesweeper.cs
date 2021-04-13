@@ -1,6 +1,5 @@
-using Domain.DTOs;
-using Domain.Entities;
 using Domain.Enums;
+using Domain.Values;
 
 namespace Domain
 {
@@ -8,14 +7,14 @@ namespace Domain
     {
         //TODO: holds state, with command query opps
         //TODO: gamestate factory
+        //TODO: IRules
         
-        
-        public static GameStateDTO PerformMove(Move move)
+        public static GameState PerformMove(Move move)
         {
             var updatedGameStatus = RuleEvaluator.EvaluateGameStatus(move.Grid, move.Coords);
             var updatedGrid = UpdateGrid(move);
             
-            return new GameStateDTO {GameStatus = updatedGameStatus, Grid = updatedGrid, Coords = move.Coords};
+            return new GameState(updatedGameStatus, updatedGrid, move.Coords);
         }
 
         private static Grid UpdateGrid(Move move)

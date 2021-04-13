@@ -1,6 +1,6 @@
-using Domain.Entities;
+using Domain.Values;
 
-namespace Application.DTOs
+namespace Application.GameBehaviour.DTOs
 {
     public sealed record InputDTO
     {

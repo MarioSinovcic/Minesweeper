@@ -1,9 +1,9 @@
-using Domain.DTOs;
+using Domain.Values;
 
 namespace Frontend.Interfaces
 {
     public interface IOutputHandler
     {
-        public void DisplayGameState(GameStateDTO gameState);
+        public void DisplayGameState(GameState gameState);
     }
 }

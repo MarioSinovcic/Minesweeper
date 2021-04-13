@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using Application.Behaviour.Setup;
-using Domain.Entities;
+using Domain.Values;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Domain.Entity_Unit_Tests

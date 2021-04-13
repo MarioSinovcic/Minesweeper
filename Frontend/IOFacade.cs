@@ -1,5 +1,4 @@
-using Domain.DTOs;
-using Domain.Entities;
+using Domain.Values;
 using Frontend.Interfaces;
 
 namespace Frontend
@@ -20,7 +19,7 @@ namespace Frontend
             return _inputHandler.GetTurnInput();
         }
 
-        public void DisplayGameState(GameStateDTO gameState)
+        public void DisplayGameState(GameState gameState)
         {
             _outputHandler.DisplayGameState(gameState);
         }

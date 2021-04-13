@@ -1,4 +1,4 @@
-﻿using Application.Controllers;
+﻿using Application.GameBehaviour;
 using Frontend;
 
 namespace Application
