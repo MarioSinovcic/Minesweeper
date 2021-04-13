@@ -5,8 +5,8 @@ namespace Domain
 {
     public static class Minesweeper //TODO: setup mediator
     {
-        //TODO: holds state, with command query opps
-        //TODO: gamestate factory
+        //TODO: holds state, with command query opps <- priority
+        //TODO: game state factory
         //TODO: IRules
         
         public static GameState PerformMove(Move move)
