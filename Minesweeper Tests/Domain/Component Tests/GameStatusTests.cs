@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Application.Behaviour.Setup;
 using Domain;
 using Domain.Enums;
@@ -72,11 +70,9 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
             var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            grid.Tiles[0, 2] = grid.Tiles[0, 2].ShowTile();
-            grid.Tiles[0, 4] = grid.Tiles[0, 4].ShowTile();
-            grid.Tiles[1, 1] = grid.Tiles[1, 1].ShowTile();
-            grid.Tiles[1, 2] = grid.Tiles[1, 2].ShowTile();
-            grid.Tiles[2, 2] = grid.Tiles[2, 2].ShowTile();
+            var coords = new Coords(2, 0);
+            var updatedTile =  grid.ShowHiddenTile(coords);
+            grid.ReplaceTile(coords, updatedTile); //grid\.Tiles\[([0-9])\, ([0-9])\]\.ShowTile\(\)
             var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(1,1));
 
             Assert.AreEqual(GameStatus.Playing, resultGameStatus);

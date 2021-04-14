@@ -5,9 +5,9 @@ namespace Domain
 {
     public static class Minesweeper //TODO: setup mediator
     {
-        //TODO: holds state, with command query opps <- priority
-        //TODO: game state factory
-        //TODO: IRules
+        //TODO: holds state, with command query opps
+        //TODO: gamestate factory
+        
         
         public static GameState PerformMove(Move move)
         {
@@ -19,25 +19,24 @@ namespace Domain
 
         private static Grid UpdateGrid(Move move)
         {
-            var x = move.Coords.X;
-            var y = move.Coords.Y;
-        
-            var neighbours = move.Grid.GetNeighbouringMines(move.Coords);
             var grid = move.Grid;
+            var coords = move.Coords;
+            var neighbours = grid.GetNeighbouringMines(coords);
 
             switch (neighbours)
             {
                 case > 0:
-                    grid.Tiles[y, x] = grid.Tiles[y, x].ShowTile();
+                    var updatedTile = grid.ShowHiddenTile(coords);
+                    grid.ReplaceTile(coords, updatedTile);
                     return grid;
                 case 0:
-                    ShowAllSurroundingEmptyTiles(grid, x, y);
+                    ShowAllSurroundingEmptyTiles(grid, coords);
                     break;
             }
-            return move.Grid;
+            return grid;
         }
 
-        private static void ShowAllSurroundingEmptyTiles(Grid grid, int x, int y)
+        private static void ShowAllSurroundingEmptyTiles(Grid grid, Coords givenCoords)
         {
             var width = grid.Width;
             var height = grid.Height;
@@ -46,15 +45,19 @@ namespace Domain
             {
                 for (var yOff = -1; yOff < 2; yOff++)
                 {
-                    var xCoord = x + xOff;
-                    var yCoord = y + yOff;
+                    var xCoord = givenCoords.X + xOff;
+                    var yCoord = givenCoords.Y + yOff;
+                    var coords = new Coords(xCoord, yCoord);
+                    
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
-                    if (!grid.Tiles[yCoord, xCoord].Type.Equals(TileType.Empty) ||
-                        !grid.Tiles[yCoord, xCoord].Status.Equals(TileStatus.Hidden)) continue;
-                    grid.Tiles[yCoord, xCoord] = grid.Tiles[yCoord, xCoord].ShowTile();
-                    if (!(grid.GetNeighbouringMines(new Coords(xCoord, yCoord)) > 0))
+                    if (!grid.GetTileTypeAt(coords).Equals(TileType.Empty) ||
+                        !grid.GetTileStatusAt(coords).Equals(TileStatus.Hidden)) continue;
+                    var updatedTile = grid.ShowHiddenTile(coords);
+                    grid.ReplaceTile(coords, updatedTile);
+                    
+                    if (!(grid.GetNeighbouringMines(coords) > 0))
                     {
-                        ShowAllSurroundingEmptyTiles(grid, xCoord, yCoord);
+                        ShowAllSurroundingEmptyTiles(grid, coords);
                     }
                 }
             }

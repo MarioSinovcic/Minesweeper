@@ -20,8 +20,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(1,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.Tiles[0,0].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[0,1].Status);
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,0)));
         }
         
         [Test]
@@ -31,8 +31,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(2,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.Tiles[0,0].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[0,2].Status);
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,0)));
         }
         
         [Test]
@@ -42,15 +42,15 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(3,3)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[1,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[4,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[5,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,4].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,2].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,5].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,1].Status);
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,3)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,2)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,1)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,4)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,5)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(4,3)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,3)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(5,3)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,3)));
         }
         
         [Test]
@@ -60,12 +60,12 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(1,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.Tiles[1,5].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[0,0].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[0,1].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[1,3].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,2].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,0].Status);
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(5,1)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,1)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,2)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3)));
         }
         
         [Test]
@@ -75,7 +75,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(5,0)};
             var resultGrid = Minesweeper.PerformMove(move).Grid;
             
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.Tiles[3,3].Status); //test failure should be comms
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(3,3))); //test failure should be comms
         }
         
         [Test]
@@ -85,10 +85,10 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var move = new Move {Grid = grid, Coords = new Coords(0,3)};
             var resultGrid = Minesweeper.PerformMove(move).Grid; //TODO: command query separation, perform move, get grid should be separate
             
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[3,0].Status); //TODO: grid method for getStatusAtCoords & getTypeAtCoords
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,0].Status); //Tile record not exposed
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,1].Status);
-            Assert.AreEqual(TileStatus.Shown, resultGrid.Tiles[2,2].Status);
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3))); //TODO: grid method for getStatusAtCoords & getTypeAtCoords
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,2))); //Tile record not exposed
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,2)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,2)));
         }
 
     }

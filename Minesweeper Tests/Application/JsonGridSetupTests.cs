@@ -3,6 +3,7 @@ using System.IO;
 using Application.Behaviour.Setup;
 using Domain.Enums;
 using Domain.Values;
+using Minesweeper_Tests.Domain;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Application
@@ -36,25 +37,25 @@ namespace Minesweeper_Tests.Application
         public void ShouldReadMines_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup(TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            var mineTile = new Tile(TileType.Mine);
             
-            Assert.AreEqual(mineTile.Status, resultGrid.Tiles[0,0].Status);
-            Assert.AreEqual(mineTile.Type, resultGrid.Tiles[0,0].Type);
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
+            Assert.AreEqual(TileType.Mine, resultGrid.GetTileTypeAt(new Coords(0,0)));
         }
         
         [Test]
         public void ShouldReadEmptyTiles_FromJsonCornersFileCorrectly()
         {
             var resultGrid = new JsonGridSetup( TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
-            Assert.AreEqual(new Tile(TileType.Empty), resultGrid.Tiles[1,1]);
+            Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(1,1)));
         }
         
         [Test]
         public void ShouldSetAllTileStatuses_ToHidden()
         {
             var resultGrid = new JsonGridSetup(TestFolderPath + "FourCornerMines_LargeGrid.json").CreateGrid();
+            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
 
-            foreach (var tile in resultGrid.Tiles)
+            foreach (var tile in tiles)
             {
                 Assert.AreEqual(TileStatus.Hidden, tile.Status);
             }

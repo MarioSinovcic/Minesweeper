@@ -5,16 +5,40 @@ namespace Domain.Values
 {
     public record Grid
     {
-        public Grid(Tile[,] tiles) //remove later
+        private readonly Tile[,] _tiles;
+        public int Width { get; }
+        public int Height { get; }
+        
+        public Grid(Tile[,] tiles)
         {
             Height = tiles.GetLength(0);
             Width = tiles.GetLength(1);
-            Tiles = tiles;
+            _tiles = tiles;
         }
-
-        public int Width { get; }
-        public int Height { get; } 
-        public Tile[,] Tiles { get; init; } //TODO: refactor for getting status/type for coords
+        
+        public TileStatus GetTileStatusAt(Coords coords)
+        {
+            var (x, y) = coords;
+            return _tiles[y, x].Status;
+        }
+        
+        public TileType GetTileTypeAt(Coords coords)
+        {
+            var (x, y) = coords;
+            return _tiles[y, x].Type;
+        }
+        
+        public Tile ShowHiddenTile(Coords coords)
+        {
+            var (x, y) = coords;
+            return _tiles[y, x].ShowTile();
+        }
+        
+        public void ReplaceTile(Coords coords, Tile updatedTile)
+        {
+            var (x, y) = coords;
+            _tiles[y, x] = updatedTile;
+        }
 
         public int GetNeighbouringMines(Coords coords)
         {
@@ -27,19 +51,19 @@ namespace Domain.Values
             }
             
             var mines = 0;
-            if (Tiles[y,x].Type.Equals(TileType.Mine))
+            if (_tiles[y,x].Type.Equals(TileType.Mine))
             {
                 mines--;
             }
             
-            for (var xoff = -1 ; xoff < 2; xoff++)
+            for (var xOff = -1 ; xOff < 2; xOff++)
             {
-                for (var yoff = -1; yoff < 2; yoff++)
+                for (var yOff = -1; yOff < 2; yOff++)
                 {
-                    var xCoord = x + xoff;
-                    var yCoord = y + yoff;
+                    var xCoord = x + xOff;
+                    var yCoord = y + yOff;
                     if (xCoord <= -1 || xCoord >= Width || yCoord <= -1 || yCoord >= Height) continue;
-                    if (Tiles[yCoord, xCoord].Type.Equals(TileType.Mine))
+                    if (_tiles[yCoord, xCoord].Type.Equals(TileType.Mine))
                     {
                         mines++;
                     }

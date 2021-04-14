@@ -22,7 +22,7 @@ namespace Frontend
                 Console.Write($" {i}  ");
                 for (var j = 0; j < grid.Width; j++)
                 {
-                    DisplayCell(grid, new Coords(j,i));
+                    DisplayTile(grid, new Coords(j,i));
                 }
 
                 Console.WriteLine($"{VerticalSeparator}");
@@ -40,11 +40,9 @@ namespace Frontend
             Console.WriteLine(divider);
         }
 
-        private void DisplayCell(Grid grid, Coords coords)
+        private void DisplayTile(Grid grid, Coords coords)
         {
-            var tile = grid.Tiles[coords.Y, coords.X];
-
-            Console.Write(tile.Status.Equals(TileStatus.Shown)
+            Console.Write(grid.GetTileStatusAt(coords).Equals(TileStatus.Shown)
                 ? $"{VerticalSeparator}  {grid.GetNeighbouringMines(coords)}  "
                 : $"{VerticalSeparator}  {HiddenTile}  ");
         }
