@@ -1,9 +1,9 @@
-using Domain.Values;
+using Domain.Interfaces;
 
-namespace Application.Interfaces
+namespace Application.SetupBehaviours.Interfaces
 {
     public interface IGridSetup
     {
-        public Grid CreateGrid();
+        public IGrid CreateGrid();
     }
 }

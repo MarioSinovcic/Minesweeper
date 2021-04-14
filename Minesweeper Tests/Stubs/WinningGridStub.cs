@@ -7,7 +7,7 @@ namespace Minesweeper_Tests.Stubs
     public record WinningGridStub : Grid
     {
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Grids/OneCornerMine.json";
-        private static readonly Grid Grid = new JsonGridSetup(PathName).CreateGrid();
+        private static readonly Grid Grid = (Grid) new JsonGridSetup(PathName).CreateGrid();
 
         public WinningGridStub() : base(Grid)
         {
@@ -17,7 +17,7 @@ namespace Minesweeper_Tests.Stubs
                 {
                     var coords = new Coords(i, j);
                     if (Grid.GetTileTypeAt(coords) != TileType.Empty) continue;
-                    var updatedTile = Grid.ShowHiddenTile(coords);
+                    var updatedTile = Grid.GetInvertTileStatus(coords);
                     Grid.ReplaceTile(coords,updatedTile);
                 }
             }

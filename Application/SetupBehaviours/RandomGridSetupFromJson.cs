@@ -1,8 +1,9 @@
 using System;
 using System.IO;
-using Application.Interfaces;
 using Application.SetupBehaviours.DTOs;
+using Application.SetupBehaviours.Interfaces;
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 using Newtonsoft.Json;
 
@@ -17,20 +18,21 @@ namespace Application.SetupBehaviours
         public RandomGridSetupFromJson(string settingsFilePath)
         {
             ValidatePath(settingsFilePath);
-            
+
             using var jsonFile = new StreamReader(settingsFilePath);
-            var (width, height, difficulty) = JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
-            
+            var (width, height, difficulty) =
+                JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
+
             _width = width;
             _height = height;
-            _difficulty = difficulty; 
+            _difficulty = difficulty;
         }
 
-        public Grid CreateGrid() 
+        public IGrid CreateGrid()
         {
             ValidateParameters();
-            var tiles = new Tile[_height,_width];
-            
+            var tiles = new Tile[_height, _width];
+
             for (var i = 0; i < _width; i++)
             {
                 for (var j = 0; j < _height; j++)
@@ -39,9 +41,10 @@ namespace Application.SetupBehaviours
                     tiles[j, i] = new Tile(tileType);
                 }
             }
+
             return new Grid(tiles);
         }
-        
+
         private TileType GetRandomTileType() //TODO: stub random, provided by the constructor
         {
             var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
@@ -55,7 +58,7 @@ namespace Application.SetupBehaviours
                 throw new ApplicationException("Invalid input parameters for random generation.");
             }
         }
-        
+
         private static void ValidatePath(string pathname) //DRY validation: make json diser.
         {
             if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");

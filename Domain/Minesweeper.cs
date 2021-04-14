@@ -1,4 +1,5 @@
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 
 namespace Domain
@@ -20,7 +21,7 @@ namespace Domain
             return new GameState(updatedGameStatus, updatedGrid, move.Coords);
         }
 
-        private static Grid UpdateGrid(Move move)
+        private static IGrid UpdateGrid(Move move)
         {
             var grid = move.Grid;
             var coords = move.Coords;
@@ -28,7 +29,7 @@ namespace Domain
 
             if (grid.GetTileTypeAt(coords) == TileType.Mine)
             {
-                var updatedTile = grid.ShowHiddenTile(coords);
+                var updatedTile = grid.GetInvertTileStatus(coords);
                 grid.ReplaceTile(coords, updatedTile);
                 return grid;
             }
@@ -36,7 +37,7 @@ namespace Domain
             switch (neighbours)
             {
                 case > 0:
-                    var updatedTile = grid.ShowHiddenTile(coords);
+                    var updatedTile = grid.GetInvertTileStatus(coords);
                     grid.ReplaceTile(coords, updatedTile);
                     return grid;
                 case 0:
@@ -46,7 +47,7 @@ namespace Domain
             return grid;
         }
 
-        private static void ShowAllSurroundingEmptyTiles(Grid grid, Coords givenCoords)
+        private static void ShowAllSurroundingEmptyTiles(IGrid grid, Coords givenCoords)
         {
             var width = grid.Width;
             var height = grid.Height;
@@ -62,7 +63,7 @@ namespace Domain
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
                     if (grid.GetTileTypeAt(coords) != TileType.Empty ||
                         grid.GetTileStatusAt(coords) != TileStatus.Hidden) continue;
-                    var updatedTile = grid.ShowHiddenTile(coords);
+                    var updatedTile = grid.GetInvertTileStatus(coords);
                     grid.ReplaceTile(coords, updatedTile);
                     
                     if (!(grid.GetNeighbouringMines(coords) > 0))

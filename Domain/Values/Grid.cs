@@ -1,9 +1,10 @@
 using System;
 using Domain.Enums;
+using Domain.Interfaces;
 
 namespace Domain.Values
 {
-    public record Grid
+    public record Grid : IGrid
     {
         private readonly Tile[,] _tiles;
         public int Width { get; }
@@ -15,7 +16,7 @@ namespace Domain.Values
             Width = tiles.GetLength(1);
             _tiles = tiles;
         }
-        
+
         public TileStatus GetTileStatusAt(Coords coords)
         {
             var (x, y) = coords;
@@ -28,7 +29,7 @@ namespace Domain.Values
             return _tiles[y, x].Type;
         }
         
-        public Tile ShowHiddenTile(Coords coords)
+        public Tile GetInvertTileStatus(Coords coords) //TODO: remove if poss
         {
             var (x, y) = coords;
             return _tiles[y, x].ShowTile();

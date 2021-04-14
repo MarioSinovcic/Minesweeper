@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Domain.Interfaces;
 using Domain.Values;
 
 namespace Minesweeper_Tests.Domain
 {
     public static class GridTestExtensions
     {
-        public static List<Tile> LoopThroughGrid(Grid grid)
+        public static List<Tile> LoopThroughGrid(IGrid grid)
         {
             var tiles = new List<Tile>();
             

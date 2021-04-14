@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 
 namespace Domain
@@ -10,7 +11,7 @@ namespace Domain
 
         private const int TilesLeftToWin = 1;
         
-        public static GameStatus EvaluateGameStatus(Grid grid, Coords coords)
+        public static GameStatus EvaluateGameStatus(IGrid grid, Coords coords)
         {
             var (x, y) = coords;
             if (x > grid.Width || x < 0 || y > grid.Height || y < 0)
@@ -30,7 +31,7 @@ namespace Domain
             return emptyTilesCount == shownTilesCount ? GameStatus.Win : GameStatus.Playing;
         }
 
-        private static List<Tile> GetTileList(Grid grid)
+        private static List<Tile> GetTileList(IGrid grid)
         {
             var tiles = new List<Tile>();
             

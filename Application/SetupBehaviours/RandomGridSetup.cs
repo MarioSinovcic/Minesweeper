@@ -1,6 +1,7 @@
 using System;
-using Application.Interfaces;
+using Application.SetupBehaviours.Interfaces;
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 
 namespace Application.SetupBehaviours
@@ -18,7 +19,7 @@ namespace Application.SetupBehaviours
             _difficulty = difficulty; 
         }
 
-        public Grid CreateGrid() 
+        public IGrid CreateGrid() 
         {
             ValidateParameters();
             

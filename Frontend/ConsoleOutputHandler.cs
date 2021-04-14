@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 using Frontend.Interfaces;
 
@@ -11,34 +13,29 @@ namespace Frontend
         private const string MineTile = "X";
         private const string VerticalSeparator = "|";
 
+        private static readonly Dictionary<GameStatus, string> GameStateMessages = new()
+        {
+            {GameStatus.Win, "Well done you won!"},
+            {GameStatus.Playing, ""},
+            {GameStatus.Loss, "Oh no you lost, try again!"},
+            {GameStatus.Error, "Looks like something went wrong with the game, please restart."},
+        };
+
         public void DisplayGameState(GameState gameState)
         {
             Console.Clear();
-            var grid = gameState.Grid;
-            DisplayGrid(grid);
             
-            switch (gameState.GameStatus)
+            var (gameStatus, grid, _) = gameState;
+            DisplayGrid(grid);
+            Console.Write(GameStateMessages[gameStatus]);
+            
+            if (gameStatus == GameStatus.Win || gameStatus == GameStatus.Loss)
             {
-                case GameStatus.Playing:
-                    break;
-                case GameStatus.Win:
-                    Console.WriteLine("YAY");
-                    System.Environment.Exit(0);
-                    break;
-                case GameStatus.Loss:
-                    Console.WriteLine("Boo");
-                    System.Environment.Exit(0);
-                    break;
-                case GameStatus.Error:
-                    Console.WriteLine("Error");
-                    break;
-                default:
-                    DisplayGrid(grid);
-                    break;
+                Environment.Exit(0);
             }
         }
 
-        private void DisplayGrid(Grid grid)
+        private void DisplayGrid(IGrid grid)
         {
             DisplayColNumbers(grid.Width);
 
@@ -65,7 +62,7 @@ namespace Frontend
             Console.WriteLine(divider);
         }
 
-        private void DisplayTile(Grid grid, Coords coords)
+        private void DisplayTile(IGrid grid, Coords coords)
         {
             if (grid.GetTileTypeAt(coords) == TileType.Mine )
             {

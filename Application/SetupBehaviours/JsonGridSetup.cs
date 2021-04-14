@@ -1,8 +1,9 @@
 using System;
 using System.IO;
-using Application.Interfaces;
 using Application.SetupBehaviours.DTOs;
+using Application.SetupBehaviours.Interfaces;
 using Domain.Enums;
+using Domain.Interfaces;
 using Domain.Values;
 using Newtonsoft.Json;
 
@@ -17,7 +18,7 @@ namespace Application.Behaviour.Setup
             _pathname = pathname;
         }
         
-        public Grid CreateGrid() //TODO: correct use of static
+        public IGrid CreateGrid() //TODO: correct use of static
         {
             ValidatePath(_pathname);
             

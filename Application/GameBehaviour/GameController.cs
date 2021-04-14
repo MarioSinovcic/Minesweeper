@@ -9,7 +9,7 @@ namespace Application.GameBehaviour
     {
         public GameState SetupGame()
         {
-            var grid = new RandomGridSetup(3, 3, 100).CreateGrid(); //TODO: should be taken in from settings
+            var grid = new RandomGridSetup(3, 3, 4).CreateGrid(); //TODO: should be taken in from settings
             return new GameState(GameStatus.Playing, grid, null); //TODO: create factory NewGameState(grid)
         }
 
