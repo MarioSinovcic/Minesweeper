@@ -11,9 +11,9 @@ namespace Domain
         
         public static GameState PerformMove(Move move)
         {
-            var updatedGameStatus = RuleEvaluator.EvaluateGameStatus(move.Grid, move.Coords);
             var updatedGrid = UpdateGrid(move);
-            
+            var updatedGameStatus = RuleEvaluator.EvaluateGameStatus(updatedGrid, move.Coords);
+
             return new GameState(updatedGameStatus, updatedGrid, move.Coords);
         }
 
@@ -23,6 +23,13 @@ namespace Domain
             var coords = move.Coords;
             var neighbours = grid.GetNeighbouringMines(coords);
 
+            if (grid.GetTileTypeAt(coords) == TileType.Mine)
+            {
+                var updatedTile = grid.ShowHiddenTile(coords);
+                grid.ReplaceTile(coords, updatedTile);
+                return grid;
+            }
+            
             switch (neighbours)
             {
                 case > 0:
@@ -50,8 +57,8 @@ namespace Domain
                     var coords = new Coords(xCoord, yCoord);
                     
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
-                    if (!grid.GetTileTypeAt(coords).Equals(TileType.Empty) ||
-                        !grid.GetTileStatusAt(coords).Equals(TileStatus.Hidden)) continue;
+                    if (grid.GetTileTypeAt(coords) != TileType.Empty ||
+                        grid.GetTileStatusAt(coords) != TileStatus.Hidden) continue;
                     var updatedTile = grid.ShowHiddenTile(coords);
                     grid.ReplaceTile(coords, updatedTile);
                     

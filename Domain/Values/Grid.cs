@@ -51,7 +51,7 @@ namespace Domain.Values
             }
             
             var mines = 0;
-            if (_tiles[y,x].Type.Equals(TileType.Mine))
+            if (_tiles[y,x].Type == TileType.Mine)
             {
                 mines--;
             }
@@ -63,7 +63,7 @@ namespace Domain.Values
                     var xCoord = x + xOff;
                     var yCoord = y + yOff;
                     if (xCoord <= -1 || xCoord >= Width || yCoord <= -1 || yCoord >= Height) continue;
-                    if (_tiles[yCoord, xCoord].Type.Equals(TileType.Mine))
+                    if (_tiles[yCoord, xCoord].Type == TileType.Mine)
                     {
                         mines++;
                     }

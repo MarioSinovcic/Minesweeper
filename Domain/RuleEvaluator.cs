@@ -15,19 +15,19 @@ namespace Domain
                 return GameStatus.Error;
             }
 
-            if (grid.GetTileTypeAt(coords).Equals(TileType.Mine))
+            if (grid.GetTileTypeAt(coords) == TileType.Mine)
             {
                 return GameStatus.Loss;
             }
 
-            var tiles = GetTileList(grid).Cast<Tile>().ToList();
+            var tiles = GetTileList(grid);
             var emptyTilesCount = tiles.Count(tile => tile.Type == TileType.Empty);
-            var shownTilesCount = tiles.Count(tile => tile.Status == TileStatus.Shown) + 1;
+            var shownTilesCount = tiles.Count(tile => tile.Status == TileStatus.Shown);
 
             return emptyTilesCount == shownTilesCount ? GameStatus.Win : GameStatus.Playing;
         }
-        
-        public static List<Tile> GetTileList(Grid grid)
+
+        private static List<Tile> GetTileList(Grid grid)
         {
             var tiles = new List<Tile>();
             
