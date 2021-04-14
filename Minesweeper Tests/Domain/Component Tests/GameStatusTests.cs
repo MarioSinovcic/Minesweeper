@@ -25,7 +25,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnErrorState_IfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
         {
             var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, boundaryValuesForInputCoords);
+            var move = new Move(grid, boundaryValuesForInputCoords);
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
             Assert.AreEqual(GameStatus.Error, resultGameStatus);
         }
@@ -34,16 +35,18 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnLossState_IfMineSelected()
         {
             var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(0,0));
+            var move = new Move(grid, new Coords(0,0));
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
             Assert.AreEqual(GameStatus.Loss, resultGameStatus);
         }
         
         [Test]
-        public void ShouldReturnWinState_IfAllEmptyTilesAreShown()
+        public void ShouldReturnWinState_IfAllEmptyTilesAreShown() //TODO: fix test
         {
             var grid = new WinningGridStub();
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(1,1));
+            var move = new Move(grid, new Coords(1,1));
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
             
             Assert.AreEqual(GameStatus.Win, resultGameStatus);
         }
@@ -52,7 +55,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnLossEven_IfAllEmptyTilesAreShown()
         {
             var grid = new WinningGridStub();
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(0,0));
+            var move = new Move(grid, new Coords(0,0));
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
             
             Assert.AreEqual(GameStatus.Loss, resultGameStatus);
         }
@@ -61,7 +65,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnPlaying_IfGameIsNotFinished()
         {
             var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(1,1));
+            var move = new Move(grid, new Coords(1,1));
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
             Assert.AreEqual(GameStatus.Playing, resultGameStatus);
         }
@@ -70,10 +75,11 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
             var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var coords = new Coords(2, 0);
+            var coords = new Coords(1, 0);
             var updatedTile =  grid.ShowHiddenTile(coords);
             grid.ReplaceTile(coords, updatedTile); //grid\.Tiles\[([0-9])\, ([0-9])\]\.ShowTile\(\)
-            var resultGameStatus = RuleEvaluator.EvaluateGameStatus(grid, new Coords(1,1));
+            var move = new Move(grid,coords);
+            var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
             Assert.AreEqual(GameStatus.Playing, resultGameStatus);
         }

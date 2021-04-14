@@ -7,10 +7,13 @@ namespace Domain
     {
         //TODO: holds state, with command query opps
         //TODO: gamestate factory
-        
-        
         public static GameState PerformMove(Move move)
         {
+            var gameStatus = RuleEvaluator.EvaluateGameStatus(move.Grid, move.Coords); //TODO: fix DRY
+            if (gameStatus == GameStatus.Error)
+            {
+                return new GameState(GameStatus.Error,move.Grid, move.Coords);
+            }
             var updatedGrid = UpdateGrid(move);
             var updatedGameStatus = RuleEvaluator.EvaluateGameStatus(updatedGrid, move.Coords);
 

@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Domain.Enums;
 using Application.SetupBehaviours;
-using Domain.Values;
 using Minesweeper_Tests.Domain;
 using NUnit.Framework;
 
@@ -51,7 +50,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldGatherCorrectDimensionSettings_FromSettingsFile()
         {
-            var resultGrid = new RandomGridSetup("Fakes/Settings/RandomGridSettings.json").CreateGrid();
+            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings.json").CreateGrid();
         
             Assert.AreEqual(9,resultGrid.Height);
             Assert.AreEqual(10,resultGrid.Width);
@@ -60,15 +59,33 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowApplicationException_ForInvalidParamsInSettingsFile()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJson("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters")); 
         }
         
         [Test]
         public void ShouldThrowApplicationException_ForMissingParamsInSettingsFile()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetup("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJson("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters"));
+        }
+
+        [Test] public void ShouldCreateGrid_WithCorrectDimensionsFromSettingsFile()
+        {
+            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            Assert.AreEqual(9,resultGrid.Height);
+            Assert.AreEqual(5,resultGrid.Width);
+        }
+        
+        [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() //TODO: test random properly
+        {
+            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
+            var mineCount = tiles.Count(x => x.Type == TileType.Mine);
+            var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
+
+            Assert.True(mineCount > 0); 
+            Assert.True(emptyCount > 0);
         }
     }
 }

@@ -1,0 +1,73 @@
+using System;
+using System.IO;
+using Application.Interfaces;
+using Application.SetupBehaviours.DTOs;
+using Domain.Enums;
+using Domain.Values;
+using Newtonsoft.Json;
+
+namespace Application.SetupBehaviours
+{
+    public sealed class RandomGridSetupFromJson : IGridSetup
+    {
+        private readonly int _width;
+        private readonly int _height;
+        private readonly int _difficulty;
+
+        public RandomGridSetupFromJson(string settingsFilePath)
+        {
+            ValidatePath(settingsFilePath);
+            
+            using var jsonFile = new StreamReader(settingsFilePath);
+            var (width, height, difficulty) = JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
+            
+            _width = width;
+            _height = height;
+            _difficulty = difficulty; 
+        }
+
+        public Grid CreateGrid() 
+        {
+            ValidateParameters();
+            var tiles = new Tile[_height,_width];
+            
+            for (var i = 0; i < _width; i++)
+            {
+                for (var j = 0; j < _height; j++)
+                {
+                    var tileType = GetRandomTileType();
+                    tiles[j, i] = new Tile(tileType);
+                }
+            }
+            return new Grid(tiles);
+        }
+        
+        private TileType GetRandomTileType() //TODO: stub random, provided by the constructor
+        {
+            var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
+            return randomNum.Next(_difficulty) < 1 ? TileType.Mine : TileType.Empty;
+        }
+
+        private void ValidateParameters()
+        {
+            if (_width <= 1 || _height <= 1 || _difficulty <= 1)
+            {
+                throw new ApplicationException("Invalid input parameters for random generation.");
+            }
+        }
+        
+        private static void ValidatePath(string pathname) //DRY validation: make json diser.
+        {
+            if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");
+            try
+            {
+                using var jsonFile = new StreamReader(pathname);
+                JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
+            }
+            catch (Exception e)
+            {
+                throw new IOException("Invalid path for grid creation.", e);
+            }
+        }
+    }
+}

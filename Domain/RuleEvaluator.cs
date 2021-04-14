@@ -6,7 +6,10 @@ using Domain.Values;
 namespace Domain
 {
     public static class RuleEvaluator //TODO: potential to refactor into list of IRules (polymorphic) -> isValid(), 
-    {
+    {   //TODO: should not be static (only one class uses this)
+
+        private const int TilesLeftToWin = 1;
+        
         public static GameStatus EvaluateGameStatus(Grid grid, Coords coords)
         {
             var (x, y) = coords;
@@ -40,7 +43,6 @@ namespace Domain
                     tiles.Add(new Tile(tileType, tileStatus));
                 }
             }
-
             return tiles;
         }
     }

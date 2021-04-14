@@ -18,7 +18,6 @@ namespace Minesweeper_Tests.Domain
                     tiles.Add(new Tile(tileType, tileStatus));
                 }
             }
-
             return tiles;
         }
     }
