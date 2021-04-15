@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Domain.Enums;
 using Application.SetupBehaviours;
+using Application.SetupBehaviours.Factories;
 using Minesweeper_Tests.Domain;
 using NUnit.Framework;
 
@@ -12,13 +13,13 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowApplicationException_ForInvalidParams()
         {
-            Assert.Throws<ApplicationException>(() => new RandomGridSetup(-5, -0, 0).CreateGrid());
+            Assert.Throws<ApplicationException>(() => new RandomGridSetupFactory(-5, -0, 0).CreateGrid());
         }
 
         [Test]
         public void ShouldCreateGrid_WithCorrectDimensions()
         {
-            var resultGrid = new RandomGridSetup(5,10,10).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(5,10,10).CreateGrid();
             Assert.AreEqual(10, resultGrid.Height);
             Assert.AreEqual(5, resultGrid.Width);
         }
@@ -26,7 +27,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldCreateGrid_WithCorrectDimensionsAndRandomMines()
         {
-            var resultGrid = new RandomGridSetup(4,3,2).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(4,3,2).CreateGrid();
             var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             
@@ -38,7 +39,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldCreatedGrid_WithMinedAndEmptyTiles() //spy?? //TODO: refactor random tests
         {
-            var resultGrid = new RandomGridSetup(10, 10, 10).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(10, 10, 10).CreateGrid();
             var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
@@ -50,7 +51,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldGatherCorrectDimensionSettings_FromSettingsFile()
         {
-            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings.json").CreateGrid();
+            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings.json").CreateGrid();
         
             Assert.AreEqual(9,resultGrid.Height);
             Assert.AreEqual(10,resultGrid.Width);
@@ -59,27 +60,27 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowApplicationException_ForInvalidParamsInSettingsFile()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJson("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters")); 
         }
         
         [Test]
         public void ShouldThrowApplicationException_ForMissingParamsInSettingsFile()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJson("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters"));
         }
 
         [Test] public void ShouldCreateGrid_WithCorrectDimensionsFromSettingsFile()
         {
-            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
             Assert.AreEqual(9,resultGrid.Height);
             Assert.AreEqual(5,resultGrid.Width);
         }
         
         [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() //TODO: test random properly
         {
-            var resultGrid = new RandomGridSetupFromJson("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
             var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);

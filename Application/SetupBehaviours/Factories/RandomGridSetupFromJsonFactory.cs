@@ -7,15 +7,15 @@ using Domain.Interfaces;
 using Domain.Values;
 using Newtonsoft.Json;
 
-namespace Application.SetupBehaviours
+namespace Application.SetupBehaviours.Factories
 {
-    public sealed class RandomGridSetupFromJson : IGridSetup
+    public sealed class RandomGridSetupFromJsonFactory : IGridSetupFactory
     {
         private readonly int _width;
         private readonly int _height;
         private readonly int _difficulty;
 
-        public RandomGridSetupFromJson(string settingsFilePath)
+        public RandomGridSetupFromJsonFactory(string settingsFilePath)
         {
             ValidatePath(settingsFilePath);
 

@@ -1,4 +1,4 @@
-using Application.Behaviour.Setup;
+using Application.SetupBehaviours.Factories;
 using Domain.Enums;
 using Domain.Values;
 
@@ -7,7 +7,7 @@ namespace Minesweeper_Tests.Stubs
     public record WinningGridStub : Grid
     {
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Grids/OneCornerMine.json";
-        private static readonly Grid Grid = (Grid) new JsonGridSetup(PathName).CreateGrid();
+        private static readonly Grid Grid = (Grid) new JsonGridSetupFactory(PathName).CreateGrid();
 
         public WinningGridStub() : base(Grid)
         {

@@ -1,4 +1,4 @@
-using Application.Behaviour.Setup;
+using Application.SetupBehaviours.Factories;
 using Domain;
 using Domain.Enums;
 using Domain.Values;
@@ -24,7 +24,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
         public void ShouldReturnErrorState_IfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
         {
-            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var move = new Move(grid, boundaryValuesForInputCoords);
             var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
@@ -34,7 +34,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnLossState_IfMineSelected()
         {
-            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var move = new Move(grid, new Coords(0,0));
             var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
@@ -65,7 +65,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinished()
         {
-            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var move = new Move(grid, new Coords(1,1));
             var resultGameStatus = Minesweeper.PerformMove(move).GameStatus;
 
@@ -75,7 +75,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
-            var grid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
+            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var coords = new Coords(1, 0);
             var updatedTile =  grid.GetInvertTileStatus(coords);
             grid.ReplaceTile(coords, updatedTile); //grid\.Tiles\[([0-9])\, ([0-9])\]\.ShowTile\(\)

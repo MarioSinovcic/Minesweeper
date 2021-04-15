@@ -12,7 +12,7 @@ namespace Application
             var ioFacade = new IOFacade(inputHandler, outputHandler);
             var gameController = new GameController();
             
-            var gameState = gameController.SetupGame(); //TODO: use builder??
+            var gameState = gameController.SetupGame();
                 
             ioFacade.DisplayGameState(gameState);
             while (true)

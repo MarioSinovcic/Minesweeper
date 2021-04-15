@@ -7,13 +7,13 @@ using Domain.Interfaces;
 using Domain.Values;
 using Newtonsoft.Json;
 
-namespace Application.Behaviour.Setup
+namespace Application.SetupBehaviours.Factories
 {
-    public class JsonGridSetup : IGridSetup
+    public class JsonGridSetupFactory : IGridSetupFactory
     {
         private static string _pathname;
 
-        public JsonGridSetup(string pathname)
+        public JsonGridSetupFactory(string pathname)
         {
             _pathname = pathname;
         }

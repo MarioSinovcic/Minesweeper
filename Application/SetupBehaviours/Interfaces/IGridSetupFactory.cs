@@ -2,7 +2,7 @@ using Domain.Interfaces;
 
 namespace Application.SetupBehaviours.Interfaces
 {
-    public interface IGridSetup
+    public interface IGridSetupFactory
     {
         public IGrid CreateGrid();
     }

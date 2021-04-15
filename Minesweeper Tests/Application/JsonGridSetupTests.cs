@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Application.Behaviour.Setup;
+using Application.SetupBehaviours.Factories;
 using Domain.Enums;
 using Domain.Values;
 using Minesweeper_Tests.Domain;
@@ -15,19 +15,19 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldThrowIoException_ForNullPath()
         {
-            Assert.Throws<IOException>(() => new JsonGridSetup(null).CreateGrid());
+            Assert.Throws<IOException>(() => new JsonGridSetupFactory(null).CreateGrid());
         }
         
         [Test]
         public void ShouldThrowIoException_ForInvalidPaths()
         {
-            Assert.Throws<IOException>(() => new JsonGridSetup("/user/").CreateGrid());
+            Assert.Throws<IOException>(() => new JsonGridSetupFactory("/user/").CreateGrid());
         }
         
         [Test]
         public void ShouldCreateGrid_WithCorrectDimensions()
         {
-            var resultGrid = new JsonGridSetup(TestFolderPath + "OneCornerMine.json").CreateGrid();
+            var resultGrid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             
             Assert.AreEqual(7, resultGrid.Width);
             Assert.AreEqual(3, resultGrid.Height);
@@ -36,7 +36,7 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldReadMines_FromJsonCornersFileCorrectly()
         {
-            var resultGrid = new JsonGridSetup(TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
+            var resultGrid = new JsonGridSetupFactory(TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
             
             Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
             Assert.AreEqual(TileType.Mine, resultGrid.GetTileTypeAt(new Coords(0,0)));
@@ -45,14 +45,14 @@ namespace Minesweeper_Tests.Application
         [Test]
         public void ShouldReadEmptyTiles_FromJsonCornersFileCorrectly()
         {
-            var resultGrid = new JsonGridSetup( TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
+            var resultGrid = new JsonGridSetupFactory( TestFolderPath + "FourCornerMines_SmallGrid.json").CreateGrid();
             Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(1,1)));
         }
         
         [Test]
         public void ShouldSetAllTileStatuses_ToHidden()
         {
-            var resultGrid = new JsonGridSetup(TestFolderPath + "FourCornerMines_LargeGrid.json").CreateGrid();
+            var resultGrid = new JsonGridSetupFactory(TestFolderPath + "FourCornerMines_LargeGrid.json").CreateGrid();
             var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
 
             foreach (var tile in tiles)

@@ -4,15 +4,15 @@ using Domain.Enums;
 using Domain.Interfaces;
 using Domain.Values;
 
-namespace Application.SetupBehaviours
+namespace Application.SetupBehaviours.Factories
 {
-    public sealed class RandomGridSetup : IGridSetup
+    public sealed class RandomGridSetupFactory : IGridSetupFactory
     {
         private readonly int _width;
         private readonly int _height;
         private readonly int _difficulty;
         
-        public RandomGridSetup(int width, int height, int difficulty)
+        public RandomGridSetupFactory(int width, int height, int difficulty)
         {
             _width = width;
             _height = height;
