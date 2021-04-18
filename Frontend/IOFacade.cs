@@ -1,3 +1,4 @@
+using Application.GameBehaviour.DTOs;
 using Domain.Values;
 using Frontend.Interfaces;
 
@@ -14,7 +15,7 @@ namespace Frontend
             _outputHandler = outputHandler;
         }
 
-        public Coords GetTurnInput()
+        public InputDTO GetTurnInput()
         {
             return _inputHandler.GetTurnInput();
         }

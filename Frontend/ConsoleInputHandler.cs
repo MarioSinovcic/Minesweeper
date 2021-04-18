@@ -1,4 +1,6 @@
 ﻿using System;
+using Application.GameBehaviour.DTOs;
+using Domain.Enums;
 using Domain.Values;
 using Frontend.Interfaces;
 
@@ -6,12 +8,22 @@ namespace Frontend
 {
     public class ConsoleInputHandler : IInputHandler
     {
-        public Coords GetTurnInput() //TODO: input validation
+        private const string InputPrompt = "Enter your co-ordinates\"0 2\": ";
+        
+        public InputDTO GetTurnInput() //TODO: input validation
         {
-            Console.Write("Enter your co-ordinates\"0 2\": ");
-            var input = Console.ReadLine(); 
+            Console.Write(InputPrompt);
+            var input = Console.ReadLine();
+
+            Coords coords;
+            if (input[0].Equals('f'))
+            {
+                coords = new Coords((int)Char.GetNumericValue(input[2]), (int)Char.GetNumericValue(input[4]));
+                return new InputDTO(GameStatus.SetFlag, coords);
+            }
             
-            return new Coords((int)Char.GetNumericValue(input[0]), (int)Char.GetNumericValue(input[2]));
+            coords = new Coords((int)Char.GetNumericValue(input[0]), (int)Char.GetNumericValue(input[2]));
+            return new InputDTO(GameStatus.Playing, coords);
         }
     }
 }

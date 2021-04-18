@@ -1,3 +1,4 @@
+using Application.GameBehaviour.DTOs;
 using Application.SetupBehaviours.Factories;
 using Domain;
 using Domain.Enums;
@@ -13,9 +14,12 @@ namespace Application.GameBehaviour
             return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss
         }
 
-        public GameState HandleMove(Coords inputDto, GameState gameState) //TODO: create inputDTO
+        public GameState HandleMove(InputDTO inputDto, GameState gameState) //TODO: create inputDTO
         {
-            return Minesweeper.PerformMove(new Move(gameState.Grid, inputDto));
+            var state = new GameState(inputDto.GameStatus, gameState.Grid, inputDto.SelectedTile);
+            var minesweeper = new Minesweeper(state);
+            minesweeper.PerformMove();
+            return minesweeper.GetGameState();
         }
     }
 }

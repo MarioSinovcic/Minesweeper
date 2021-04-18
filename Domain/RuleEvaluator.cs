@@ -11,7 +11,7 @@ namespace Domain
 
         private const int TilesLeftToWin = 1;
         
-        public static GameStatus EvaluateGameStatus(IGrid grid, Coords coords)
+        public static GameStatus ValidateInput(IGrid grid, Coords coords, GameStatus gameStatus)
         {
             var (x, y) = coords;
             if (x > grid.Width || x < 0 || y > grid.Height || y < 0)
@@ -19,6 +19,16 @@ namespace Domain
                 return GameStatus.Error;
             }
 
+            return gameStatus;
+        }
+
+        public static GameStatus EvaluateGameStatus(IGrid grid, Coords coords, GameStatus gameStatus)
+        {
+            if (gameStatus == GameStatus.SetFlag)
+            {
+                return GameStatus.Playing;
+            }
+            
             if (grid.GetTileTypeAt(coords) == TileType.Mine)
             {
                 return GameStatus.Loss;

@@ -11,6 +11,7 @@ namespace Frontend
     {
         private const string HiddenTile = " ";
         private const string MineTile = "X";
+        private const string FlagTile = ">";
         private const string VerticalSeparator = "|";
 
         private static readonly Dictionary<GameStatus, string> GameStateMessages = new()
@@ -62,8 +63,14 @@ namespace Frontend
             Console.WriteLine(divider);
         }
 
-        private void DisplayTile(IGrid grid, Coords coords)
+        private void DisplayTile(IGrid grid, Coords coords) //TODO: this is genuinely horrible
         {
+            if(grid.GetTileStatusAt(coords) == TileStatus.Flag)
+            {
+                Console.Write($"{VerticalSeparator}  {FlagTile}  ");
+                return;
+            }
+            
             if (grid.GetTileTypeAt(coords) == TileType.Mine )
             {
                 Console.Write(grid.GetTileStatusAt(coords) == TileStatus.Shown

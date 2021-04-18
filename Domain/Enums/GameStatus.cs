@@ -5,6 +5,7 @@ namespace Domain.Enums
         Playing, 
         Win,
         Loss,
-        Error
+        Error,
+        SetFlag
     }
 }

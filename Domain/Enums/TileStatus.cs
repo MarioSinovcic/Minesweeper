@@ -3,6 +3,7 @@ namespace Domain.Enums
     public enum TileStatus
     {
         Hidden,
-        Shown
+        Shown,
+        Flag
     }
 }

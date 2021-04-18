@@ -1,9 +1,7 @@
+using Domain.Enums;
 using Domain.Values;
 
 namespace Application.GameBehaviour.DTOs
 {
-    public sealed record InputDTO
-    {
-        public Coords SelectedTile { get; init; }
-    }
+    public sealed record InputDTO(GameStatus GameStatus, Coords SelectedTile);
 }

@@ -1,7 +1,6 @@
 ﻿using Application.GameBehaviour;
-using Frontend;
 
-namespace Application
+namespace Frontend
 {
     internal static class Program
     {
