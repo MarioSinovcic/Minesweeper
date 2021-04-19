@@ -9,8 +9,6 @@ namespace Domain
     public static class RuleEvaluator //TODO: potential to refactor into list of IRules (polymorphic) -> isValid(), 
     {   //TODO: should not be static (only one class uses this)
 
-        private const int TilesLeftToWin = 1;
-        
         public static GameStatus ValidateInput(IGrid grid, Coords coords, GameStatus gameStatus)
         {
             var (x, y) = coords;

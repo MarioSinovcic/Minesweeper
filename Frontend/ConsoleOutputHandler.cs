@@ -19,7 +19,7 @@ namespace Frontend
             {GameStatus.Win, "Well done you won!"},
             {GameStatus.Playing, ""},
             {GameStatus.Loss, "Oh no you lost, try again!"},
-            {GameStatus.Error, "Looks like something went wrong with the game, please restart."},
+            {GameStatus.Error, "Looks like something went wrong with the game, please try again."},
         };
 
         public void DisplayGameState(GameState gameState)
@@ -28,7 +28,7 @@ namespace Frontend
             
             var (gameStatus, grid, _) = gameState;
             DisplayGrid(grid);
-            Console.Write(GameStateMessages[gameStatus]);
+            Console.Write(GameStateMessages[gameStatus] + "\n");
             
             if (gameStatus == GameStatus.Win || gameStatus == GameStatus.Loss)
             {
