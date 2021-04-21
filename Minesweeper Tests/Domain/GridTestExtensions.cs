@@ -6,7 +6,7 @@ namespace Minesweeper_Tests.Domain
 {
     public static class GridTestExtensions
     {
-        public static List<Tile> LoopThroughGrid(IGrid grid)
+        public static IEnumerable<Tile> LoopThroughGrid(IGrid grid)
         {
             var tiles = new List<Tile>();
             

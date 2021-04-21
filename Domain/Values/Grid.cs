@@ -35,7 +35,7 @@ namespace Domain.Values
             return _tiles[y, x].ShowTile();
         }
         
-        public void ReplaceTile(Coords coords, Tile updatedTile)
+        public void ReplaceTile(Coords coords, Tile updatedTile) //TODO: remove to make immutable
         {
             var (x, y) = coords;
             _tiles[y, x] = updatedTile;

@@ -51,6 +51,20 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test] 
         public void ShouldNotLoseGame_IfFlagPlacedOnMine()
         {
+            var grid = new JsonGridSetupFactory(TestFolderPath + "DiagonalMines.json").CreateGrid();
+            var coords = new Coords(5, 0);
+            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
+            minesweeper.PerformMove();
+            var resultGrid = minesweeper.GetGameState().Grid;
+            var resultStatus = minesweeper.GetGameState().GameStatus;
+
+            Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
+            Assert.AreEqual(GameStatus.Playing, resultStatus);
+        }
+        
+        [Test] 
+        public void ShouldWinGame_IfFlagPlacedOnMineAndAllOthersAreMines()
+        {
             var grid = new JsonGridSetupFactory(TestFolderPath + "AllMines.json").CreateGrid();
             var coords = new Coords(0, 0);
             var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
@@ -59,7 +73,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             var resultStatus = minesweeper.GetGameState().GameStatus;
 
             Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
-            Assert.AreEqual(GameStatus.Playing, resultStatus);
+            Assert.AreEqual(GameStatus.Win, resultStatus);
         }
         
         

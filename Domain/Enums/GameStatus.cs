@@ -6,6 +6,7 @@ namespace Domain.Enums
         Win,
         Loss,
         Error,
-        SetFlag
+        SetFlag,
+        FirstTurn
     }
 }

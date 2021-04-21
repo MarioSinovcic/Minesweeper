@@ -6,9 +6,8 @@ namespace Frontend
     {
         private static void Main()
         {
-            var outputHandler = new ConsoleOutputHandler(); //TODO: introduce a dependency injection system?
-            var inputHandler = new ConsoleInputHandler();
-            var ioFacade = new IOFacade(inputHandler, outputHandler);
+            //TODO: introduce a dependency injection system?
+            var ioFacade = new IOFacade( new ConsoleInputHandler(), new ConsoleOutputHandler());
             var gameController = new GameController();
             
             var gameState = gameController.SetupGame();

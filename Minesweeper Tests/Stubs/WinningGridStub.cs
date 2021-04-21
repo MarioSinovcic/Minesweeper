@@ -6,6 +6,7 @@ namespace Minesweeper_Tests.Stubs
 {
     public record WinningGridStub : Grid
     {
+        //TODO: bad string path
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests/Fakes/Grids/OneCornerMine.json";
         private static readonly Grid Grid = (Grid) new JsonGridSetupFactory(PathName).CreateGrid();
 
@@ -22,8 +23,9 @@ namespace Minesweeper_Tests.Stubs
                 }
             }
 
+            //setting up one last tile that is not shown, this needs to be selected to win the game
             var winningTileCoords = new Coords(1, 1);
-            var lastTileNeededToWin = new Tile(TileType.Empty); //last tile not shown, needs to be selected to win
+            var lastTileNeededToWin = new Tile(TileType.Empty); 
             Grid.ReplaceTile(winningTileCoords,lastTileNeededToWin);
         }
     }

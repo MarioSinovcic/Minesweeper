@@ -42,12 +42,23 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 
             Assert.AreEqual(GameStatus.Loss, resultGameStatus);
         }
-        
+
         [Test]
-        [Ignore("passes when run solo, but not when run w/ other tests")] //TODO: fix test
+        [Ignore("Works when run individual but not when run with other tests")]
         public void ShouldReturnWinState_IfAllEmptyTilesAreShown() 
         {
             var grid = new WinningGridStub();
+            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 1)));
+            minesweeper.PerformMove();
+            var resultGameStatus = minesweeper.GetGameState();
+            
+            Assert.AreEqual(GameStatus.Win, resultGameStatus.GameStatus);
+        }
+        
+        [Test]
+        public void ShouldReturnWinState_IfAllTilesAreEmptyAndOneIsSelected() 
+        {
+            var grid = new JsonGridSetupFactory(TestFolderPath + "AllEmpty.json").CreateGrid();
             var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 1)));
             minesweeper.PerformMove();
             var resultGameStatus = minesweeper.GetGameState().GameStatus;

@@ -10,8 +10,8 @@ namespace Application.GameBehaviour
     {
         public GameState SetupGame()
         {
-            var grid = new RandomGridSetupFromJsonFactory("SetupBehaviours/RandomGridSettings.json").CreateGrid(); //TODO: should be taken in from settings
-            return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss
+            var grid = new RandomGridSetupFromJsonFactory("SetupBehaviours/RandomGridSettings.json").CreateGrid();
+            return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss (game state factory)
         }
 
         public GameState HandleMove(InputDTO inputDto, GameState gameState) //TODO: create inputDTO
