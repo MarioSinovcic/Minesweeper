@@ -20,11 +20,11 @@ namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
         };
 
         [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
-        public void ShouldThrowOutOffRangeException_IfInputIsOutOfBounds(Coords inputCoords)
+        public void ShouldThrowArgumentException_IfInputIsOutOfBounds(Coords inputCoords)
         {
             var resultGrid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             
-            Assert.Throws<IndexOutOfRangeException>(() => resultGrid.GetNeighbouringMines(inputCoords));
+            Assert.Throws<ArgumentException>(() => resultGrid.GetNeighbouringMines(inputCoords));
         }
         
         [Test]

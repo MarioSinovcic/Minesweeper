@@ -40,6 +40,7 @@ namespace Domain
         private void CheckIfGameIsWon()
         {
             var winningRule = _rules.GetWinningRule();
+            
             if (winningRule.IsActive(_gameState))
             {
                 _gameState = winningRule.UpdateGameState(_gameState);

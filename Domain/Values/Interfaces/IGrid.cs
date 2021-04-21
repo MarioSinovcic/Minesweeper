@@ -1,7 +1,6 @@
 using Domain.Enums;
-using Domain.Values;
 
-namespace Domain.Interfaces
+namespace Domain.Values.Interfaces
 {
     public interface IGrid
     {
@@ -11,7 +10,7 @@ namespace Domain.Interfaces
 
         public TileType GetTileTypeAt(Coords coords);
 
-        public Tile GetInvertTileStatus(Coords coords); //TODO: remove if poss
+        public Tile GetInvertTileStatus(Coords coords); 
         
         public int GetNeighbouringMines(Coords coords);
         

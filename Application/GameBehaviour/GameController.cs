@@ -16,6 +16,11 @@ namespace Application.GameBehaviour
 
         public GameState HandleMove(InputDTO inputDto, GameState gameState) //TODO: create inputDTO
         {
+            if (inputDto.GameStatus == GameStatus.Error)
+            {
+                return new GameState(GameStatus.Error, null, null);
+            }
+            
             var state = new GameState(inputDto.GameStatus, gameState.Grid, inputDto.SelectedTile);
             var minesweeper = new Minesweeper(state);
             minesweeper.PerformMove();

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Enums;
-using Domain.Interfaces;
 using Domain.Values;
+using Domain.Values.Interfaces;
 using Frontend.Interfaces;
 
-namespace Frontend
+namespace Frontend.ConsoleIO
 {
     public class ConsoleOutputHandler : IOutputHandler
     {

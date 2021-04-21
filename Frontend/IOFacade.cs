@@ -4,7 +4,7 @@ using Frontend.Interfaces;
 
 namespace Frontend
 {
-    public class IOFacade
+    public class IOFacade : IInputHandler, IOutputHandler //Questionable use of Interface Segregation Principle
     {
         private readonly IInputHandler _inputHandler;
         private readonly IOutputHandler _outputHandler;

@@ -4,7 +4,7 @@ using Domain.Enums;
 using Domain.Values;
 using Frontend.Interfaces;
 
-namespace Frontend
+namespace Frontend.ConsoleIO
 {
     public class ConsoleInputHandler : IInputHandler
     {

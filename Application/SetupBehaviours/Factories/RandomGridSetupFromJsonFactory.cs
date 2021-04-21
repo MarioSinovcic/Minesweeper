@@ -3,8 +3,8 @@ using System.IO;
 using Application.SetupBehaviours.DTOs;
 using Application.SetupBehaviours.Interfaces;
 using Domain.Enums;
-using Domain.Interfaces;
 using Domain.Values;
+using Domain.Values.Interfaces;
 using Newtonsoft.Json;
 
 namespace Application.SetupBehaviours.Factories

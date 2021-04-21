@@ -1,6 +1,6 @@
 using System;
 using Domain.Enums;
-using Domain.Interfaces;
+using Domain.Values.Interfaces;
 
 namespace Domain.Values
 {
@@ -48,7 +48,7 @@ namespace Domain.Values
 
             if (y >= Height || x >= Width || y < 0 || x < 0)
             {
-                throw new IndexOutOfRangeException("X and Y co-ordinates must be within the grid's dimensions.");
+                throw new ArgumentException("X and Y co-ordinates must be within the grid's dimensions.");
             }
             
             var mines = 0;

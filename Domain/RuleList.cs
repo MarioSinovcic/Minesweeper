@@ -5,7 +5,7 @@ using Domain.Rules.Interface;
 
 namespace Domain
 {
-    public class RuleList
+    public class RuleList 
     {
         private readonly IEnumerable<IRule> _gameRules = new ReadOnlyCollection<IRule>(new IRule[]
             {
@@ -13,7 +13,7 @@ namespace Domain
                 new SetFlagRule(),
                 new ShowMineRule(),
                 new ShowEmptyNumberedTileRule(),
-                new CascadeShowEmptyTilesRule(),
+                new CascadeShowEmptyTilesRule()
             }
         );
         

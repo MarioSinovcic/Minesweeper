@@ -1,5 +1,5 @@
 using Domain.Enums;
-using Domain.Interfaces;
+using Domain.Values.Interfaces;
 
 namespace Domain.Values
 {

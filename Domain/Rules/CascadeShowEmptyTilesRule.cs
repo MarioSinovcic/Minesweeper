@@ -1,7 +1,7 @@
 using Domain.Enums;
-using Domain.Interfaces;
 using Domain.Rules.Interface;
 using Domain.Values;
+using Domain.Values.Interfaces;
 
 namespace Domain.Rules
 {

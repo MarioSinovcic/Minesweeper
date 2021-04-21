@@ -1,8 +1,8 @@
 using System;
 using Application.SetupBehaviours.Interfaces;
 using Domain.Enums;
-using Domain.Interfaces;
 using Domain.Values;
+using Domain.Values.Interfaces;
 
 namespace Application.SetupBehaviours.Factories
 {

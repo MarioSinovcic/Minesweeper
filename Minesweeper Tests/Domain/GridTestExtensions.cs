@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Domain.Interfaces;
 using Domain.Values;
+using Domain.Values.Interfaces;
 
 namespace Minesweeper_Tests.Domain
 {

@@ -1,4 +1,4 @@
-using Domain.Interfaces;
+using Domain.Values.Interfaces;
 
 namespace Application.SetupBehaviours.Interfaces
 {
