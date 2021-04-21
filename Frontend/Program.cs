@@ -11,7 +11,7 @@ namespace Frontend
             var ioFacade = new IOFacade( new ConsoleInputHandler(), new ConsoleOutputHandler());
             var gameController = new GameController();
             
-            var gameState = gameController.SetupGame();
+            var gameState = gameController.SetupRandomGameFromJson("SetupBehaviours/RandomGridSettings.json");
                 
             ioFacade.DisplayGameState(gameState);
             while (true)

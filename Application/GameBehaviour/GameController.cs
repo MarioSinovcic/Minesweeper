@@ -8,9 +8,9 @@ namespace Application.GameBehaviour
 {
     public class GameController //TODO: add factory pattern, error handling, json deserializing ??
     {
-        public GameState SetupGame()
+        public GameState SetupRandomGameFromJson(string pathname)
         {
-            var grid = new RandomGridSetupFromJsonFactory("SetupBehaviours/RandomGridSettings.json").CreateGrid();
+            var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid();
             return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss (game state factory)
         }
 

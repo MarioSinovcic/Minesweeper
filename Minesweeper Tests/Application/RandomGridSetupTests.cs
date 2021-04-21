@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Domain.Enums;
-using Application.SetupBehaviours;
 using Application.SetupBehaviours.Factories;
 using Minesweeper_Tests.Domain;
 using NUnit.Framework;
@@ -40,7 +39,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldCreatedGrid_WithMinedAndEmptyTiles() //spy?? //TODO: refactor random tests
         {
             var resultGrid = new RandomGridSetupFactory(10, 10, 10).CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
+            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 
@@ -81,7 +80,7 @@ namespace Minesweeper_Tests.Application
         [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() //TODO: test random properly
         {
             var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
+            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 

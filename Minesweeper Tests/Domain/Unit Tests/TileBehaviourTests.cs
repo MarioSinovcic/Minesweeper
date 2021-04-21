@@ -2,7 +2,7 @@ using Domain.Enums;
 using Domain.Values;
 using NUnit.Framework;
 
-namespace Minesweeper_Tests.Domain.Entity_Unit_Tests
+namespace Minesweeper_Tests.Domain.Unit_Tests
 {
     public class TileBehaviourTests
     {
