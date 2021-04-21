@@ -10,45 +10,42 @@ namespace Frontend
     {
         private const string InputPrompt = "Enter your co-ordinates e.g.,\"0 2\": ";
         private const string ErrorPrompt = "Looks like that input wasn't valid, please try again: ";
-        
+
         public InputDTO GetTurnInput() //TODO: implement L
         {
-            var input = GetValidatedInput();
-
-            Coords coords;
-            if (input[0].Equals('f'))
-            {
-                coords = new Coords((int)Char.GetNumericValue(input[2]), (int)Char.GetNumericValue(input[4]));
-                return new InputDTO(GameStatus.SetFlag, coords);
-            }
-            
-            coords = new Coords((int)Char.GetNumericValue(input[0]), (int)Char.GetNumericValue(input[2]));
-            return new InputDTO(GameStatus.Playing, coords);
+            Console.Write(InputPrompt);
+            return GetValidatedInput();
         }
 
-        private string GetValidatedInput() //TODO: larger grids are broken (use regex)
+        private InputDTO GetValidatedInput() //TODO: larger grids are broken (use regex)
         {
-            Console.Write(InputPrompt);
             var input = Console.ReadLine()?.Trim();
-            
-            while (true)
-            {
-                if (input != null && input.Length >= 3 && input.Length <= 5)
-                {
-                    if (input.Length <= 5 && input[0] == 'f' && Char.IsDigit(input[2]) && Char.IsDigit(input[4]))
-                    {
-                        return input;
-                    }
+            var strings = input?.Split(" ");
 
-                    if (input.Length <= 3 && Char.IsDigit(input[0]) && Char.IsDigit(input[2]))
+            while (strings != null)
+            {
+                int xCoord;
+                int yCoord;
+                if (strings[0] == "f" && strings.Length == 3)
+                {
+                    Console.WriteLine(strings[1] + strings[2]);
+                    if (int.TryParse(strings[1], out xCoord) && int.TryParse(strings[2], out yCoord))
                     {
-                        return input;
+                        return new InputDTO(GameStatus.SetFlag, new Coords(xCoord, yCoord));
                     }
                 }
-
+                else if(strings.Length == 2)
+                {
+                    if (int.TryParse(strings[0], out xCoord) && int.TryParse(strings[1], out yCoord))
+                    {
+                        return new InputDTO(GameStatus.Playing, new Coords(xCoord, yCoord));
+                    }
+                }
                 Console.Write(ErrorPrompt);
-                input = Console.ReadLine()?.Trim();
+                strings = Console.ReadLine()?.Trim().Split(" ");
             }
+            
+            return new InputDTO(GameStatus.Error, null);
         }
     }
 }

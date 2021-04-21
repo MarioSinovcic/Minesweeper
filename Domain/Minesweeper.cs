@@ -5,12 +5,12 @@ namespace Domain
 {
     public class Minesweeper //TODO: setup mediator
     {
-        private readonly RuleList _ruleList;
+        private readonly RuleList _rules;
         private GameState _gameState; //TODO: make immutable?
 
         public Minesweeper(GameState gameState)
         {
-            _ruleList = new RuleList();
+            _rules = new RuleList();
             _gameState = gameState;
         }
         
@@ -28,7 +28,7 @@ namespace Domain
 
         private void UpdateGameStatus()
         {
-            var rules = _ruleList.GetRulesList();
+            var rules = _rules.GetRulesList();
             
             foreach (var rule in rules.Where(rule => rule.IsActive(_gameState)))
             {
@@ -39,7 +39,7 @@ namespace Domain
 
         private void CheckIfGameIsWon()
         {
-            var winningRule = _ruleList.GetWinningRule();
+            var winningRule = _rules.GetWinningRule();
             if (winningRule.IsActive(_gameState))
             {
                 _gameState = winningRule.UpdateGameState(_gameState);

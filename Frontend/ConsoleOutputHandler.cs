@@ -28,6 +28,7 @@ namespace Frontend
             
             var (gameStatus, grid, _) = gameState;
             DisplayGrid(grid);
+            
             Console.Write(GameStateMessages[gameStatus] + "\n");
             
             if (gameStatus == GameStatus.Win || gameStatus == GameStatus.Loss)
@@ -63,7 +64,7 @@ namespace Frontend
             Console.WriteLine(divider);
         }
 
-        private void DisplayTile(IGrid grid, Coords coords) //TODO: this is genuinely horrible
+        private void DisplayTile(IGrid grid, Coords coords) //TODO: this is pretty horrible
         {
             if(grid.GetTileStatusAt(coords) == TileStatus.Flag)
             {
@@ -79,9 +80,43 @@ namespace Frontend
             }
             else
             {
-                Console.Write(grid.GetTileStatusAt(coords) == TileStatus.Shown
-                    ? $"{VerticalSeparator}  {grid.GetNeighbouringMines(coords)}  "
-                    : $"{VerticalSeparator}  {HiddenTile}  ");
+                if (grid.GetTileStatusAt(coords) == TileStatus.Shown)
+                {
+                    HandleColouredTiles(grid.GetNeighbouringMines(coords));
+                }
+                else
+                {
+                    Console.Write($"{VerticalSeparator}  {HiddenTile}  ");
+                }
+            }
+        }
+
+        private void HandleColouredTiles(int neighbours) //TODO: this is also gross
+        {
+            Console.Write($"{VerticalSeparator}  ");
+                
+            if (neighbours == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.Write($"{neighbours}  ");
+                Console.ResetColor();
+            }
+            else if (neighbours == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write($"{neighbours}  ");
+                Console.ResetColor();
+            }
+            else if (neighbours > 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write($"{neighbours}  ");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Write($"{neighbours}  ");
+                Console.ResetColor();
             }
         }
     }
