@@ -10,7 +10,7 @@ namespace Application.GameBehaviour
     {
         public GameState SetupRandomGameFromJson(string pathname)
         {
-            var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid();
+            var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid(); //Consider static method.
             return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss (game state factory)
         }
 
@@ -21,7 +21,7 @@ namespace Application.GameBehaviour
                 return new GameState(GameStatus.Error, null, null);
             }
             
-            var state = new GameState(inputDto.GameStatus, gameState.Grid, inputDto.SelectedTile);
+            var state = new GameState(inputDto.GameStatus, gameState.Grid, inputDto.SelectedTile); //fix this
             var minesweeper = new Minesweeper(state);
             minesweeper.PerformMove();
             return minesweeper.GetGameState();

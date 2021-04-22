@@ -6,7 +6,7 @@ namespace Domain.Rules
 {
     public class ShowEmptyNumberedTileRule : IRule
     {
-        public bool IsActive(GameState gameState)
+        public bool IsRuleApplicable(GameState gameState)
         {
             var gameStatus = gameState.GameStatus;
             var grid = gameState.Grid;

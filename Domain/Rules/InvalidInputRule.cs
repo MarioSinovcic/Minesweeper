@@ -6,7 +6,7 @@ namespace Domain.Rules
 {
     public class InvalidInputRule : IRule
     {
-        public bool IsActive(GameState gameState)
+        public bool IsRuleApplicable(GameState gameState)
         {
             var grid = gameState.Grid;
             var (x, y) = gameState.Coords;

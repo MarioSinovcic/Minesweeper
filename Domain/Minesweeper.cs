@@ -30,7 +30,7 @@ namespace Domain
         {
             var rules = _rules.GetRulesList();
             
-            foreach (var rule in rules.Where(rule => rule.IsActive(_gameState)))
+            foreach (var rule in rules.Where(rule => rule.IsRuleApplicable(_gameState)))
             {
                 _gameState = rule.UpdateGameState(_gameState);
                 break;
@@ -41,7 +41,7 @@ namespace Domain
         {
             var winningRule = _rules.GetWinningRule();
             
-            if (winningRule.IsActive(_gameState))
+            if (winningRule.IsRuleApplicable(_gameState))
             {
                 _gameState = winningRule.UpdateGameState(_gameState);
             }

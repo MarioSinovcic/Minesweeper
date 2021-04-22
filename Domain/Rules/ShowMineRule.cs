@@ -6,7 +6,7 @@ namespace Domain.Rules
 {
     public class ShowMineRule : IRule
     {
-        public bool IsActive(GameState gameState)
+        public bool IsRuleApplicable(GameState gameState)
         {
             var grid = gameState.Grid;
             var coords = gameState.Coords;

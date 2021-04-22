@@ -6,7 +6,7 @@ namespace Domain.Rules
 {
     public class SetFlagRule : IRule
     {
-        public bool IsActive(GameState gameState)
+        public bool IsRuleApplicable(GameState gameState)
         {
             return gameState.GameStatus == GameStatus.SetFlag;
         }

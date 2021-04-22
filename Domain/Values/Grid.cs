@@ -4,7 +4,7 @@ using Domain.Values.Interfaces;
 
 namespace Domain.Values
 {
-    public record Grid : IGrid
+    public record Grid : IGrid 
     {
         private readonly Tile[,] _tiles;
         public int Width { get; }

@@ -5,7 +5,7 @@ namespace Frontend
 {
     internal static class Program
     {
-        private static void Main()
+        private static void Main() //TODO: don't die on the first turn
         {
             //TODO: introduce a dependency injection system?
             var ioFacade = new IOFacade( new ConsoleInputHandler(), new ConsoleOutputHandler());
@@ -14,10 +14,11 @@ namespace Frontend
             var gameState = gameController.SetupRandomGameFromJson("SetupBehaviours/RandomGridSettings.json");
                 
             ioFacade.DisplayGameState(gameState);
-            while (true)
+            while (true) //Play around with this, enviro.exit is a smell, -> !gameStatus.playing
+            //play around with intermidate state, sorta menu (maybe even a summary)
             {
-                var coords = ioFacade.GetTurnInput(); //TODO: should be inputDTO
-                gameState = gameController.HandleMove(coords, gameState); 
+                var inputDTO = ioFacade.GetTurnInput(); //TODO: should be inputDTO
+                gameState = gameController.HandleMove(inputDTO, gameState); 
                 ioFacade.DisplayGameState(gameState);
             }
         }

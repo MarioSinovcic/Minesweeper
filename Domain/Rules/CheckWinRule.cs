@@ -9,7 +9,7 @@ namespace Domain.Rules
 {
     public class CheckWinRule : IRule
     {
-        public bool IsActive(GameState gameState)
+        public bool IsRuleApplicable(GameState gameState)
         {
             if (gameState.GameStatus == GameStatus.Playing)
             {
