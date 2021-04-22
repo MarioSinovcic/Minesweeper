@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain.Enums;
 using Domain.Values;
 using Domain.Values.Interfaces;
@@ -10,10 +11,17 @@ namespace Frontend.ConsoleIO
     public class ConsoleBoardOutputHandler : IOutputHandler
     {
         private const string HiddenTile = " ";
-        private const string ShownEmptyTile = "×";
         private const string MineTile = "¤";
         private const string FlagTile = ">";
         private const string VerticalSeparator = "|";
+        
+        private static readonly IList<DisplayTile> DisplayTileTypes = new List<DisplayTile>
+        {
+            new(0, ConsoleColor.Gray, '×'),
+            new(1, ConsoleColor.DarkCyan, '1'),
+            new(2, ConsoleColor.Yellow, '2'),
+            new(3, ConsoleColor.Red, '3'),
+        };
 
         private static readonly Dictionary<GameStatus, string> GameStateMessages = new()
         {
@@ -26,16 +34,15 @@ namespace Frontend.ConsoleIO
 
         public void DisplayGameState(GameState gameState)
         {
-            Console.Clear();
-            
             var (gameStatus, grid, _) = gameState;
+
+            Console.Clear();
             DisplayGrid(grid);
-            
             Console.Write(GameStateMessages[gameStatus] + "\n");
             
             if (gameStatus == GameStatus.Win || gameStatus == GameStatus.Loss)
             {
-                Environment.Exit(0);
+                Environment.Exit(0); //TODO: code smell
             }
         }
 
@@ -76,6 +83,7 @@ namespace Frontend.ConsoleIO
             
             if (grid.GetTileTypeAt(coords) == TileType.Mine )
             {
+                
                 Console.Write(grid.GetTileStatusAt(coords) == TileStatus.Shown
                     ? $"{VerticalSeparator}  {MineTile}  "
                     : $"{VerticalSeparator}  {HiddenTile}  ");
@@ -96,26 +104,8 @@ namespace Frontend.ConsoleIO
         private void HandleColouredTiles(int neighbours) //TODO: this is also gross
         {
             Console.Write($"{VerticalSeparator}  ");
-                
-            if (neighbours == 0)
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"{ShownEmptyTile}  ");
-                Console.ResetColor();
-            }
-            else if (neighbours == 1)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                Console.Write($"{neighbours}  ");
-                Console.ResetColor();
-            }
-            else if (neighbours == 2)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write($"{neighbours}  ");
-                Console.ResetColor();
-            }
-            else if (neighbours > 2)
+
+            if (neighbours > DisplayTileTypes.Count()) 
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"{neighbours}  ");
@@ -123,8 +113,10 @@ namespace Frontend.ConsoleIO
             }
             else
             {
-                Console.Write($"{neighbours}  ");
+                Console.ForegroundColor = DisplayTileTypes[neighbours].Color;
+                Console.Write($"{DisplayTileTypes[neighbours].DisplayChar}  ");
                 Console.ResetColor();
+
             }
         }
     }
