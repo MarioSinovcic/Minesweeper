@@ -1,5 +1,3 @@
-using Application.SetupBehaviours.Factories;
-using Domain;
 using Domain.Enums;
 using Domain.Values;
 using NUnit.Framework;
@@ -13,37 +11,41 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowSingleTile_WithOneNeighbouringMine()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 0)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,0)));
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(1, 0);
+
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
+
+            Assert.AreEqual(TileStatus.Hidden, resultState.Grid.GetTileStatusAt(new Coords(0, 0)));
+            Assert.AreEqual(TileStatus.Shown, resultState.Grid.GetTileStatusAt(moveCoords));
         }
-        
+
         [Test]
         public void ShouldShowSingleTile_WithTwoNeighbouringMines()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "FourSquareMines_SmallGrid.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(2, 0)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
             
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(0,0)));
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,0)));
+            var testGridPath = TestFolderPath + "FourSquareMines_SmallGrid.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(2, 0);
+
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
+
+            Assert.AreEqual(TileStatus.Hidden, resultState.Grid.GetTileStatusAt(new Coords(0, 0)));
+            Assert.AreEqual(TileStatus.Shown, resultState.Grid.GetTileStatusAt(moveCoords));
         }
+        
         
         [Test]
         public void ShouldShowAllEmptyTiles_IfZeroNeighbouringMines() //TODO: refactor, doesn't test functionality properly, hard to find the point of failure
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "FourSquareMines_LargeGrid.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(3, 3)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            
+            var testGridPath = TestFolderPath + "FourSquareMines_LargeGrid.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(3, 3);
+
+            var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
+
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,3)));
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,2)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,1)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,4)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(3,5)));
@@ -56,11 +58,12 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnDiagonallyMinedGrid()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "DiagonalMines.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 0)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            
+            var testGridPath = TestFolderPath + "DiagonalMines.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(1, 0);
+
+            var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
+
             Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(5,1)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,0)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,0)));
@@ -72,21 +75,23 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFourMines()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "FourSquareMines_SmallGrid.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(5, 0)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(3,3))); //test failure should be comms
+            var testGridPath = TestFolderPath + "FourSquareMines_SmallGrid.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(5, 0);
+
+            var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
+
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(3,3))); //test failure should be communicate what went wrong
         }
         
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFiveMines()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "FiveMines_LargeGrid.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(0, 3)));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
+            var testGridPath = TestFolderPath + "FiveMines_LargeGrid.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(0, 3);
+
+            var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
             
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3))); //TODO: grid method for getStatusAtCoords & getTypeAtCoords
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,2))); //Tile record not exposed

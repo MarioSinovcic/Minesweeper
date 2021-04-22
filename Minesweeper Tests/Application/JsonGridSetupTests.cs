@@ -52,7 +52,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldSetAllTileStatuses_ToHidden()
         {
             var resultGrid = new JsonGridSetupFactory(TestFolderPath + "FourCornerMines_LargeGrid.json").CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
+            var tiles = TestExtensions.LoopThroughGrid(resultGrid);
 
             foreach (var tile in tiles)
             {

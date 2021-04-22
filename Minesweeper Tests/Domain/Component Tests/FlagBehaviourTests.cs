@@ -1,5 +1,3 @@
-using Application.SetupBehaviours.Factories;
-using Domain;
 using Domain.Enums;
 using Domain.Values;
 using NUnit.Framework;
@@ -13,98 +11,96 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test] 
         public void ShouldSetFlag_AtCorrectCoordinates()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var coords = new Coords(1, 0);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var moveStatusType = GameStatus.SetFlag;
+            var moveCoords = new Coords(1, 0);
+            
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
+            Assert.AreEqual(TileStatus.Flag, resultState.Grid.GetTileStatusAt(moveCoords));
         }
         
         [Test] 
         public void ShouldSetFlagOnTile_WithMine()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "DiagonalMines.json").CreateGrid();
-            var coords = new Coords(2, 2);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
+            var testGridPath = TestFolderPath + "DiagonalMines.json";
+            var moveStatusType = GameStatus.SetFlag;
+            var moveCoords = new Coords(2, 2);
 
-            Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
+            
+            Assert.AreEqual(TileStatus.Flag, resultState.Grid.GetTileStatusAt(moveCoords));
         }
         
         [Test] 
         public void ShouldShowTileThatHasAFlagOnIt_WithAScoreOfOne()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var coords = new Coords(1, 0);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var firstMoveStatusType = GameStatus.SetFlag;
+            var secondMoveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(1, 0);
+            
+            var firstMove = TestExtensions.PerformMove(testGridPath, firstMoveStatusType, moveCoords);
+            var resultState = TestExtensions.PerformMove(firstMove.Grid, secondMoveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(coords));
+            Assert.AreEqual(TileStatus.Shown, resultState.Grid.GetTileStatusAt(moveCoords));
         }
         
         [Test] 
         public void ShouldNotLoseGame_IfFlagPlacedOnMine()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "DiagonalMines.json").CreateGrid();
-            var coords = new Coords(5, 0);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            var resultStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "DiagonalMines.json";
+            var moveStatusType = GameStatus.SetFlag;
+            var moveCoords = new Coords(5, 0);
+            
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
-            Assert.AreEqual(GameStatus.Playing, resultStatus);
+            Assert.AreEqual(TileStatus.Flag, resultState.Grid.GetTileStatusAt(moveCoords));
+            Assert.AreEqual(GameStatus.Playing, resultState.GameStatus);
         }
         
         [Test] 
         public void ShouldWinGame_IfFlagPlacedOnMineAndAllOthersAreMines()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "AllMines.json").CreateGrid();
-            var coords = new Coords(0, 0);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            var resultStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "AllMines.json";
+            var moveStatusType = GameStatus.SetFlag;
+            var moveCoords = new Coords(0, 0);
+            
+            var resultState= TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Flag, resultGrid.GetTileStatusAt(coords));
-            Assert.AreEqual(GameStatus.Win, resultStatus);
+            Assert.AreEqual(TileStatus.Flag, resultState.Grid.GetTileStatusAt(moveCoords));
+            Assert.AreEqual(GameStatus.Win, resultState.GameStatus);
         }
         
         
         [Test] 
         public void ShouldLoseGame_IfCoordsSetOnFlaggedMine()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "AllMines.json").CreateGrid();
-            var coords = new Coords(0, 0);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
-            var resultStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "AllMines.json";
+            var firstMoveStatusType = GameStatus.SetFlag;
+            var secondMoveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(0, 0);
+            
+            var firstMove = TestExtensions.PerformMove(testGridPath, firstMoveStatusType, moveCoords);
+            var resultState = TestExtensions.PerformMove(firstMove.Grid, secondMoveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(coords));
-            Assert.AreEqual(GameStatus.Loss, resultStatus);
+            Assert.AreEqual(TileStatus.Shown, resultState.Grid.GetTileStatusAt(moveCoords));
+            Assert.AreEqual(GameStatus.Loss, resultState.GameStatus);
         }
         
         [Test] 
         public void ShouldShowTileThatHasAFlagOnIt_WithAScoreOfZero()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "ThreeMines_LargeGrid.json").CreateGrid();
-            var coords = new Coords(6, 6);
-            var minesweeper = new Minesweeper(new GameState(GameStatus.SetFlag, grid, coords));
-            minesweeper.PerformMove();
-            minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, coords));
-            minesweeper.PerformMove();
-            var resultGrid = minesweeper.GetGameState().Grid;
+            var testGridPath = TestFolderPath + "ThreeMines_LargeGrid.json";
+            var firstMoveStatusType = GameStatus.SetFlag;
+            var secondMoveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(6, 6);
+            
+            var firstMove = TestExtensions.PerformMove(testGridPath, firstMoveStatusType, moveCoords);
+            var resultState = TestExtensions.PerformMove(firstMove.Grid, secondMoveStatusType, moveCoords);
 
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(coords));
+            Assert.AreEqual(TileStatus.Shown, resultState.Grid.GetTileStatusAt(moveCoords));
+            Assert.AreEqual(GameStatus.Playing, resultState.GameStatus);
         }
     }
 }

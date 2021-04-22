@@ -24,23 +24,24 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
         public void ShouldReturnErrorState_IfInputIsOutOfBounds(Coords boundaryValuesForInputCoords)
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, boundaryValuesForInputCoords));
-            minesweeper.PerformMove();
-            var resultGameStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var moveStatusType = GameStatus.Playing;
+            
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, boundaryValuesForInputCoords);
 
-            Assert.AreEqual(GameStatus.Error, resultGameStatus);
+            Assert.AreEqual(GameStatus.Error, resultState.GameStatus);
         }
         
         [Test]
         public void ShouldReturnLossState_IfMineSelected()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(0, 0)));
-            minesweeper.PerformMove();
-            var resultGameStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(0, 0);
+            
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
 
-            Assert.AreEqual(GameStatus.Loss, resultGameStatus);
+            Assert.AreEqual(GameStatus.Loss, resultState.GameStatus);
         }
 
         [Test]
@@ -58,12 +59,13 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnWinState_IfAllTilesAreEmptyAndOneIsSelected() 
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "AllEmpty.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 1)));
-            minesweeper.PerformMove();
-            var resultGameStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "AllEmpty.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(1, 1);
             
-            Assert.AreEqual(GameStatus.Win, resultGameStatus);
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
+
+            Assert.AreEqual(GameStatus.Win, resultState.GameStatus);
         }
         
         [Test]
@@ -80,21 +82,24 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinished()
         {
-            var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 1)));
-            minesweeper.PerformMove();
-            var resultGameStatus = minesweeper.GetGameState().GameStatus;
+            var testGridPath = TestFolderPath + "OneCornerMine.json";
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(1, 1);
+            
+            var resultState = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords);
 
-            Assert.AreEqual(GameStatus.Playing, resultGameStatus);
+            Assert.AreEqual(GameStatus.Playing, resultState.GameStatus);
         }
         
         [Test]
         public void ShouldReturnPlaying_IfGameIsNotFinishedInTheLateGame()
         {
+
             var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var coords = new Coords(1, 0);
             var updatedTile =  grid.GetInvertTileStatus(coords);
-            grid.ReplaceTile(coords, updatedTile); 
+            grid.ReplaceTile(new Coords(2,0), updatedTile); 
+            grid.ReplaceTile(new Coords(4,2), updatedTile); 
             var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, coords));
             minesweeper.PerformMove();
             var resultGameStatus = minesweeper.GetGameState().GameStatus;

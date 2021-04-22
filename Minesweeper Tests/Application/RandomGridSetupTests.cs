@@ -27,7 +27,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldCreateGrid_WithCorrectDimensionsAndRandomMines()
         {
             var resultGrid = new RandomGridSetupFactory(4,3,2).CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid);
+            var tiles = TestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             
             Assert.AreEqual(4, resultGrid.Width);
@@ -39,7 +39,7 @@ namespace Minesweeper_Tests.Application
         public void ShouldCreatedGrid_WithMinedAndEmptyTiles() //spy?? //TODO: refactor random tests
         {
             var resultGrid = new RandomGridSetupFactory(10, 10, 10).CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid).ToList();
+            var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 
@@ -80,7 +80,7 @@ namespace Minesweeper_Tests.Application
         [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() //TODO: test random properly
         {
             var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
-            var tiles = GridTestExtensions.LoopThroughGrid(resultGrid).ToList();
+            var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 
