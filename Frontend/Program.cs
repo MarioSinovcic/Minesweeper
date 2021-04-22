@@ -8,7 +8,7 @@ namespace Frontend
         private static void Main() //TODO: don't die on the first turn
         {
             //TODO: introduce a dependency injection system?
-            var ioFacade = new IOFacade( new ConsoleInputHandler(), new ConsoleOutputHandler());
+            var ioFacade = new IOFacade( new ConsoleInputHandler(), new ConsoleOutputHandler()); //TODO: fix this
             var gameController = new GameController();
             
             var gameState = gameController.SetupRandomGameFromJson("SetupBehaviours/RandomGridSettings.json");

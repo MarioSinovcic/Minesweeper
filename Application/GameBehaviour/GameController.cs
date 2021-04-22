@@ -11,7 +11,7 @@ namespace Application.GameBehaviour
         public GameState SetupRandomGameFromJson(string pathname)
         {
             var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid(); //Consider static method.
-            return new GameState(GameStatus.Playing, grid, null); //TODO: remove null if poss (game state factory)
+            return new GameState(GameStatus.FirstTurn, grid, null); //TODO: remove null if poss (game state factory)
         }
 
         public GameState HandleMove(InputDTO inputDto, GameState gameState) //TODO: create inputDTO

@@ -1,4 +1,5 @@
 using Application.GameBehaviour.DTOs;
+using Domain.Enums;
 using Domain.Values;
 using Frontend.Interfaces;
 
@@ -8,7 +9,7 @@ namespace Frontend
     {
         private readonly IInputHandler _inputHandler;
         private readonly IOutputHandler _outputHandler;
-
+        
         public IOFacade(IInputHandler inputHandler, IOutputHandler outputHandler)
         {
             _inputHandler = inputHandler;
