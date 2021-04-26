@@ -7,7 +7,7 @@ using Domain.Values;
 
 namespace Application.GameBehaviour
 {
-    public class GameController //TODO: error handling, json deserializing ??
+    public class GameController 
     {
         public GameState SetupRandomGameFromJson(string pathname)
         {

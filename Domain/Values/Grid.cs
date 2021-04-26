@@ -29,13 +29,13 @@ namespace Domain.Values
             return _tiles[y, x].Type;
         }
         
-        public Tile GetInvertTileStatus(Coords coords) //TODO: remove if poss
+        public Tile GetInvertTileStatus(Coords coords)
         {
             var (x, y) = coords;
             return _tiles[y, x].ShowTile();
         }
         
-        public void ReplaceTile(Coords coords, Tile updatedTile) //TODO: remove to make immutable
+        public void ReplaceTile(Coords coords, Tile updatedTile) 
         {
             var (x, y) = coords;
             _tiles[y, x] = updatedTile;

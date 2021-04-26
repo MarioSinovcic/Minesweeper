@@ -45,7 +45,7 @@ namespace Application.SetupBehaviours.Factories
             return new Grid(tiles);
         }
 
-        private TileType GetRandomTileType() //TODO: stub random, provided by the constructor
+        private TileType GetRandomTileType()
         {
             var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
             return randomNum.Next(_difficulty) < 1 ? TileType.Mine : TileType.Empty;
@@ -59,9 +59,8 @@ namespace Application.SetupBehaviours.Factories
             }
         }
 
-        private static void ValidatePath(string pathname) //DRY validation: make json diser.
+        private static void ValidatePath(string pathname)
         {
-            if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");
             try
             {
                 using var jsonFile = new StreamReader(pathname);

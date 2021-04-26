@@ -44,9 +44,9 @@ namespace Application.SetupBehaviours.Factories
             }
         }
 
-        private TileType GetRandomTileType() //TODO: stub random, provided by the constructor
+        private TileType GetRandomTileType()
         {
-            var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
+            var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tiles will be a mine
             return randomNum.Next(_difficulty) < 1 ? TileType.Mine : TileType.Empty;
         }
     }

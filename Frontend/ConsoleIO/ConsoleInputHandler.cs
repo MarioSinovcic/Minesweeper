@@ -8,16 +8,16 @@ namespace Frontend.ConsoleIO
 {
     public class ConsoleInputHandler : IInputHandler
     {
-        private const string InputPrompt = "Enter your co-ordinates e.g.,\"0 2\": ";
+        private const string InputPrompt = "Enter your co-ordinates: ";
         private const string ErrorPrompt = "Looks like that input wasn't valid, please try again: ";
 
-        public InputDTO GetTurnInput() //TODO: implement L
+        public InputDTO GetTurnInput()
         {
             Console.Write(InputPrompt);
             return GetValidatedInput();
         }
 
-        private InputDTO GetValidatedInput() //TODO: larger grids are broken (use regex)
+        private InputDTO GetValidatedInput() 
         {
             var input = Console.ReadLine()?.Trim();
             var strings = input?.Split(" ");

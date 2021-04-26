@@ -18,7 +18,7 @@ namespace Application.SetupBehaviours.Factories
             _pathname = pathname;
         }
         
-        public IGrid CreateGrid() //TODO: correct use of static
+        public IGrid CreateGrid()
         {
             ValidatePath(_pathname);
             
@@ -42,7 +42,6 @@ namespace Application.SetupBehaviours.Factories
 
         private static void ValidatePath(string pathname)
         {
-            if (!File.Exists(pathname)) throw new IOException("Invalid path for grid creation.");
             try
             {
                 using var jsonFile = new StreamReader(pathname);

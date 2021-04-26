@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Domain.Enums;
 using Domain.Values;
 using Domain.Values.Interfaces;
@@ -42,7 +41,7 @@ namespace Frontend.ConsoleIO
             
             if (gameStatus == GameStatus.Win || gameStatus == GameStatus.Loss)
             {
-                Environment.Exit(0); //TODO: code smell
+                Environment.Exit(0); 
             }
         }
 
@@ -73,7 +72,7 @@ namespace Frontend.ConsoleIO
             Console.WriteLine(divider);
         }
 
-        private void DisplayTile(IGrid grid, Coords coords) //TODO: this is pretty horrible
+        private void DisplayTile(IGrid grid, Coords coords)
         {
             if(grid.GetTileStatusAt(coords) == TileStatus.Flag)
             {
@@ -101,11 +100,11 @@ namespace Frontend.ConsoleIO
             }
         }
 
-        private void HandleColouredTiles(int neighbours) //TODO: this is also gross
+        private void HandleColouredTiles(int neighbours)
         {
             Console.Write($"{VerticalSeparator}  ");
 
-            if (neighbours > DisplayTileTypes.Count()) 
+            if (neighbours > DisplayTileTypes.Count) 
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"{neighbours}  ");

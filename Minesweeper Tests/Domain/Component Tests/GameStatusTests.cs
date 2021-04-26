@@ -45,18 +45,6 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         }
 
         [Test]
-        [Ignore("Works when run individual but not when run with other tests")]
-        public void ShouldReturnWinState_IfAllEmptyTilesAreShown() 
-        {
-            var grid = new WinningGridStub();
-            var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, new Coords(1, 1)));
-            minesweeper.PerformMove();
-            var resultGameStatus = minesweeper.GetGameState();
-            
-            Assert.AreEqual(GameStatus.Win, resultGameStatus.GameStatus);
-        }
-        
-        [Test]
         public void ShouldReturnWinState_IfAllTilesAreEmptyAndOneIsSelected() 
         {
             var testGridPath = TestFolderPath + "AllEmpty.json";

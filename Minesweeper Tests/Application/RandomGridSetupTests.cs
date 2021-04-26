@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Domain.Enums;
 using Application.SetupBehaviours.Factories;
-using Minesweeper_Tests.Domain;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Application
@@ -36,7 +35,7 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldCreatedGrid_WithMinedAndEmptyTiles() //spy?? //TODO: refactor random tests
+        public void ShouldCreatedGrid_WithMinedAndEmptyTiles()
         {
             var resultGrid = new RandomGridSetupFactory(10, 10, 10).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
@@ -77,7 +76,7 @@ namespace Minesweeper_Tests.Application
             Assert.AreEqual(5,resultGrid.Width);
         }
         
-        [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() //TODO: test random properly
+        [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() 
         {
             var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();

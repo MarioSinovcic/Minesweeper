@@ -37,7 +37,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
         
         
         [Test]
-        public void ShouldShowAllEmptyTiles_IfZeroNeighbouringMines() //TODO: refactor, doesn't test functionality properly, hard to find the point of failure
+        public void ShouldShowAllEmptyTiles_IfZeroNeighbouringMines()
         {
             var testGridPath = TestFolderPath + "FourSquareMines_LargeGrid.json";
             var moveStatusType = GameStatus.Playing;
@@ -71,7 +71,7 @@ namespace Minesweeper_Tests.Domain.Component_Tests
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,2)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3)));
         }
-        
+
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFourMines()
         {
@@ -81,9 +81,9 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 
             var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
 
-            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(3,3))); //test failure should be communicate what went wrong
+            Assert.AreEqual(TileStatus.Hidden, resultGrid.GetTileStatusAt(new Coords(3, 3)));
         }
-        
+
         [Test]
         public void ShouldShowAllEmptyTilesAndNumberedTiles_OnGridWithFiveMines()
         {
@@ -93,8 +93,8 @@ namespace Minesweeper_Tests.Domain.Component_Tests
 
             var resultGrid = TestExtensions.PerformMove(testGridPath, moveStatusType, moveCoords).Grid;
             
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3))); //TODO: grid method for getStatusAtCoords & getTypeAtCoords
-            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,2))); //Tile record not exposed
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,3))); 
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,2)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,2)));
             Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,2)));
         }

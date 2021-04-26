@@ -3,10 +3,10 @@ using Domain.Values;
 
 namespace Domain
 {
-    public class Minesweeper //TODO: setup mediator
+    public class Minesweeper 
     {
         private readonly RuleList _rules;
-        private GameState _gameState; //TODO: make immutable?
+        private GameState _gameState; 
 
         public Minesweeper(GameState gameState)
         {
@@ -14,7 +14,6 @@ namespace Domain
             _gameState = gameState;
         }
         
-        //TODO: game state factory
         public void PerformMove()
         {
             UpdateGameStatus();

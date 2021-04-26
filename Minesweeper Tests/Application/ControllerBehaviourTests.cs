@@ -16,12 +16,12 @@ namespace Minesweeper_Tests.Application
             new[] {-9, 2, 10}, //case 1
             new[] {9, -2, 10}, //case 2
             new[] {-10, -4, 10}, //case 3
-            new[] {9, -2, 10}, //case 3
             new[] {0, 3, 10}, //case 4
             new[] {2, 0, 10}, //case 5
             new[] {5, 2, 0}, //case 6
             new[] {9, 2, -10}, //case 7
             new[] {0, 0, -0}, //case 8
+            new[] {9, -2, 10} //case 9
         };
             
         private static readonly object[] BoundaryValuesForInputCoords =
@@ -44,7 +44,7 @@ namespace Minesweeper_Tests.Application
         }
         
         [Test]
-        public void ShouldNotThrowError_IfSetupGridPathIsInvalid() //TODO: setup boundary values for this and for incorrect files
+        public void ShouldNotThrowError_IfSetupGridPathIsInvalid()
         {
             Assert.DoesNotThrow(() => _gameController.SetupRandomGameFromJson(""));
         }

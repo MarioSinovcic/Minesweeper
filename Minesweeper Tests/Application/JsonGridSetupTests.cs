@@ -2,7 +2,6 @@ using System.IO;
 using Application.SetupBehaviours.Factories;
 using Domain.Enums;
 using Domain.Values;
-using Minesweeper_Tests.Domain;
 using NUnit.Framework;
 
 namespace Minesweeper_Tests.Application
