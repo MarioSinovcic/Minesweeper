@@ -1,7 +1,7 @@
 # Minesweeper
 
-A C# console applciation that lets users play [minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)). 
-The basic archtecture for the system can be found here <-link to diagram. 
+A C# console application that lets users play [minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)). 
+The basic architecture for the system can be found here <-link to diagram. 
 
 ## Requirements
 
@@ -20,3 +20,4 @@ The basic archtecture for the system can be found here <-link to diagram.
  - show tiles by typing the x and y value with a space in between (e.g., "3 5")
  - place flags by typing "f" then the x and y value with a space in between (e.g., "f 2 1")
  - win by showing all tiles that aren't mines.
+![image](https://user-images.githubusercontent.com/38930019/116163802-8f644b80-a74c-11eb-8b82-8d9b8ea09e2f.png)
