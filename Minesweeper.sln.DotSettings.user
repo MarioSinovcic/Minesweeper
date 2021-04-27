@@ -5,7 +5,7 @@
   &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fcfc5318_002D4e7a_002D40d6_002Da886_002Dec009ee35035/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldReturnWinState_IfAllEmptyTilesAreShown" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper Tests" Presentation="&amp;lt;Minesweeper Tests&amp;gt;" /&gt;
+  &lt;Project Location="/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/Minesweeper_Tests" Presentation="&amp;lt;Minesweeper_Tests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>
 	
 	

@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{27B20E75-1DC4-4F31-9CD1-728E09AA4C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper_Controller", "Minesweeper_Controller\Minesweeper_Controller.csproj", "{27B20E75-1DC4-4F31-9CD1-728E09AA4C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper Tests", "Minesweeper Tests\Minesweeper Tests.csproj", "{D025C26B-4D8E-4925-BE20-9A47EFAB112C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper_Tests", "Minesweeper_Tests\Minesweeper_Tests.csproj", "{D025C26B-4D8E-4925-BE20-9A47EFAB112C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8BD054D8-FB26-4285-95F4-3A02CEFECD89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper_Service", "Minesweeper_Service\Minesweeper_Service.csproj", "{8BD054D8-FB26-4285-95F4-3A02CEFECD89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{EA354811-4607-4E50-9127-72DA4B013477}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper_Client", "Minesweeper_Client\Minesweeper_Client.csproj", "{EA354811-4607-4E50-9127-72DA4B013477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
