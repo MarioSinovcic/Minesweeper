@@ -4,7 +4,7 @@ using Minesweeper_Controller.SetupBehaviours.Factories;
 using Minesweeper_Service.Enums;
 using NUnit.Framework;
 
-namespace Minesweeper_Tests.Application
+namespace Minesweeper_Tests.Controller.SetupUnitTests
 {
     public class RandomGridSetupTests
     {

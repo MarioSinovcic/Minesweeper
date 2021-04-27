@@ -5,7 +5,7 @@ using Minesweeper_Service.Values;
 using Minesweeper_Tests.Stubs;
 using NUnit.Framework;
 
-namespace Minesweeper_Tests.Domain.Component_Tests
+namespace Minesweeper_Tests.Service.Component_Tests
 {
     public class GameStatusTests
     {

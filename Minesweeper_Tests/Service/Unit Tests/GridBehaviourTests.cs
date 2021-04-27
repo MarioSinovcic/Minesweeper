@@ -3,7 +3,7 @@ using Minesweeper_Controller.SetupBehaviours.Factories;
 using Minesweeper_Service.Values;
 using NUnit.Framework;
 
-namespace Minesweeper_Tests.Domain.Unit_Tests
+namespace Minesweeper_Tests.Service.Unit_Tests
 {
     public class GridBehaviourTests
     {
