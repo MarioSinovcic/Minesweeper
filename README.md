@@ -1,7 +1,7 @@
 # Minesweeper
 
 A C# console application that lets users play [minesweeper](https://en.wikipedia.org/wiki/Minesweeper_(video_game)). 
-The basic architecture for the system can be found here <-link to diagram. 
+The basic architecture for the system can be found [here](https://github.com/MarioSinovcic/Minesweeper/wiki).
 
 ## Requirements
 
