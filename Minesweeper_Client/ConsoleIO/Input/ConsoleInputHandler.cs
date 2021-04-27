@@ -1,8 +1,8 @@
 ﻿using System;
+using Minesweeper_Client.ConsoleIO.Input;
 using Minesweeper_Controller.GameBehaviour.DTOs;
 using Minesweeper_Service.Enums;
 using Minesweeper_Service.Values;
-using Minesweeper_Client.Interfaces;
 
 namespace Minesweeper_Client.ConsoleIO
 {

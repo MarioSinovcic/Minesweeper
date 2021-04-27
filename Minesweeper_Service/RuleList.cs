@@ -5,7 +5,7 @@ using Minesweeper_Service.Rules.Interface;
 
 namespace Minesweeper_Service
 {
-    public class RuleList 
+    internal class RuleList 
     {
         private readonly IEnumerable<IRule> _gameRules = new ReadOnlyCollection<IRule>(new IRule[]
             {
@@ -17,12 +17,12 @@ namespace Minesweeper_Service
             }
         );
         
-        public IRule GetWinningRule()
+        internal IRule GetWinningRule()
         {
             return new CheckWinRule();
         }
 
-        public IEnumerable<IRule> GetRulesList()
+        internal IEnumerable<IRule> GetRulesList()
         {
             return _gameRules;
         }

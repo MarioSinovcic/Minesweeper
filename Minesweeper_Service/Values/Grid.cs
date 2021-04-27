@@ -29,7 +29,7 @@ namespace Minesweeper_Service.Values
             return _tiles[y, x].Type;
         }
         
-        public Tile GetInvertTileStatus(Coords coords)
+        public Tile GetInvertTileAt(Coords coords)
         {
             var (x, y) = coords;
             return _tiles[y, x].ShowTile();

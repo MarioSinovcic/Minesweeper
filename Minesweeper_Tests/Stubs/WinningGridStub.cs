@@ -18,7 +18,7 @@ namespace Minesweeper_Tests.Stubs
                 {
                     var coords = new Coords(i, j);
                     if (Grid.GetTileTypeAt(coords) != TileType.Empty) continue;
-                    var updatedTile = Grid.GetInvertTileStatus(coords);
+                    var updatedTile = Grid.GetInvertTileAt(coords);
                     Grid.ReplaceTile(coords,updatedTile);
                 }
             }

@@ -19,7 +19,7 @@ namespace Minesweeper_Service.Rules
             var updatedGrid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var updatedTile = updatedGrid.GetInvertTileStatus(coords);
+            var updatedTile = updatedGrid.GetInvertTileAt(coords);
             updatedGrid.ReplaceTile(coords, updatedTile);
             
             return new GameState(GameStatus.Loss, updatedGrid, coords);

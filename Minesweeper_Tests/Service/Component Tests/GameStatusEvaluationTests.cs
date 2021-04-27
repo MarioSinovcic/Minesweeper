@@ -85,7 +85,7 @@ namespace Minesweeper_Tests.Service.Component_Tests
 
             var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var coords = new Coords(1, 0);
-            var updatedTile =  grid.GetInvertTileStatus(coords);
+            var updatedTile =  grid.GetInvertTileAt(coords);
             grid.ReplaceTile(new Coords(2,0), updatedTile); 
             grid.ReplaceTile(new Coords(4,2), updatedTile); 
             var minesweeper = new Minesweeper(new GameState(GameStatus.Playing, grid, coords));

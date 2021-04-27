@@ -10,7 +10,7 @@ namespace Minesweeper_Service.Values.Interfaces //take it out
 
         public TileType GetTileTypeAt(Coords coords);
 
-        public Tile GetInvertTileStatus(Coords coords); 
+        public Tile GetInvertTileAt(Coords coords); 
         
         public int GetNeighbouringMines(Coords coords);
         

@@ -47,7 +47,7 @@ namespace Minesweeper_Service.Rules
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
                     if (grid.GetTileTypeAt(coords) != TileType.Empty ||
                         grid.GetTileStatusAt(coords) != TileStatus.Hidden) continue;
-                    var updatedTile = grid.GetInvertTileStatus(coords);
+                    var updatedTile = grid.GetInvertTileAt(coords);
                     grid.ReplaceTile(coords, updatedTile);
                     
                     if (!(grid.GetNeighbouringMines(coords) > 0))
