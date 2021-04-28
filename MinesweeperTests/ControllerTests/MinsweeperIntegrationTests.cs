@@ -24,20 +24,20 @@ namespace MinesweeperTests.ControllerTests
         }
         
         [TestCaseSource(nameof(BoundaryValuesForInvalidGridFilePaths))]
-        public void CreationBehaviour_WithIncorrectJsonPath_SuccessfullyDoesNotThrowError(string path)
+        public void CreationBehaviour_WithIncorrectJsonPath_SuccessfullyDoesNotThrowError(string settingsFilePath)
         {
             //Arrange
-            var invalidPath = path;
+            var invalidPath = settingsFilePath;
             
             //Act //Assert
             Assert.DoesNotThrow(() => _gameController.SetupRandomGameFromJson(invalidPath));
         }
         
         [TestCaseSource(nameof(BoundaryValuesForInvalidGridFilePaths))]
-        public void CreationBehaviour_WithIncorrectJsonPath_SuccessfullyReturnsErrorState(string path) 
+        public void CreationBehaviour_WithIncorrectJsonPath_SuccessfullyReturnsErrorState(string settingsFilePath) 
         {
             //Arrange
-            var invalidPath = path;
+            var invalidPath = settingsFilePath;
             
             //Act
             var resultGameState = _gameController.SetupRandomGameFromJson(invalidPath);

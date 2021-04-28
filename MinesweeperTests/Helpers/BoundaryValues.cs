@@ -35,5 +35,14 @@ namespace MinesweeperTests.Helpers
             new Coords(4,245), 
             new Coords(52,1),
         };
+        
+        internal static readonly object[] ValidGridSetupParameters =
+        {
+            new[] {9, 2, 3}, 
+            new[] {2, 2, 2}, 
+            new[] {1, 4, 2}, 
+            new[] {50, 1, 80}, 
+            new[] {100, 100, 10}, 
+        };
     }
 }

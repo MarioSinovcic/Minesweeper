@@ -9,81 +9,137 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
 {
     public class RandomGridSetupTests
     {
-        [Test]
-        public void ShouldThrowApplicationException_ForInvalidParams()
+        private static readonly object[] InvalidGridParamsBoundaryValues = BoundaryValues.InvalidGridSetupParams;
+        private static readonly object[] ValidGridParamsBoundaryValues = BoundaryValues.ValidGridSetupParameters;
+
+
+        [TestCaseSource(nameof(InvalidGridParamsBoundaryValues))]
+        public void CreateGrid_WithInvalidParameters_ShouldReturnApplicationException(int[] gridParams)
         {
-            Assert.Throws<ApplicationException>(() => new RandomGridSetupFactory(-5, -0, 0).CreateGrid());
+            //Arrange
+            var width = gridParams[0];
+            var height = gridParams[1];
+            var difficulty = gridParams[2];
+            
+            //Act //Assert
+            Assert.Throws<ApplicationException>(() => new RandomGridSetupFactory(width, height, difficulty).CreateGrid());
+        }
+
+        [TestCaseSource(nameof(ValidGridParamsBoundaryValues))]
+        public void CreateGrid_WithValidParameters_ShouldGridWithCorrectDimensions(int[] gridParams)
+        {
+            //Arrange
+            var width = gridParams[0];
+            var height = gridParams[1];
+            var difficulty = gridParams[2];
+            
+            //Act 
+            var resultGrid = new RandomGridSetupFactory(width,height,difficulty).CreateGrid();
+            
+            //Assert
+            Assert.AreEqual(height, resultGrid.Height);
+            Assert.AreEqual(width, resultGrid.Width);
         }
 
         [Test]
-        public void ShouldCreateGrid_WithCorrectDimensions()
+        public void CreateGrid_WithHighDifficulty_ShouldGridWithSomeMines()
         {
-            var resultGrid = new RandomGridSetupFactory(5,10,10).CreateGrid();
-            Assert.AreEqual(10, resultGrid.Height);
-            Assert.AreEqual(5, resultGrid.Width);
-        }
+            //Arrange
+            var width = 4;
+            var height = 4;
+            var difficulty = 2;
 
-        [Test]
-        public void ShouldCreateGrid_WithCorrectDimensionsAndRandomMines()
-        {
-            var resultGrid = new RandomGridSetupFactory(4,3,2).CreateGrid();
+            //Act
+            var resultGrid = new RandomGridSetupFactory(width,height, difficulty).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             
-            Assert.AreEqual(4, resultGrid.Width);
-            Assert.AreEqual(3, resultGrid.Height);
+            //Assert
             Assert.True(mineCount > 0); 
         }
         
         [Test]
-        public void ShouldCreatedGrid_WithMinedAndEmptyTiles()
+        public void CreateGrid_WithMediumDifficulty_ShouldGridWithSomeMinesAndSomeEmptyTiles()
         {
-            var resultGrid = new RandomGridSetupFactory(10, 10, 10).CreateGrid();
+            //Arrange
+            var width = 10;
+            var height = 10;
+            var difficulty = 6;
+
+            //Act
+            var resultGrid = new RandomGridSetupFactory(width,height, difficulty).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 
+            //Assert
             Assert.True(mineCount > 0); 
             Assert.True(emptyCount > 0);
         }
         
-        [Test]
-        public void ShouldGatherCorrectDimensionSettings_FromSettingsFile()
-        {
-            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings.json").CreateGrid();
-        
-            Assert.AreEqual(9,resultGrid.Height);
-            Assert.AreEqual(10,resultGrid.Width);
-        }
         
         [Test]
-        public void ShouldThrowApplicationException_ForInvalidParamsInSettingsFile()
+        public void CreateGrid_WithInvalidSettings_ShouldReturnApplicationException()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory("Fakes/Settings/InvalidRandomGridSettings.json").CreateGrid());
+            //Arrange
+            var settingsFilePath = "Fakes/Settings/InvalidRandomGridSettings.json";
+            
+            //Act //Assert
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters")); 
         }
         
         [Test]
-        public void ShouldThrowApplicationException_ForMissingParamsInSettingsFile()
+        public void CreateGrid_WithMissingSettingsParams_ShouldReturnApplicationException()
         {
-            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory("Fakes/Settings/IncompleteRandomGridSettings.json").CreateGrid());
+            //Arrange
+            var settingsFilePath = "Fakes/Settings/IncompleteRandomGridSettings.json";
+            
+            //Act //Assert
+            var error = Assert.Throws<ApplicationException>(() => new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid());
             Assert.True(error.Message.Contains("Invalid input parameters"));
         }
 
-        [Test] public void ShouldCreateGrid_WithCorrectDimensionsFromSettingsFile()
+        [Test]
+        public void CreateGrid_WithValidSettingsFile_ShouldGridWitCorrectDimensions()
         {
-            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            //Arrange
+            var settingsFilePath = "Fakes/Settings/RandomGridSettings.json";
+            
+            //Act
+            var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
+        
+            //Assert
             Assert.AreEqual(9,resultGrid.Height);
-            Assert.AreEqual(5,resultGrid.Width);
+            Assert.AreEqual(10,resultGrid.Width);
         }
         
-        [Test] public void ShouldCreateGrid_WithMinesAndEmptyTiles() 
+        [Test] public void CreateGrid_WithValidSettingsFile_ShouldGridWithSomeMines() 
         {
-            var resultGrid = new RandomGridSetupFromJsonFactory("Fakes/Settings/RandomGridSettings2.json").CreateGrid();
+            //Arrange
+            var settingsFilePath = "Fakes/Settings/RandomGridSettings2.json";
+            
+            //Act
+            var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
+            var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
+            var mineCount = tiles.Count(x => x.Type == TileType.Mine);
+
+            //Assert
+            Assert.True(mineCount > 0); 
+        }
+        
+        [Test] public void CreateGrid_WithValidSettingsFile_ShouldGridWithSomeMinesAndSomeEmptyTiles() 
+        {
+            //Arrange
+            var settingsFilePath = "Fakes/Settings/RandomGridSettings.json";
+            
+            //Act
+            var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
 
+            //Assert
             Assert.True(mineCount > 0); 
             Assert.True(emptyCount > 0);
         }

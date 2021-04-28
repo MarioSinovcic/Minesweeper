@@ -2,11 +2,10 @@ using MinesweeperController.SetupBehaviours.Factories;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
 
-namespace MinesweeperTests.Helper.Stubs
+namespace MinesweeperTests.Helpers.Stubs
 {
     public record WinningGridStub : Grid
     {
-        //TODO: bad string path
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/MinesweeperTests/Helpers/Fakes/Grids/OneCornerMine.json";
         private static readonly Grid Grid = (Grid) new JsonGridSetupFactory(PathName).CreateGrid();
 

@@ -1,8 +1,8 @@
 using MinesweeperController.SetupBehaviours.Factories;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
-using MinesweeperTests.Helper.Stubs;
 using MinesweeperTests.Helpers;
+using MinesweeperTests.Helpers.Stubs;
 using NUnit.Framework;
 
 namespace MinesweeperTests.ServiceTests.Component_Tests
@@ -70,7 +70,7 @@ namespace MinesweeperTests.ServiceTests.Component_Tests
             //Assert
             Assert.AreEqual(GameStatus.Loss, resultState.GameStatus);
         }
-        
+
         [Test]
         public void GameStatusBehaviour_WithOneCornerMine_SuccessfullyReturnPlayingAfterOneMove()
         {

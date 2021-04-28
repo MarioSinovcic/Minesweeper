@@ -1,6 +1,7 @@
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
 using MinesweeperTests.Helpers;
+using MinesweeperTests.Helpers.Stubs;
 using NUnit.Framework;
 
 namespace MinesweeperTests.ServiceTests.Component_Tests
@@ -138,6 +139,20 @@ namespace MinesweeperTests.ServiceTests.Component_Tests
 
             //Assert
             Assert.AreEqual(GameStatus.Loss, resultState.GameStatus);
+        }
+        
+        [Test] public void GameStatusBehaviour_WithWinningGrid_SuccessfullyReturnPlayingStatusIfTileFlagged()
+        {
+            //Arrange
+            var grid = new WinningGridStub();
+            var moveStatusType = GameStatus.SetFlag;
+            var moveCoords = new Coords(0, 0);
+            
+            //Act
+            var resultState = TestExtensions.PerformMove(grid, moveStatusType, moveCoords);
+            
+            //Assert
+            Assert.AreEqual(GameStatus.Playing, resultState.GameStatus);
         }
     }
 }
