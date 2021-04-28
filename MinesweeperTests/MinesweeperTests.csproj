@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="NUnit" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Fakes\**">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Helpers\Fakes\Grids\AllEmpty.json" />
+      <Content Include="Helpers\Fakes\Grids\AllMines.json" />
+      <Content Include="Helpers\Fakes\Grids\DiagonalMines.json" />
+      <Content Include="Helpers\Fakes\Grids\FiveMines_LargeGrid.json" />
+      <Content Include="Helpers\Fakes\Grids\FourCornerMines_LargeGrid.json" />
+      <Content Include="Helpers\Fakes\Grids\FourCornerMines_SmallGrid.json" />
+      <Content Include="Helpers\Fakes\Grids\FourSquareMines_LargeGrid.json" />
+      <Content Include="Helpers\Fakes\Grids\FourSquareMines_SmallGrid.json" />
+      <Content Include="Helpers\Fakes\Grids\OneCornerMine.json" />
+      <Content Include="Helpers\Fakes\Grids\ThreeMines.json" />
+      <Content Include="Helpers\Fakes\Grids\ThreeMines_LargeGrid.json" />
+      <Content Include="Helpers\Fakes\Settings\IncompleteRandomGridSettings.json" />
+      <Content Include="Helpers\Fakes\Settings\InvalidRandomGridSettings.json" />
+      <Content Include="Helpers\Fakes\Settings\RandomGridSettings.json" />
+      <Content Include="Helpers\Fakes\Settings\RandomGridSettings2.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MinesweeperController\MinesweeperController.csproj" />
+    </ItemGroup>
+
+</Project>
