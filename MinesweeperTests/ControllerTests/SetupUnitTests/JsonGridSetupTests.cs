@@ -23,7 +23,7 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
 
         [Test]
-        public void CreateGrid_With7by3Grid_ShouldReturnGridWithCorrectDimensions()
+        public void CreateGrid_WithOneCornerMine_ShouldReturnGridWithCorrectDimensions()
         {
             //Arrange
             var pathname = TestFolderPath + "OneCornerMine.json";
@@ -51,7 +51,7 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
         
         [Test]
-        public void CreateGrid_WithEmptyTiles_ShouldReturnGridWithCorrectlyPlacedEmptyTiles()
+        public void CreateGrid_WithFourCorner_ShouldReturnGridWithCorrectlyPlacedEmptyTiles()
         {
             //Arrange
             var pathname = TestFolderPath + "FourCornerMines_SmallGrid.json";
@@ -60,7 +60,11 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
             var resultGrid = new JsonGridSetupFactory(pathname).CreateGrid();
             
             //Assert
+            Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(1,0)));
+            Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(0,1)));
             Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(1,1)));
+            Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(2,1)));
+            Assert.AreEqual(TileType.Empty, resultGrid.GetTileTypeAt(new Coords(1,2)));
         }
         
         [Test]

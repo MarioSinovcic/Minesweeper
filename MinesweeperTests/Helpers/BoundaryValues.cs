@@ -41,6 +41,9 @@ namespace MinesweeperTests.Helpers
             new[] {9, 2, 3}, 
             new[] {2, 2, 2}, 
             new[] {1, 4, 2}, 
+            new[] {500, 4, 10}, 
+            new[] {1, 1, 100}, 
+            new[] {1, 1, 1}, 
             new[] {50, 1, 80}, 
             new[] {100, 100, 10}, 
         };

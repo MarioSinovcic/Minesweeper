@@ -38,7 +38,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
 
         private void ValidateParameters()
         {
-            if (_width < 1 || _height < 1 || _difficulty <= 1)
+            if (_width < 1 || _height < 1 || _difficulty < 1)
             {
                 throw new ApplicationException("Invalid input parameters for random generation.");
             }

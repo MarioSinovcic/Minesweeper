@@ -14,15 +14,15 @@ namespace MinesweeperService
             _gameState = gameState;
         }
         
-        public void PerformMove() //command
+        public void PerformMove() 
         {
             UpdateGameStatus();
             CheckIfGameIsWon();
         }
         
-        public GameState GetGameState() //query
+        public GameState GetGameState() 
         {
-            return _gameState; //TODO: remove all public methods
+            return _gameState; 
         }
 
         private void UpdateGameStatus()
