@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using MinesweeperController.SetupBehaviours.DTOs;
 using MinesweeperController.SetupBehaviours.Interfaces;
-using MinesweeperService.Enums;
 using MinesweeperService.Values;
 using MinesweeperService.Values.Interfaces;
 using Newtonsoft.Json;
@@ -37,18 +36,11 @@ namespace MinesweeperController.SetupBehaviours.Factories
             {
                 for (var j = 0; j < _height; j++)
                 {
-                    var tileType = GetRandomTileType();
+                    var tileType = Tile.GetRandomTileType(_difficulty);
                     tiles[j, i] = new Tile(tileType);
                 }
             }
-
             return new Grid(tiles);
-        }
-
-        private TileType GetRandomTileType()
-        {
-            var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tile will be a mine
-            return randomNum.Next(_difficulty) < 1 ? TileType.Mine : TileType.Empty;
         }
 
         private void ValidateParameters()

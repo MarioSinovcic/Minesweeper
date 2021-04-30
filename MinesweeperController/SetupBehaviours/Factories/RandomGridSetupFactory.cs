@@ -29,7 +29,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
             {
                 for (var j = 0; j < _height; j++)
                 {
-                    var tileType = GetRandomTileType();
+                    var tileType = Tile.GetRandomTileType(_difficulty);
                     tiles[j, i] = new Tile(tileType);
                 }
             }
@@ -42,12 +42,6 @@ namespace MinesweeperController.SetupBehaviours.Factories
             {
                 throw new ApplicationException("Invalid input parameters for random generation.");
             }
-        }
-
-        private TileType GetRandomTileType()
-        {
-            var randomNum = new Random(); //approximates to: 1 out of every {Difficulty} tiles will be a mine
-            return randomNum.Next(_difficulty) < 1 ? TileType.Mine : TileType.Empty;
         }
     }
 }
