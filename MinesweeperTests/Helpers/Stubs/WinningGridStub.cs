@@ -22,7 +22,7 @@ namespace MinesweeperTests.Helpers.Stubs
                 }
             }
 
-            //setting up one last tile that is not shown, this needs to be selected to win the game
+            //setting up one last tile that is not shown, this tile needs to be selected to win the game
             var winningTileCoords = new Coords(1, 1);
             var lastTileNeededToWin = new Tile(TileType.Empty); 
             Grid.ReplaceTile(winningTileCoords,lastTileNeededToWin);

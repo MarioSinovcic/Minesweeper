@@ -13,7 +13,7 @@ namespace MinesweeperTests.ServiceTests.Component_Tests
 
         private static readonly object[] BoundaryValuesForInputCoords = BoundaryValues.InputCoords;
 
-        [TestCaseSource(nameof(BoundaryValuesForInputCoords))] //FlagBehaviour_WithOneCornerMine_SuccessfullySetsFlag
+        [TestCaseSource(nameof(BoundaryValuesForInputCoords))]
         public void GameStatusBehaviour_WithInvalidCoordinates_ShouldReturnErrorStatus(Coords boundaryValuesForInputCoords)
         {
             //Arrange

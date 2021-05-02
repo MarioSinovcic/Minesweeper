@@ -9,7 +9,7 @@ namespace MinesweeperTests.Helpers
 {
     internal static class TestExtensions
     {
-        public static GameState PerformMove(string jsonGridPath, GameStatus gameStatus, Coords coords)
+        internal static GameState PerformMove(string jsonGridPath, GameStatus gameStatus, Coords coords)
         {
             var grid = new JsonGridSetupFactory(jsonGridPath).CreateGrid();
             var minesweeper = new Minesweeper(new GameState(gameStatus, grid, coords));
@@ -17,14 +17,14 @@ namespace MinesweeperTests.Helpers
             return minesweeper.GetGameState();
         }
         
-        public static GameState PerformMove(IGrid grid, GameStatus gameStatus, Coords coords)
+        internal static GameState PerformMove(IGrid grid, GameStatus gameStatus, Coords coords)
         {
             var minesweeper = new Minesweeper(new GameState(gameStatus, grid, coords));
             minesweeper.PerformMove();
             return minesweeper.GetGameState();
         }
         
-        public static IEnumerable<Tile> LoopThroughGrid(IGrid grid)
+        internal static IEnumerable<Tile> LoopThroughGrid(IGrid grid)
         {
             var tiles = new List<Tile>();
             

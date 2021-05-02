@@ -1,6 +1,6 @@
 using MinesweeperService.Enums;
 
-namespace MinesweeperService.Values.Interfaces //take it out
+namespace MinesweeperService.Values.Interfaces 
 {
     public interface IGrid
     {
