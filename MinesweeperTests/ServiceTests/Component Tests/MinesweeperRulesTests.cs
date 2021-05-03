@@ -1,6 +1,8 @@
+using MinesweeperController.GameBehaviour.DTOs;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
 using MinesweeperTests.Helpers;
+using MinesweeperTests.Helpers.Stubs;
 using NUnit.Framework;
 
 namespace MinesweeperTests.ServiceTests.Component_Tests

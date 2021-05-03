@@ -4,7 +4,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperTests.Helpers.Stubs
 {
-    public record WinningGridStub : Grid
+    internal record WinningGridStub : Grid
     {
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/MinesweeperTests/Helpers/Fakes/Grids/OneCornerMine.json";
         private static readonly Grid Grid = (Grid) new JsonGridSetupFactory(PathName).CreateGrid();

@@ -4,6 +4,7 @@ using MinesweeperController.SetupBehaviours.Factories;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
 using MinesweeperTests.Helpers;
+using MinesweeperTests.Helpers.Stubs;
 using NUnit.Framework;
 
 namespace MinesweeperTests.ControllerTests
@@ -178,6 +179,42 @@ namespace MinesweeperTests.ControllerTests
             
             //Assert
             Assert.AreEqual(GameStatus.Error, resultGameState.GameStatus);
+        }     
+        
+        [Test]
+        public void MoveBehaviour_WithAllTilesRevealed_SuccessfullyReturnsNewWinAfterMove()  
+        {
+            //Arrange
+            var grid = new GridWithAllTilesRevealedStub();
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(0, 0);
+            var inputDTO = new InputDTO(moveStatusType,  moveCoords);
+            var previousGameState = new GameState(moveStatusType, grid, moveCoords);
+
+            //Act
+            var resultGameState = _gameController.HandleMove(inputDTO, previousGameState);
+            
+            //Assert
+            Assert.AreEqual(GameStatus.Win, resultGameState.GameStatus);
+        }    
+        
+        [Test]
+        public void MoveBehaviour_WithAllTilesRevealed_SuccessfullyCascadesEmptyTiles()  
+        {
+            //Arrange
+            var grid = new EmptyGridWithLeftTileRevealedStub();
+            var moveStatusType = GameStatus.Playing;
+            var moveCoords = new Coords(2, 0);
+            var inputDTO = new InputDTO(moveStatusType,  moveCoords);
+            var previousGameState = new GameState(moveStatusType, grid, moveCoords);
+
+            //Act
+            var resultGrid = _gameController.HandleMove(inputDTO, previousGameState).Grid;
+            
+            //Assert
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(0,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(1,0)));
+            Assert.AreEqual(TileStatus.Shown, resultGrid.GetTileStatusAt(new Coords(2,0)));
         }     
     }
 }
