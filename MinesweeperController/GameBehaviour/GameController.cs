@@ -14,11 +14,11 @@ namespace MinesweeperController.GameBehaviour
             try
             {
                 var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid(); 
-                return GameStateSimpleFactory.CreateGameState(grid);
+                return SimpleGameStateFactory.CreateGameState(grid);
             }
             catch (Exception)
             {
-                return GameStateSimpleFactory.CreateGameState(GameStatus.Error);
+                return SimpleGameStateFactory.CreateGameState(GameStatus.Error);
             }
         }
         
@@ -27,11 +27,11 @@ namespace MinesweeperController.GameBehaviour
             try
             {
                 var grid = new RandomGridSetupFactory(width,height,difficulty).CreateGrid(); 
-                return GameStateSimpleFactory.CreateGameState(grid);
+                return SimpleGameStateFactory.CreateGameState(grid);
             }
             catch (Exception)
             {
-                return GameStateSimpleFactory.CreateGameState(GameStatus.Error);
+                return SimpleGameStateFactory.CreateGameState(GameStatus.Error);
             }
         }
 
@@ -41,10 +41,10 @@ namespace MinesweeperController.GameBehaviour
             
             if (gameStatus == GameStatus.Error)
             {
-                return GameStateSimpleFactory.CreateGameState(GameStatus.Error);
+                return SimpleGameStateFactory.CreateGameState(GameStatus.Error);
             }
 
-            var state = GameStateSimpleFactory.CreateGameState(gameStatus, gameState.Grid, selectedTile);
+            var state = SimpleGameStateFactory.CreateGameState(gameStatus, gameState.Grid, selectedTile);
             var minesweeper = new Minesweeper(state);
             
             minesweeper.PerformMove();

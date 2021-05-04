@@ -4,7 +4,7 @@ using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperController.GameBehaviour
 {
-    internal static class GameStateSimpleFactory
+    internal static class SimpleGameStateFactory
     {
         internal static GameState CreateGameState(GameStatus gameStatus)
         {

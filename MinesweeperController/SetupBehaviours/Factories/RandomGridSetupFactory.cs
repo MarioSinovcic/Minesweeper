@@ -1,6 +1,5 @@
 using System;
 using MinesweeperController.SetupBehaviours.Interfaces;
-using MinesweeperService.Enums;
 using MinesweeperService.Values;
 using MinesweeperService.Values.Interfaces;
 
