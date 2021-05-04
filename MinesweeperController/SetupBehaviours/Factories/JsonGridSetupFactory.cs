@@ -16,12 +16,11 @@ namespace MinesweeperController.SetupBehaviours.Factories
         public JsonGridSetupFactory(string pathname)
         {
             _pathname = pathname;
+            SetupValidator.ValidatePath(_pathname);
         }
         
         public IGrid CreateGrid()
         {
-            ValidatePath(_pathname);
-            
             using var jsonFile = new StreamReader(_pathname);
             var jsonInput = JsonConvert.DeserializeObject<JsonGridInputDTO>(jsonFile.ReadToEnd());
 
@@ -38,19 +37,6 @@ namespace MinesweeperController.SetupBehaviours.Factories
                 }
             }
             return new Grid(tiles);
-        }
-
-        private static void ValidatePath(string pathname)
-        {
-            try
-            {
-                using var jsonFile = new StreamReader(pathname);
-                JsonConvert.DeserializeObject<JsonGridInputDTO>(jsonFile.ReadToEnd());
-            }
-            catch (Exception e)
-            {
-                throw new IOException("Invalid path for grid creation.", e);
-            }
         }
 
         private static TileType GetTileType(string value, string mineTileChar)

@@ -2,7 +2,7 @@ using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperController.SetupBehaviours.Interfaces
 {
-    public interface IGridSetupFactory
+    internal interface IGridSetupFactory
     {
         public IGrid CreateGrid();
     }

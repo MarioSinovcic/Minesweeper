@@ -16,7 +16,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
 
         public RandomGridSetupFromJsonFactory(string settingsFilePath)
         {
-            ValidatePath(settingsFilePath);
+            SetupValidator.ValidatePath(settingsFilePath);
 
             using var jsonFile = new StreamReader(settingsFilePath);
             var (width, height, difficulty) =
@@ -25,13 +25,13 @@ namespace MinesweeperController.SetupBehaviours.Factories
             _width = width;
             _height = height;
             _difficulty = difficulty;
+            SetupValidator.ValidateParameters(_width,_height,_difficulty);
         }
 
         public IGrid CreateGrid()
         {
-            ValidateParameters();
+            
             var tiles = new Tile[_height, _width];
-
             for (var i = 0; i < _width; i++)
             {
                 for (var j = 0; j < _height; j++)
@@ -41,27 +41,6 @@ namespace MinesweeperController.SetupBehaviours.Factories
                 }
             }
             return new Grid(tiles);
-        }
-
-        private void ValidateParameters()
-        {
-            if (_width < 1 || _height < 1 || _difficulty < 1)
-            {
-                throw new ApplicationException("Invalid input parameters for random generation.");
-            }
-        }
-
-        private static void ValidatePath(string pathname)
-        {
-            try
-            {
-                using var jsonFile = new StreamReader(pathname);
-                JsonConvert.DeserializeObject<RandomGridSettingsDTO>(jsonFile.ReadToEnd());
-            }
-            catch (Exception e)
-            {
-                throw new IOException("Invalid path for grid creation.", e);
-            }
         }
     }
 }

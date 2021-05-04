@@ -1,4 +1,5 @@
 using System;
+using System.Dynamic;
 using MinesweeperController.SetupBehaviours.Interfaces;
 using MinesweeperService.Values;
 using MinesweeperService.Values.Interfaces;
@@ -16,12 +17,11 @@ namespace MinesweeperController.SetupBehaviours.Factories
             _width = width;
             _height = height;
             _difficulty = difficulty; 
+            SetupValidator.ValidateParameters(_width,_height, _difficulty);
         }
 
         public IGrid CreateGrid() 
         {
-            ValidateParameters();
-            
             var tiles = new Tile[_height,_width];
             
             for (var i = 0; i < _width; i++)
@@ -33,14 +33,6 @@ namespace MinesweeperController.SetupBehaviours.Factories
                 }
             }
             return new Grid(tiles);
-        }
-
-        private void ValidateParameters()
-        {
-            if (_width < 1 || _height < 1 || _difficulty < 1)
-            {
-                throw new ApplicationException("Invalid input parameters for random generation.");
-            }
         }
     }
 }
