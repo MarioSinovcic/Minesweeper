@@ -123,7 +123,6 @@ namespace MinesweeperTests.ServiceTests.Component_Tests
             Assert.AreEqual(GameStatus.Win, resultState.GameStatus);
         }
         
-        
         [Test] 
         public void GameBehaviour_GridWithAllMines_SuccessfullyLossGameWhenFlaggedMineRevealed()
         {

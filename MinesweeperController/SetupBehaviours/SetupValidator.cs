@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 
 namespace MinesweeperController.SetupBehaviours
 {
-    internal class SetupValidator
+    internal static class SetupValidator
     {
         internal static void ValidateParameters(int width, int height, int difficulty)
         {
-            if (width < 1 || height < 1 || difficulty < 1)
+            if (width < 1 || width > 99 || height < 1 || height > 99 || difficulty < 1)
             {
                 throw new ApplicationException("Invalid input parameters for random generation.");
             }

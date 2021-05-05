@@ -11,8 +11,6 @@ namespace MinesweeperController.GameBehaviour
     {
         public GameState SetupRandomGameFromJson(string pathname)
         {
-            
-            
             try
             {
                 var grid = new RandomGridSetupFromJsonFactory(pathname).CreateGrid(); 

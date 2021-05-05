@@ -50,7 +50,8 @@ namespace MinesweeperClient.ConsoleIO.Output
 
             for (var i = 0; i < grid.Height; i++)
             {
-                Console.Write($" {i}  ");
+                Console.Write(i > 9 ? $" {i} " : $"  {i} ");
+
                 for (var j = 0; j < grid.Width; j++)
                 {
                     DisplayTile(grid, new Coords(j,i));
@@ -65,7 +66,7 @@ namespace MinesweeperClient.ConsoleIO.Output
             var divider = "       0  ";
             for (var i = 1; i < width; i++)
             {
-                divider += $"   {i}  ";
+                divider += i > 9 ? $"   {i} " : $"   {i}  ";
             }
 
             Console.WriteLine(divider);
@@ -114,7 +115,6 @@ namespace MinesweeperClient.ConsoleIO.Output
                 Console.ForegroundColor = DisplayTileTypes[neighbours].Color;
                 Console.Write($"{DisplayTileTypes[neighbours].DisplayChar}  ");
                 Console.ResetColor();
-
             }
         }
     }
