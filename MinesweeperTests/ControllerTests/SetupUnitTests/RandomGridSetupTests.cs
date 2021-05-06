@@ -19,10 +19,10 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
             //Arrange
             var width = gridParams[0];
             var height = gridParams[1];
-            var difficulty = gridParams[2];
+            var mineFrequency = gridParams[2];
             
             //Act //Assert
-            Assert.Throws<ApplicationException>(() => new RandomGridSetupFactory(width, height, difficulty).CreateGrid());
+            Assert.Throws<ApplicationException>(() => new RandomGridSetupFactory(width, height, mineFrequency).CreateGrid());
         }
 
         [TestCaseSource(nameof(ValidGridParamsBoundaryValues))]
@@ -31,10 +31,10 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
             //Arrange
             var width = gridParams[0];
             var height = gridParams[1];
-            var difficulty = gridParams[2];
+            var mineFrequency = gridParams[2];
             
             //Act 
-            var resultGrid = new RandomGridSetupFactory(width,height,difficulty).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(width,height,mineFrequency).CreateGrid();
             
             //Assert
             Assert.AreEqual(height, resultGrid.Height);
@@ -42,15 +42,15 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
 
         [Test]
-        public void CreateGrid_WithHighDifficulty_ShouldGridWithSomeMines()
+        public void CreateGrid_WithHighmineFrequency_ShouldGridWithSomeMines()
         {
             //Arrange
             var width = 4;
             var height = 4;
-            var difficulty = 2;
+            var mineFrequency = 2;
 
             //Act
-            var resultGrid = new RandomGridSetupFactory(width,height, difficulty).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(width,height, mineFrequency).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid);
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             
@@ -59,15 +59,15 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
         
         [Test]
-        public void CreateGrid_WithMediumDifficulty_ShouldGridWithSomeMinesAndSomeEmptyTiles()
+        public void CreateGrid_WithMediummineFrequency_ShouldGridWithSomeMinesAndSomeEmptyTiles()
         {
             //Arrange
             var width = 10;
             var height = 10;
-            var difficulty = 6;
+            var mineFrequency = 6;
 
             //Act
-            var resultGrid = new RandomGridSetupFactory(width,height, difficulty).CreateGrid();
+            var resultGrid = new RandomGridSetupFactory(width,height, mineFrequency).CreateGrid();
             var tiles = TestExtensions.LoopThroughGrid(resultGrid).ToList();
             var mineCount = tiles.Count(x => x.Type == TileType.Mine);
             var emptyCount = tiles.Count(x => x.Type == TileType.Empty);
@@ -104,20 +104,21 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         public void CreateGrid_WithValidSettingsFile_ShouldGridWitCorrectDimensions()
         {
             //Arrange
-            var settingsFilePath = "Fakes/Settings/RandomGridSettings.json";
+            var settingsFilePath = "Helpers/Fakes/Settings/RandomLargeGridSettings.json";
             
             //Act
             var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
         
             //Assert
-            Assert.AreEqual(9,resultGrid.Height);
-            Assert.AreEqual(10,resultGrid.Width);
+            Assert.AreEqual(99,resultGrid.Height);
+            Assert.AreEqual(99,resultGrid.Width);
         }
         
-        [Test] public void CreateGrid_WithValidSettingsFile_ShouldGridWithSomeMines() 
+        [Test] 
+        public void CreateGrid_WithValidSettingsFile_ShouldGridWithSomeMines() 
         {
             //Arrange
-            var settingsFilePath = "Fakes/Settings/RandomGridSettings2.json";
+            var settingsFilePath = "Helpers/Fakes/Settings/RandomSmallGridSettings.json";
             
             //Act
             var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
@@ -131,7 +132,7 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         [Test] public void CreateGrid_WithValidSettingsFile_ShouldGridWithSomeMinesAndSomeEmptyTiles() 
         {
             //Arrange
-            var settingsFilePath = "Fakes/Settings/RandomGridSettings.json";
+            var settingsFilePath = "Helpers/Fakes/Settings/RandomLargeGridSettings.json";
             
             //Act
             var resultGrid = new RandomGridSetupFromJsonFactory(settingsFilePath).CreateGrid();
