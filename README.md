@@ -15,8 +15,6 @@ The basic architecture for the system can be found [here](https://github.com/Mar
 ------
 ### How To Play
 
-1. Open the app, then run the game.
-2. Follow the rules:
- - show tiles by typing the x and y value with a space in between (e.g., "3 5")
- - place flags by typing "f" then the x and y value with a space in between (e.g., "f 2 1")
+ - show tiles by typing the x and y value with a space in between (e.g., "3 5").
+ - place flags by typing "f" then the x and y value with a space in between (e.g., "f 2 1").
  - win by showing all tiles that aren't mines.
