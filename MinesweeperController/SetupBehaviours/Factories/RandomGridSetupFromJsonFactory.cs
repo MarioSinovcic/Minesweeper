@@ -1,14 +1,12 @@
-using System;
 using System.IO;
 using MinesweeperController.SetupBehaviours.DTOs;
 using MinesweeperController.SetupBehaviours.Interfaces;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 using Newtonsoft.Json;
 
 namespace MinesweeperController.SetupBehaviours.Factories
 {
-    public sealed class RandomGridSetupFromJsonFactory : IGridSetupFactory
+    public sealed class RandomGridSetupFromJsonFactory : GridSetupFactory
     {
         private readonly int _width;
         private readonly int _height;
@@ -28,7 +26,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
             SetupValidator.ValidateParameters(_width,_height,_mineFrequency);
         }
 
-        public IGrid CreateGrid()
+        public Grid CreateGrid()
         {
             
             var tiles = new Tile[_height, _width];

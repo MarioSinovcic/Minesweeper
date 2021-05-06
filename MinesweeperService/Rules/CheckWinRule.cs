@@ -3,7 +3,6 @@ using System.Linq;
 using MinesweeperService.Enums;
 using MinesweeperService.Rules.Interface;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperService.Rules
 {
@@ -28,7 +27,7 @@ namespace MinesweeperService.Rules
             return new GameState(GameStatus.Win, gameState.Grid, gameState.Coords);
         }
         
-        private static IEnumerable<Tile> GetTileList(IGrid grid)
+        private static IEnumerable<Tile> GetTileList(Grid grid)
         {
             var tiles = new List<Tile>();
             

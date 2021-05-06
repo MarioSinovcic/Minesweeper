@@ -1,15 +1,13 @@
-using System;
 using System.IO;
 using MinesweeperController.SetupBehaviours.DTOs;
 using MinesweeperController.SetupBehaviours.Interfaces;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 using Newtonsoft.Json;
 
 namespace MinesweeperController.SetupBehaviours.Factories
 {
-    public class JsonGridSetupFactory : IGridSetupFactory
+    public class JsonGridSetupFactory : GridSetupFactory
     {
         private static string _pathname;
 
@@ -19,7 +17,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
             SetupValidator.ValidatePath(_pathname);
         }
         
-        public IGrid CreateGrid()
+        public Grid CreateGrid()
         {
             using var jsonFile = new StreamReader(_pathname);
             var jsonInput = JsonConvert.DeserializeObject<JsonGridInputDTO>(jsonFile.ReadToEnd());

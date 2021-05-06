@@ -42,7 +42,7 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
 
         [Test]
-        public void CreateGrid_WithHighmineFrequency_ShouldGridWithSomeMines()
+        public void CreateGrid_WithHighMineFrequency_ShouldGridWithSomeMines()
         {
             //Arrange
             var width = 4;
@@ -59,7 +59,7 @@ namespace MinesweeperTests.ControllerTests.SetupUnitTests
         }
         
         [Test]
-        public void CreateGrid_WithMediummineFrequency_ShouldGridWithSomeMinesAndSomeEmptyTiles()
+        public void CreateGrid_WithMediumMineFrequency_ShouldGridWithSomeMinesAndSomeEmptyTiles()
         {
             //Arrange
             var width = 10;

@@ -1,9 +1,9 @@
-using MinesweeperService.Values.Interfaces;
+using MinesweeperService.Values;
 
 namespace MinesweeperController.SetupBehaviours.Interfaces
 {
-    internal interface IGridSetupFactory
+    internal interface GridSetupFactory
     {
-        public IGrid CreateGrid();
+        public Grid CreateGrid();
     }
 }

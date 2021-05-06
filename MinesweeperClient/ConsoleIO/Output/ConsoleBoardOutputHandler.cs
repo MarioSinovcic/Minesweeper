@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperClient.ConsoleIO.Output
 {
@@ -44,7 +43,7 @@ namespace MinesweeperClient.ConsoleIO.Output
             }
         }
 
-        private void DisplayGrid(IGrid grid)
+        private void DisplayGrid(Grid grid)
         {
             DisplayColNumbers(grid.Width);
 
@@ -72,7 +71,7 @@ namespace MinesweeperClient.ConsoleIO.Output
             Console.WriteLine(divider);
         }
 
-        private void DisplayTile(IGrid grid, Coords coords)
+        private void DisplayTile(Grid grid, Coords coords)
         {
             if(grid.GetTileStatusAt(coords) == TileStatus.Flag)
             {

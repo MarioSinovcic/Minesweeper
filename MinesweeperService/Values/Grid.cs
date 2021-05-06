@@ -1,10 +1,9 @@
 using System;
 using MinesweeperService.Enums;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperService.Values
 {
-    public record Grid : IGrid 
+    public record Grid 
     {
         private readonly Tile[,] _tiles;
         public int Width { get; }

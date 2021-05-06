@@ -1,12 +1,9 @@
-using System;
-using System.Dynamic;
 using MinesweeperController.SetupBehaviours.Interfaces;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperController.SetupBehaviours.Factories
 {
-    public sealed class RandomGridSetupFactory : IGridSetupFactory
+    public sealed class RandomGridSetupFactory : GridSetupFactory
     {
         private readonly int _width;
         private readonly int _height;
@@ -20,7 +17,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
             SetupValidator.ValidateParameters(_width,_height, _mineFrequency);
         }
 
-        public IGrid CreateGrid() 
+        public Grid CreateGrid() 
         {
             var tiles = new Tile[_height,_width];
             

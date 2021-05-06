@@ -3,7 +3,6 @@ using MinesweeperController.SetupBehaviours.Factories;
 using MinesweeperService;
 using MinesweeperService.Enums;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperTests.Helpers
 {
@@ -17,14 +16,14 @@ namespace MinesweeperTests.Helpers
             return minesweeper.GetGameState();
         }
         
-        internal static GameState PerformMove(IGrid grid, GameStatus gameStatus, Coords coords)
+        internal static GameState PerformMove(Grid grid, GameStatus gameStatus, Coords coords)
         {
             var minesweeper = new Minesweeper(new GameState(gameStatus, grid, coords));
             minesweeper.PerformMove();
             return minesweeper.GetGameState();
         }
         
-        internal static IEnumerable<Tile> LoopThroughGrid(IGrid grid)
+        internal static IEnumerable<Tile> LoopThroughGrid(Grid grid)
         {
             var tiles = new List<Tile>();
             

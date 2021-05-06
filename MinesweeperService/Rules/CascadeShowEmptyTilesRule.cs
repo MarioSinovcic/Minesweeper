@@ -1,7 +1,6 @@
 using MinesweeperService.Enums;
 using MinesweeperService.Rules.Interface;
 using MinesweeperService.Values;
-using MinesweeperService.Values.Interfaces;
 
 namespace MinesweeperService.Rules
 {
@@ -25,7 +24,7 @@ namespace MinesweeperService.Rules
             return new GameState(gameState.GameStatus, updatedGrid, gameState.Coords);
         }
         
-        private static IGrid ShowAllSurroundingEmptyTiles(IGrid grid, Coords givenCoords)
+        private static Grid ShowAllSurroundingEmptyTiles(Grid grid, Coords givenCoords)
         {
             var width = grid.Width;
             var height = grid.Height;
