@@ -22,11 +22,11 @@ namespace MinesweeperController.GameBehaviour
             }
         }
         
-        public GameState SetupRandomGrid(int width, int height, int difficulty)
+        public GameState SetupRandomGrid(int width, int height, int mineFrequency)
         {
             try
             {
-                var grid = new RandomGridSetupFactory(width,height,difficulty).CreateGrid(); 
+                var grid = new RandomGridSetupFactory(width,height,mineFrequency).CreateGrid(); 
                 return SimpleGameStateFactory.CreateGameState(grid);
             }
             catch (Exception)

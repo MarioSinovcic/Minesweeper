@@ -14,7 +14,7 @@
 
     <ItemGroup>
       <Content Include="Fakes\**">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Helpers\Fakes\Grids\AllEmpty.json" />
       <Content Include="Helpers\Fakes\Grids\AllMines.json" />
@@ -29,8 +29,12 @@
       <Content Include="Helpers\Fakes\Grids\ThreeMines_LargeGrid.json" />
       <Content Include="Helpers\Fakes\Settings\IncompleteRandomGridSettings.json" />
       <Content Include="Helpers\Fakes\Settings\InvalidRandomGridSettings.json" />
-      <Content Include="Helpers\Fakes\Settings\RandomGridSettings.json" />
-      <Content Include="Helpers\Fakes\Settings\RandomGridSettings2.json" />
+      <Content Include="Helpers\Fakes\Settings\RandomLargeGridSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Helpers\Fakes\Settings\RandomSmallGridSettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>

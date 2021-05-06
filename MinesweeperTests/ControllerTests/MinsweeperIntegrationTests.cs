@@ -66,10 +66,10 @@ namespace MinesweeperTests.ControllerTests
             //Arrange
             var width = randomGridSetupParams[0];
             var height = randomGridSetupParams[1];
-            var difficulty = randomGridSetupParams[2];
+            var mineFrequency = randomGridSetupParams[2];
             
             //Act //Assert
-            Assert.DoesNotThrow(() => _gameController.SetupRandomGrid(width, height, difficulty));
+            Assert.DoesNotThrow(() => _gameController.SetupRandomGrid(width, height, mineFrequency));
         }
         
         [TestCaseSource(nameof(BoundaryValuesForInvalidGridSetupParams))]
@@ -78,10 +78,10 @@ namespace MinesweeperTests.ControllerTests
             //Arrange
             var width = randomGridSetupParams[0];
             var height = randomGridSetupParams[1];
-            var difficulty = randomGridSetupParams[2];
+            var mineFrequency = randomGridSetupParams[2];
             
             //Act 
-            var resultGameState = _gameController.SetupRandomGrid(width, height, difficulty);
+            var resultGameState = _gameController.SetupRandomGrid(width, height, mineFrequency);
             
             //Assert
             Assert.AreEqual(GameStatus.Error, resultGameState.GameStatus);
@@ -93,10 +93,10 @@ namespace MinesweeperTests.ControllerTests
             //Arrange
             var width = 10;
             var height = 10;
-            var difficulty = 10;
+            var mineFrequency = 10;
             
             //Act 
-            var resultGameState = _gameController.SetupRandomGrid(width, height, difficulty);
+            var resultGameState = _gameController.SetupRandomGrid(width, height, mineFrequency);
             
             //Assert
             Assert.AreEqual(GameStatus.FirstTurn, resultGameState.GameStatus);
@@ -108,10 +108,10 @@ namespace MinesweeperTests.ControllerTests
             //Arrange
             var width = 5;
             var height = 10;
-            var difficulty = 10;
+            var mineFrequency = 10;
             
             //Act 
-            var resultGameState = _gameController.SetupRandomGrid(width, height, difficulty);
+            var resultGameState = _gameController.SetupRandomGrid(width, height, mineFrequency);
             
             //Assert
             Assert.AreEqual(5, resultGameState.Grid.Width);

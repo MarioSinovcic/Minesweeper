@@ -10,14 +10,14 @@ namespace MinesweeperController.SetupBehaviours.Factories
     {
         private readonly int _width;
         private readonly int _height;
-        private readonly int _difficulty;
+        private readonly int _mineFrequency;
         
-        public RandomGridSetupFactory(int width, int height, int difficulty)
+        public RandomGridSetupFactory(int width, int height, int mineFrequency)
         {
             _width = width;
             _height = height;
-            _difficulty = difficulty; 
-            SetupValidator.ValidateParameters(_width,_height, _difficulty);
+            _mineFrequency = mineFrequency; 
+            SetupValidator.ValidateParameters(_width,_height, _mineFrequency);
         }
 
         public IGrid CreateGrid() 
@@ -28,7 +28,7 @@ namespace MinesweeperController.SetupBehaviours.Factories
             {
                 for (var j = 0; j < _height; j++)
                 {
-                    var tileType = Tile.GetRandomTileType(_difficulty);
+                    var tileType = Tile.GetRandomTileType(_mineFrequency);
                     tiles[j, i] = new Tile(tileType);
                 }
             }

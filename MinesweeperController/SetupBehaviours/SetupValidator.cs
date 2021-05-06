@@ -7,9 +7,9 @@ namespace MinesweeperController.SetupBehaviours
 {
     internal static class SetupValidator
     {
-        internal static void ValidateParameters(int width, int height, int difficulty)
+        internal static void ValidateParameters(int width, int height, int mineFrequency)
         {
-            if (width < 1 || width > 99 || height < 1 || height > 99 || difficulty < 1)
+            if (width < 1 || width > 99 || height < 1 || height > 99 || mineFrequency < 1)
             {
                 throw new ApplicationException("Invalid input parameters for random generation.");
             }
