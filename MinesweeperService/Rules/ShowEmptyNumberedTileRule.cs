@@ -4,7 +4,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperService.Rules
 {
-    public class ShowEmptyNumberedTileRule : IRule
+    internal class ShowEmptyNumberedTileRule : IRule
     {
         public bool IsRuleApplicable(GameState gameState)
         {
@@ -12,7 +12,7 @@ namespace MinesweeperService.Rules
             var grid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var neighbours = grid.GetNeighbouringMines(coords);
+            var neighbours = grid.GetNeighbouringMinesAt(coords);
 
             return gameStatus == GameStatus.Playing && neighbours > 0 && grid.GetTileTypeAt(coords) == TileType.Empty;
         }
@@ -22,8 +22,8 @@ namespace MinesweeperService.Rules
             var updatedGrid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var updatedTile = updatedGrid.GetInvertTileAt(coords);
-            updatedGrid.ReplaceTile(coords, updatedTile);
+            var updatedTile = updatedGrid.GetInvertedTileAt(coords);
+            updatedGrid.ReplaceTileAt(coords, updatedTile);
             return new GameState(gameState.GameStatus, updatedGrid, coords);
         }
     }

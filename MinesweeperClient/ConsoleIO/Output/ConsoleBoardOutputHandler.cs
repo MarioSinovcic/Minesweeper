@@ -90,7 +90,7 @@ namespace MinesweeperClient.ConsoleIO.Output
             {
                 if (grid.GetTileStatusAt(coords) == TileStatus.Shown)
                 {
-                    HandleColouredTiles(grid.GetNeighbouringMines(coords));
+                    HandleColouredTiles(grid.GetNeighbouringMinesAt(coords));
                 }
                 else
                 {

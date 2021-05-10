@@ -4,7 +4,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperService.Rules
 {
-    public class InvalidInputRule : IRule
+    internal class InvalidInputRule : IRule
     {
         public bool IsRuleApplicable(GameState gameState)
         {

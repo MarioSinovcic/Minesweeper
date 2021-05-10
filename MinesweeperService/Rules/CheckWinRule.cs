@@ -6,7 +6,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperService.Rules
 {
-    public class CheckWinRule : IRule
+    internal class CheckWinRule : IRule
     {
         public bool IsRuleApplicable(GameState gameState)
         {

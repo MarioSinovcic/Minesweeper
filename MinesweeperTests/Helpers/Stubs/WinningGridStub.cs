@@ -17,15 +17,15 @@ namespace MinesweeperTests.Helpers.Stubs
                 {
                     var coords = new Coords(i, j);
                     if (Grid.GetTileTypeAt(coords) != TileType.Empty) continue;
-                    var updatedTile = Grid.GetInvertTileAt(coords);
-                    Grid.ReplaceTile(coords,updatedTile);
+                    var updatedTile = Grid.GetInvertedTileAt(coords);
+                    Grid.ReplaceTileAt(coords,updatedTile);
                 }
             }
 
             //setting up one last tile that is not shown, this tile needs to be selected to win the game
             var winningTileCoords = new Coords(1, 1);
             var lastTileNeededToWin = new Tile(TileType.Empty); 
-            Grid.ReplaceTile(winningTileCoords,lastTileNeededToWin);
+            Grid.ReplaceTileAt(winningTileCoords,lastTileNeededToWin);
         }
     }
 }

@@ -4,7 +4,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperService.Rules
 {
-    public class ShowMineRule : IRule
+    internal class ShowMineRule : IRule
     {
         public bool IsRuleApplicable(GameState gameState)
         {
@@ -19,8 +19,8 @@ namespace MinesweeperService.Rules
             var updatedGrid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var updatedTile = updatedGrid.GetInvertTileAt(coords);
-            updatedGrid.ReplaceTile(coords, updatedTile);
+            var updatedTile = updatedGrid.GetInvertedTileAt(coords);
+            updatedGrid.ReplaceTileAt(coords, updatedTile);
             
             return new GameState(GameStatus.Loss, updatedGrid, coords);
         }

@@ -5,7 +5,7 @@ using MinesweeperClient.ConsoleIO.Output;
 
 namespace MinesweeperClient.ConsoleIO
 {
-    public class IOFacade : IInputHandler, IOutputHandler 
+    internal class IOFacade : IInputHandler, IOutputHandler 
     {
         private readonly IInputHandler _inputHandler;
         private readonly IOutputHandler _outputHandler;

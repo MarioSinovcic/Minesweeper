@@ -28,19 +28,19 @@ namespace MinesweeperService.Values
             return _tiles[y, x].Type;
         }
         
-        public Tile GetInvertTileAt(Coords coords)
+        public Tile GetInvertedTileAt(Coords coords)
         {
             var (x, y) = coords;
             return _tiles[y, x].ShowTile();
         }
         
-        public void ReplaceTile(Coords coords, Tile updatedTile) 
+        public void ReplaceTileAt(Coords coords, Tile updatedTile) 
         {
             var (x, y) = coords;
             _tiles[y, x] = updatedTile;
         }
 
-        public int GetNeighbouringMines(Coords coords)
+        public int GetNeighbouringMinesAt(Coords coords)
         {
             var x = coords.X;
             var y = coords.Y;

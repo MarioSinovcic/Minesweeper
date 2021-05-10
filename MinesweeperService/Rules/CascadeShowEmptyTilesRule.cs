@@ -4,7 +4,7 @@ using MinesweeperService.Values;
 
 namespace MinesweeperService.Rules
 {
-    public class CascadeShowEmptyTilesRule : IRule
+    internal class CascadeShowEmptyTilesRule : IRule
     {
         public bool IsRuleApplicable(GameState gameState)
         {
@@ -12,7 +12,7 @@ namespace MinesweeperService.Rules
             var grid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var neighbours = grid.GetNeighbouringMines(coords);
+            var neighbours = grid.GetNeighbouringMinesAt(coords);
 
             return gameStatus == GameStatus.Playing && neighbours == 0;
         }
@@ -32,7 +32,7 @@ namespace MinesweeperService.Rules
             if (grid.GetTileStatusAt(givenCoords) == TileStatus.Flag)
             {
                 var updatedTile = new Tile(grid.GetTileTypeAt(givenCoords), TileStatus.Shown);
-                grid.ReplaceTile(givenCoords, updatedTile);
+                grid.ReplaceTileAt(givenCoords, updatedTile);
             }
             
             for (var xOff = -1 ; xOff < 2; xOff++)
@@ -46,10 +46,10 @@ namespace MinesweeperService.Rules
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
                     if (grid.GetTileTypeAt(coords) != TileType.Empty ||
                         grid.GetTileStatusAt(coords) != TileStatus.Hidden) continue;
-                    var updatedTile = grid.GetInvertTileAt(coords);
-                    grid.ReplaceTile(coords, updatedTile);
+                    var updatedTile = grid.GetInvertedTileAt(coords);
+                    grid.ReplaceTileAt(coords, updatedTile);
                     
-                    if (!(grid.GetNeighbouringMines(coords) > 0))
+                    if (!(grid.GetNeighbouringMinesAt(coords) > 0))
                     {
                         ShowAllSurroundingEmptyTiles(grid, coords);
                     }

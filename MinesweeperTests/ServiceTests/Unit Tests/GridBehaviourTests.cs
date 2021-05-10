@@ -22,7 +22,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
             
             //Assert
-            Assert.Throws<ArgumentException>(() => resultGrid.GetNeighbouringMines(inputCoords));
+            Assert.Throws<ArgumentException>(() => resultGrid.GetNeighbouringMinesAt(inputCoords));
         }
         
         [Test]
@@ -33,7 +33,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(2, 2));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(2, 2));
             
             //Assert
             Assert.AreEqual(0, neighbouringMines);
@@ -47,7 +47,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(1, 2));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(1, 2));
             
             //Assert
             Assert.AreEqual(1, neighbouringMines);
@@ -61,7 +61,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(3, 1));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(3, 1));
             
             //Assert
             Assert.AreEqual(2, neighbouringMines);
@@ -76,7 +76,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(2, 0));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(2, 0));
             
             //Assert
             Assert.AreEqual(3, neighbouringMines);
@@ -90,7 +90,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(3, 3));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(3, 3));
             
             //Assert
             Assert.AreEqual(8, neighbouringMines);
@@ -104,7 +104,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(2, 1));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(2, 1));
             
             //Assert
             Assert.AreEqual(0, neighbouringMines);
@@ -119,7 +119,7 @@ namespace MinesweeperTests.ServiceTests.Unit_Tests
             var resultGrid = gridFactory.CreateGrid();
 
             //Act
-            var neighbouringMines = resultGrid.GetNeighbouringMines(new Coords(2, 2));
+            var neighbouringMines = resultGrid.GetNeighbouringMinesAt(new Coords(2, 2));
             
             //Assert
             Assert.AreEqual(0, neighbouringMines);
