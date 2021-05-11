@@ -13,6 +13,13 @@ The basic architecture for the system can be found [here](https://github.com/Mar
 - Be able to flag tiles
 
 ------
+### How To Run It
+
+ - either open the solution in an appropriate IDE (e.g., Rider).
+ - or alternatively in terminal navigate to the Program.cs file in the Client project and then run "dotnet run" in your terminal.
+
+
+------
 ### How To Play
 
  - show tiles by typing the x and y value with a space in between (e.g., "3 5").
