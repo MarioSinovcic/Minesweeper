@@ -13,13 +13,15 @@ namespace MinesweeperService.Rules
 
         public GameState UpdateGameState(GameState gameState)
         {
-            var updatedGrid = gameState.Grid;
+            var grid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var tileType = updatedGrid.GetTileTypeAt(coords);
-            updatedGrid.ReplaceTileAt(coords, new Tile(tileType, TileStatus.Flag));
+            var tileType = grid.GetTileTypeAt(coords);
+            var updatedTile = new Tile(tileType, TileStatus.Flag);
+
+            var updateGrid = grid.WithNewTileAt(coords, updatedTile);
             
-            return new GameState(GameStatus.Playing, updatedGrid, gameState.Coords);
+            return new GameState(GameStatus.Playing, updateGrid, gameState.Coords);
         }
     }
 }

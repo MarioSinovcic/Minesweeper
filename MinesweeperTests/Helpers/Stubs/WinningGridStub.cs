@@ -7,7 +7,7 @@ namespace MinesweeperTests.Helpers.Stubs
     internal record WinningGridStub : Grid
     {
         private const string PathName = "/Users/mario.sinovcic/Documents/Acceleration/Katas/Minesweeper/MinesweeperTests/Helpers/Fakes/Grids/OneCornerMine.json";
-        private static readonly Grid Grid = (Grid) new JsonGridSetupFactory(PathName).CreateGrid();
+        private static Grid Grid = new JsonGridSetupFactory(PathName).CreateGrid();
 
         public WinningGridStub() : base(Grid)
         {
@@ -17,15 +17,14 @@ namespace MinesweeperTests.Helpers.Stubs
                 {
                     var coords = new Coords(i, j);
                     if (Grid.GetTileTypeAt(coords) != TileType.Empty) continue;
-                    var updatedTile = Grid.GetInvertedTileAt(coords);
-                    Grid.ReplaceTileAt(coords,updatedTile);
+                    Grid = Grid.WithRevealedTileAt(coords);
                 }
             }
 
             //setting up one last tile that is not shown, this tile needs to be selected to win the game
             var winningTileCoords = new Coords(1, 1);
             var lastTileNeededToWin = new Tile(TileType.Empty); 
-            Grid.ReplaceTileAt(winningTileCoords,lastTileNeededToWin);
+            Grid = Grid.WithNewTileAt(winningTileCoords,lastTileNeededToWin);
         }
     }
 }

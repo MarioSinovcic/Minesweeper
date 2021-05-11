@@ -19,12 +19,12 @@ namespace MinesweeperService.Rules
         
         public GameState UpdateGameState(GameState gameState)
         {
-            var updatedGrid = ShowAllSurroundingEmptyTiles(gameState.Grid, gameState.Coords);
+            var updatedGrid = GridWithSurroundingEmptyTilesRevealed(gameState.Grid, gameState.Coords);
             
             return new GameState(gameState.GameStatus, updatedGrid, gameState.Coords);
         }
         
-        private static Grid ShowAllSurroundingEmptyTiles(Grid grid, Coords givenCoords)
+        private static Grid GridWithSurroundingEmptyTilesRevealed(Grid grid, Coords givenCoords)
         {
             var width = grid.Width;
             var height = grid.Height;
@@ -32,7 +32,7 @@ namespace MinesweeperService.Rules
             if (grid.GetTileStatusAt(givenCoords) == TileStatus.Flag)
             {
                 var updatedTile = new Tile(grid.GetTileTypeAt(givenCoords), TileStatus.Shown);
-                grid.ReplaceTileAt(givenCoords, updatedTile);
+                grid = grid.WithNewTileAt(givenCoords, updatedTile);
             }
             
             for (var xOff = -1 ; xOff < 2; xOff++)
@@ -46,12 +46,11 @@ namespace MinesweeperService.Rules
                     if (xCoord <= -1 || xCoord >= width || yCoord <= -1 || yCoord >= height) continue;
                     if (grid.GetTileTypeAt(coords) != TileType.Empty ||
                         grid.GetTileStatusAt(coords) != TileStatus.Hidden) continue;
-                    var updatedTile = grid.GetInvertedTileAt(coords);
-                    grid.ReplaceTileAt(coords, updatedTile);
+                    grid = grid.WithRevealedTileAt(coords);
                     
                     if (!(grid.GetNeighbouringMinesAt(coords) > 0))
                     {
-                        ShowAllSurroundingEmptyTiles(grid, coords);
+                        grid = GridWithSurroundingEmptyTilesRevealed(grid, coords);
                     }
                 }
             }

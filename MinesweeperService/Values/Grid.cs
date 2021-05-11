@@ -5,7 +5,7 @@ namespace MinesweeperService.Values
 {
     public record Grid 
     {
-        private readonly Tile[,] _tiles;
+        private Tile[,] _tiles;
         public int Width { get; }
         public int Height { get; }
         
@@ -28,16 +28,22 @@ namespace MinesweeperService.Values
             return _tiles[y, x].Type;
         }
         
-        public Tile GetInvertedTileAt(Coords coords)
+        public Grid WithRevealedTileAt(Coords coords)
         {
-            var (x, y) = coords;
-            return _tiles[y, x].ShowTile();
+            var tileType = GetTileTypeAt(coords);
+            var tile = new Tile(tileType, TileStatus.Shown);
+
+            return WithNewTileAt(coords, tile);
         }
         
-        public void ReplaceTileAt(Coords coords, Tile updatedTile) 
+        public Grid WithNewTileAt(Coords coords, Tile updatedTile)
         {
             var (x, y) = coords;
-            _tiles[y, x] = updatedTile;
+            var tiles = (Tile[,]) _tiles.Clone();
+
+            tiles[y, x] = updatedTile; 
+            
+            return this with {_tiles = tiles};
         }
 
         public int GetNeighbouringMinesAt(Coords coords)

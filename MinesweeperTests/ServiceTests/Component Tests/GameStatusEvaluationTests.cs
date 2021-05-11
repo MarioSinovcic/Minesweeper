@@ -92,12 +92,12 @@ namespace MinesweeperTests.ServiceTests.Component_Tests
             //Arrange
             var grid = new JsonGridSetupFactory(TestFolderPath + "OneCornerMine.json").CreateGrid();
             var coords = new Coords(1, 0);
-            var updatedTile =  grid.GetInvertedTileAt(coords);
-            grid.ReplaceTileAt(new Coords(2,0), updatedTile); 
-            grid.ReplaceTileAt(new Coords(4,2), updatedTile);
+            var gridAfterOneTurn = grid.WithRevealedTileAt(coords);
+            var gridAfterTwoTurns = gridAfterOneTurn.WithRevealedTileAt(new Coords(2, 0));
+            var gridAfterThreeTurns = gridAfterTwoTurns.WithRevealedTileAt(new Coords(4, 2));
 
             //Act
-            var resultState = TestExtensions.PerformMove(grid, GameStatus.Playing, coords);
+            var resultState = TestExtensions.PerformMove(gridAfterThreeTurns, GameStatus.Playing, coords);
 
             //Assert
             Assert.AreEqual(GameStatus.Playing, resultState.GameStatus);

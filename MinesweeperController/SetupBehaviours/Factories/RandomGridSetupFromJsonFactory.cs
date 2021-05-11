@@ -28,7 +28,6 @@ namespace MinesweeperController.SetupBehaviours.Factories
 
         public Grid CreateGrid()
         {
-            
             var tiles = new Tile[_height, _width];
             for (var i = 0; i < _width; i++)
             {

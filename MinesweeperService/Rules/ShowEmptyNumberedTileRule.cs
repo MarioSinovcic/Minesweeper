@@ -19,11 +19,11 @@ namespace MinesweeperService.Rules
         
         public GameState UpdateGameState(GameState gameState)
         {
-            var updatedGrid = gameState.Grid;
+            var grid = gameState.Grid;
             var coords = gameState.Coords;
             
-            var updatedTile = updatedGrid.GetInvertedTileAt(coords);
-            updatedGrid.ReplaceTileAt(coords, updatedTile);
+            var updatedGrid = grid.WithRevealedTileAt(coords);
+            
             return new GameState(gameState.GameStatus, updatedGrid, coords);
         }
     }
