@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MinesweeperService\MinesweeperService.csproj" />
+      <ProjectReference Include="..\MinesweeperService\MinesweeperDomain.csproj" />
     </ItemGroup>
 
 </Project>

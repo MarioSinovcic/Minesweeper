@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MinesweeperController\MinesweeperController.csproj" />
-      <ProjectReference Include="..\MinesweeperService\MinesweeperService.csproj" />
+      <ProjectReference Include="..\MinesweeperService\MinesweeperDomain.csproj" />
     </ItemGroup>
 
 </Project>
